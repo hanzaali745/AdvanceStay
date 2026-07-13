@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · My Supplier{% endblock %}
+{% block content %}
+<h2>Products</h2>
+{% if products %}
+<table class="product-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Supplier</th>
+            <th>Buy Price</th>
+            <th>Est. Sell Price</th>
+            <th>ROI</th>
+            <th>Confidence</th>
+            <th>Verdict</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>{{ product.supplier.name }}</td>
+            <td>{{ product.buy_price if product.buy_price is not none else "Missing" }}</td>
+            <td>{{ product.estimated_sell_price if product.estimated_sell_price is not none else "Missing" }}</td>
+            <td>{{ product.roi if product.roi is not none else "Missing" }}</td>
+            <td>{{ product.confidence_score if product.confidence_score is not none else "Missing" }}</td>
+            <td>{{ product.verdict.value if product.verdict else "Not yet scored" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p class="empty-state">No products yet. Import supplier data to get started.</p>
+{% endif %}
+{% endblock %}
