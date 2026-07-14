@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Suppliers — My Supplier{% endblock %}
+{% block content %}
+<h1>Suppliers</h1>
+
+<div class="panel">
+    <h2 style="margin-top:0">Add supplier</h2>
+    <form method="post" action="/suppliers">
+        <label>Name</label>
+        <input name="name" required>
+        <label>Website</label>
+        <input name="website">
+        <label>Country</label>
+        <input name="country">
+        <label>Category</label>
+        <input name="category">
+        <label><input type="checkbox" name="csv_available" style="width:auto" value="true"> CSV feed available</label>
+        <label><input type="checkbox" name="xml_available" style="width:auto" value="true"> XML feed available</label>
+        <button class="btn" type="submit" style="margin-top:14px">Add Supplier</button>
+    </form>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th><th>Country</th><th>Category</th><th>Import methods</th>
+            <th>Verification</th><th>Products</th><th>Import file</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in suppliers %}
+        <tr>
+            <td>{{ row.supplier.name }}</td>
+            <td>{{ row.supplier.country or "—" }}</td>
+            <td>{{ row.supplier.category or "—" }}</td>
+            <td>
+                {% if row.supplier.csv_available %}<span class="badge badge-success">CSV</span>{% endif %}
+                {% if row.supplier.xml_available %}<span class="badge badge-success">XML</span>{% endif %}
+                {% if row.supplier.api_available %}<span class="badge badge-success">API</span>{% endif %}
+                {% if not row.supplier.csv_available and not row.supplier.xml_available and not row.supplier.api_available %}
+                <span class="muted">Manual only</span>
+                {% endif %}
+            </td>
+            <td>{{ row.supplier.verification_status }}</td>
+            <td>{{ row.product_count }}</td>
+            <td>
+                <form class="inline" method="post" action="/suppliers/{{ row.supplier.id }}/import" enctype="multipart/form-data">
+                    <input type="file" name="file" accept=".csv,.xml" required style="display:inline;width:auto">
+                    <label style="display:inline;margin:0 6px"><input type="checkbox" name="full_catalog" value="true" style="width:auto"> full catalog</label>
+                    <button class="btn" type="submit">Import</button>
+                </form>
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="7" class="muted">No suppliers yet — add one above.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

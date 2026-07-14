@@ -1,0 +1,30 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Environment / secrets
+.env
+
+# Database
+data/*.db
+data/*.sqlite3
+data/imports/*
+!data/imports/.gitkeep
+
+# Logs / backups
+logs/*.log
+backups/*
+!backups/.gitkeep
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Tests
+.pytest_cache/
+.coverage
+htmlcov/

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Products — My Supplier{% endblock %}
+{% block content %}
+<h1>Products</h1>
+
+<div class="panel">
+    <form method="get" action="/products">
+        <label style="display:inline-block;width:auto;margin-right:16px">
+            Verdict
+            <select name="verdict" style="width:auto">
+                <option value="">All</option>
+                {% for v in verdicts %}
+                <option value="{{ v.value }}" {% if verdict == v.value %}selected{% endif %}>{{ v.value|replace('_',' ')|upper }}</option>
+                {% endfor %}
+            </select>
+        </label>
+        <label style="display:inline-block;width:auto;margin-right:16px">
+            <input type="checkbox" name="watchlist" value="true" style="width:auto" {% if watchlist %}checked{% endif %}> Watchlist only
+        </label>
+        <button class="btn" type="submit">Filter</button>
+    </form>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Product</th><th>Buy price</th><th>Sell price</th><th>Net profit</th><th>ROI</th>
+            <th>Risk</th><th>Confidence</th><th>Verdict</th><th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in products %}
+        <tr>
+            <td>{{ p.name }}{% if p.is_bundle %} <span class="badge badge-test_buy">bundle</span>{% endif %}</td>
+            <td>{% if p.buy_price is not none %}{{ "%.2f"|format(p.buy_price) }}{% else %}—{% endif %}
+                <span class="source-tag">{{ p.buy_price_source.value }}</span></td>
+            <td>{% if p.estimated_sell_price is not none %}{{ "%.2f"|format(p.estimated_sell_price) }}{% else %}—{% endif %}
+                <span class="source-tag">{{ p.sell_price_source.value }}</span></td>
+            <td>{% if p.net_profit is not none %}{{ "%.2f"|format(p.net_profit) }}{% else %}—{% endif %}</td>
+            <td>{% if p.roi_percent is not none %}{{ "%.1f"|format(p.roi_percent) }}%{% else %}—{% endif %}</td>
+            <td>{% if p.risk_score is not none %}{{ "%.0f"|format(p.risk_score) }}{% else %}—{% endif %}</td>
+            <td>{% if p.confidence_score is not none %}{{ "%.0f"|format(p.confidence_score) }}{% else %}—{% endif %}</td>
+            <td>
+                {% if p.verdict %}<span class="badge badge-{{ p.verdict.value }}" title="{{ p.verdict_reason }}">{{ p.verdict.value|replace('_',' ')|upper }}</span>
+                {% else %}<span class="muted">pending</span>{% endif %}
+            </td>
+            <td>
+                <form class="inline" method="post" action="/products/{{ p.id }}/watchlist">
+                    <button class="btn" type="submit">{{ "Unwatch" if p.watchlist else "Watch" }}</button>
+                </form>
+                <form class="inline" method="post" action="/products/{{ p.id }}/sell-price">
+                    <input type="number" step="0.01" name="estimated_sell_price" placeholder="sell £" style="width:80px;display:inline">
+                    <button class="btn" type="submit">Set</button>
+                </form>
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="9" class="muted">No products yet — import a supplier feed to get started.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

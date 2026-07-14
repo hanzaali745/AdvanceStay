@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — My Supplier{% endblock %}
+{% block content %}
+<h1>Dashboard</h1>
+
+<div class="stat-grid">
+    <div class="stat-card"><div class="label">Products</div><div class="value">{{ total_products }}</div></div>
+    <div class="stat-card"><div class="label">Suppliers</div><div class="value">{{ total_suppliers }}</div></div>
+    <div class="stat-card"><div class="label">Watchlist</div><div class="value">{{ watchlist_count }}</div></div>
+    <div class="stat-card"><div class="label">Unread alerts</div><div class="value">{{ unread_alerts }}</div></div>
+    <div class="stat-card"><div class="label">Cash invested</div><div class="value">£{{ "%.2f"|format(cash_invested) }}</div></div>
+    <div class="stat-card"><div class="label">Realised profit</div><div class="value">£{{ "%.2f"|format(realised_profit) }}</div></div>
+</div>
+
+<div class="panel">
+    <form method="post" action="/agents/run">
+        <button class="btn" type="submit">Run agent pipeline now</button>
+    </form>
+</div>
+
+<h2>Top opportunities</h2>
+<table>
+    <thead><tr><th>Product</th><th>Confidence</th><th>Net profit</th><th>ROI</th><th>Verdict</th></tr></thead>
+    <tbody>
+        {% for p in top_opportunities %}
+        <tr>
+            <td>{{ p.name }}</td>
+            <td>{{ "%.0f"|format(p.confidence_score) if p.confidence_score is not none else "—" }}</td>
+            <td>{% if p.net_profit is not none %}£{{ "%.2f"|format(p.net_profit) }}{% else %}—{% endif %}</td>
+            <td>{% if p.roi_percent is not none %}{{ "%.1f"|format(p.roi_percent) }}%{% else %}—{% endif %}</td>
+            <td><span class="badge badge-{{ p.verdict.value }}">{{ p.verdict.value|replace('_',' ')|upper }}</span></td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5" class="muted">No opportunities yet — import suppliers and run the pipeline.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Agent status</h2>
+<table>
+    <thead><tr><th>Agent</th><th>Status</th><th>Items processed</th><th>Summary</th><th>Last run</th></tr></thead>
+    <tbody>
+        {% for run in agent_runs %}
+        <tr>
+            <td>{{ run.agent_name }}</td>
+            <td><span class="badge badge-{{ run.status }}">{{ run.status }}</span></td>
+            <td>{{ run.items_processed }}</td>
+            <td class="muted">{{ run.summary or run.error or "" }}</td>
+            <td>{{ run.finished_at.strftime("%Y-%m-%d %H:%M") if run.finished_at else "—" }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5" class="muted">No agent runs yet.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
