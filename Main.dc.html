@@ -1,0 +1,448 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; color: #2D2D2D; background: #FAFAF8; }
+
+    .header {
+      background: #0B1F3A;
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #D4A574;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #F5F3F0;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #0EA5A0;
+    }
+
+    .hero {
+      position: relative;
+      height: 500px;
+      background: linear-gradient(135deg, #0EA5A0 0%, #0B1F3A 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #F5F3F0;
+      text-align: center;
+      padding: 60px 24px;
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 56px;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      color: #F5F3F0;
+    }
+
+    .hero p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 32px;
+      opacity: 0.95;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 14px 32px;
+      background: #D4A574;
+      color: #0B1F3A;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .cta-button:hover {
+      background: #C99256;
+      transform: translateY(-2px);
+    }
+
+    .featured-section {
+      max-width: 1200px;
+      margin: -60px auto 80px;
+      padding: 0 24px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .featured-card {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      padding: 48px;
+      align-items: center;
+    }
+
+    .featured-image {
+      width: 100%;
+      height: 300px;
+      background: linear-gradient(135deg, #0EA5A0 0%, #0B1F3A 100%);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #F5F3F0;
+      font-size: 14px;
+    }
+
+    .featured-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      line-height: 1.3;
+      margin-bottom: 16px;
+      color: #0B1F3A;
+    }
+
+    .featured-content p {
+      color: #64748B;
+      line-height: 1.7;
+      margin-bottom: 24px;
+      font-size: 15px;
+    }
+
+    .featured-meta {
+      display: flex;
+      gap: 16px;
+      font-size: 13px;
+      color: #64748B;
+      margin-bottom: 24px;
+    }
+
+    .category-filter {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .filter-tag {
+      padding: 10px 20px;
+      border: 2px solid #E2E8F0;
+      background: white;
+      border-radius: 24px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.3s;
+      color: #2D2D2D;
+    }
+
+    .filter-tag:hover,
+    .filter-tag.active {
+      border-color: #0EA5A0;
+      background: #0EA5A0;
+      color: white;
+    }
+
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-bottom: 80px;
+    }
+
+    .post-card {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .post-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+    }
+
+    .post-image {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #0EA5A0 0%, #0B1F3A 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #F5F3F0;
+      font-size: 12px;
+    }
+
+    .post-content {
+      padding: 24px;
+    }
+
+    .post-category {
+      display: inline-block;
+      background: #0EA5A0;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .post-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      line-height: 1.4;
+      margin-bottom: 12px;
+      color: #0B1F3A;
+    }
+
+    .post-excerpt {
+      color: #64748B;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .post-date {
+      font-size: 12px;
+      color: #94A3B8;
+    }
+
+    .footer {
+      background: #0B1F3A;
+      color: #F5F3F0;
+      padding: 60px 24px;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #F5F3F0;
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: #0EA5A0;
+    }
+
+    .footer-divider {
+      height: 1px;
+      background: rgba(245,243,240,0.1);
+      margin: 32px 0;
+    }
+
+    .footer-bottom {
+      font-size: 13px;
+      color: #94A3B8;
+    }
+  </style>
+</helmet>
+
+<div style="background: #FAFAF8; min-height: 100vh;">
+  <!-- Navigation -->
+  <header class="header">
+    <div class="nav-container">
+      <div class="logo">AdvanceStay</div>
+      <nav class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#blog">Blog</a>
+        <a href="#destinations">Destinations</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Travel Stories & Insights</h1>
+      <p>Discover tips, guides, and recommendations from our community of travelers and hospitality experts.</p>
+      <button class="cta-button">Read Latest Articles</button>
+    </div>
+  </section>
+
+  <!-- Featured Article -->
+  <section class="featured-section">
+    <article class="featured-card">
+      <div class="featured-image">
+        <span style="font-size: 12px; opacity: 0.7;">Featured Image</span>
+      </div>
+      <div class="featured-content">
+        <h2>The Ultimate Guide to Hidden Beach Resorts</h2>
+        <div class="featured-meta">
+          <span>By Sarah Chen</span>
+          <span>•</span>
+          <span>September 5, 2024</span>
+        </div>
+        <p>Explore the most exclusive and undiscovered beach destinations around the world. Learn insider tips for finding luxury accommodations that offer both privacy and breathtaking views.</p>
+        <button class="cta-button">Read Full Article</button>
+      </div>
+    </article>
+  </section>
+
+  <!-- Category Filter -->
+  <div style="max-width: 1200px; margin: 0 auto; padding: 0 24px;">
+    <div class="category-filter">
+      <button class="filter-tag active" onclick="filterPosts('all')">All Articles</button>
+      <button class="filter-tag" onclick="filterPosts('destinations')">Destinations</button>
+      <button class="filter-tag" onclick="filterPosts('tips')">Travel Tips</button>
+      <button class="filter-tag" onclick="filterPosts('reviews')">Reviews</button>
+      <button class="filter-tag" onclick="filterPosts('guides')">Guides</button>
+    </div>
+  </div>
+
+  <!-- Blog Posts Grid -->
+  <div style="max-width: 1200px; margin: 0 auto; padding: 0 24px;">
+    <div class="posts-grid">
+      <article class="post-card">
+        <div class="post-image">Featured Image</div>
+        <div class="post-content">
+          <span class="post-category">Destinations</span>
+          <h3 class="post-title">Luxury Stays in Tuscany</h3>
+          <p class="post-excerpt">Discover charming villas and boutique hotels nestled in the heart of Italy's wine country.</p>
+          <span class="post-date">August 28, 2024</span>
+        </div>
+      </article>
+
+      <article class="post-card">
+        <div class="post-image">Featured Image</div>
+        <div class="post-content">
+          <span class="post-category">Travel Tips</span>
+          <h3 class="post-title">Budget Travel Hacks for 2024</h3>
+          <p class="post-excerpt">Learn proven strategies to maximize your travel budget without sacrificing comfort and experiences.</p>
+          <span class="post-date">August 25, 2024</span>
+        </div>
+      </article>
+
+      <article class="post-card">
+        <div class="post-image">Featured Image</div>
+        <div class="post-content">
+          <span class="post-category">Guides</span>
+          <h3 class="post-title">48-Hour Tokyo Itinerary</h3>
+          <p class="post-excerpt">Make the most of your time in Tokyo with this carefully curated two-day adventure plan.</p>
+          <span class="post-date">August 22, 2024</span>
+        </div>
+      </article>
+
+      <article class="post-card">
+        <div class="post-image">Featured Image</div>
+        <div class="post-content">
+          <span class="post-category">Reviews</span>
+          <h3 class="post-title">Five-Star Resorts in Maldives</h3>
+          <p class="post-excerpt">In-depth reviews of the most luxurious overwater bungalows and resort experiences.</p>
+          <span class="post-date">August 19, 2024</span>
+        </div>
+      </article>
+
+      <article class="post-card">
+        <div class="post-image">Featured Image</div>
+        <div class="post-content">
+          <span class="post-category">Destinations</span>
+          <h3 class="post-title">Barcelona's Best Neighborhoods</h3>
+          <p class="post-excerpt">Explore the distinct character and attractions of Barcelona's most vibrant districts.</p>
+          <span class="post-date">August 16, 2024</span>
+        </div>
+      </article>
+
+      <article class="post-card">
+        <div class="post-image">Featured Image</div>
+        <div class="post-content">
+          <span class="post-category">Travel Tips</span>
+          <h3 class="post-title">What to Pack for Every Climate</h3>
+          <p class="post-excerpt">A complete packing guide that covers every destination type and season.</p>
+          <span class="post-date">August 13, 2024</span>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="#about">About Us</a>
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#terms">Terms of Service</a>
+        <a href="#contact">Contact</a>
+        <a href="#social">Social Media</a>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 AdvanceStay Blog. All rights reserved. Crafted with care for travelers worldwide.</p>
+      </div>
+    </div>
+  </footer>
+</div>
+
+</x-dc>
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#0EA5A0"}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { accent: this.props.accent ?? '#0EA5A0' };
+  }
+}
+</script>
+</body>
+</html>

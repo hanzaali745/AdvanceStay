@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AdvanceStay Blog - Travel stories, guides, and insights from hospitality experts and travelers worldwide.">
+  <title>AdvanceStay Blog - Travel Stories & Insights</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <header class="header">
+    <div class="nav-container">
+      <div class="logo">AdvanceStay</div>
+      <nav class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#blog">Blog</a>
+        <a href="#destinations">Destinations</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>Travel Stories & Insights</h1>
+      <p>Discover tips, guides, and recommendations from our community of travelers and hospitality experts.</p>
+      <button class="cta-button" onclick="scrollToSection('blog')">Read Latest Articles</button>
+    </div>
+  </section>
+
+  <!-- Featured Article -->
+  <section class="featured-section">
+    <article class="featured-card">
+      <picture class="featured-image">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=400&fit=crop" alt="Featured article cover">
+      </picture>
+      <div class="featured-content">
+        <h2>The Ultimate Guide to Hidden Beach Resorts</h2>
+        <div class="featured-meta">
+          <span>By Sarah Chen</span>
+          <span>•</span>
+          <span>September 5, 2024</span>
+        </div>
+        <p>Explore the most exclusive and undiscovered beach destinations around the world. Learn insider tips for finding luxury accommodations that offer both privacy and breathtaking views. From secret coves in Croatia to pristine islands in Southeast Asia, discover where to find the world's most exclusive beachfront escapes.</p>
+        <button class="cta-button" onclick="navigateToBlog('beach-resorts')">Read Full Article</button>
+      </div>
+    </article>
+  </section>
+
+  <!-- Search and Filter Section -->
+  <div class="filter-container" id="blog">
+    <div class="search-box">
+      <input
+        type="text"
+        id="searchInput"
+        class="search-input"
+        placeholder="Search articles..."
+        aria-label="Search blog posts"
+      >
+      <button class="search-btn" onclick="performSearch()">
+        <span>🔍</span>
+      </button>
+    </div>
+
+    <div class="category-filter">
+      <button class="filter-tag active" onclick="filterPosts('all', event)">All Articles</button>
+      <button class="filter-tag" onclick="filterPosts('destinations', event)">Destinations</button>
+      <button class="filter-tag" onclick="filterPosts('tips', event)">Travel Tips</button>
+      <button class="filter-tag" onclick="filterPosts('reviews', event)">Reviews</button>
+      <button class="filter-tag" onclick="filterPosts('guides', event)">Guides</button>
+    </div>
+  </div>
+
+  <!-- Blog Posts Grid -->
+  <section class="posts-section">
+    <div class="posts-grid" id="postsGrid">
+      <!-- Posts will be dynamically inserted here -->
+    </div>
+  </section>
+
+  <!-- Pagination -->
+  <div class="pagination" id="pagination">
+    <!-- Pagination buttons will be inserted here -->
+  </div>
+
+  <!-- Newsletter Signup -->
+  <section class="newsletter">
+    <div class="newsletter-content">
+      <h2>Subscribe to Our Newsletter</h2>
+      <p>Get the latest travel tips, destination guides, and exclusive offers delivered to your inbox.</p>
+      <form class="newsletter-form" onsubmit="handleNewsletterSignup(event)">
+        <input
+          type="email"
+          placeholder="Your email address"
+          required
+          aria-label="Email for newsletter"
+        >
+        <button type="submit" class="cta-button">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>About AdvanceStay</h3>
+        <p>Your trusted guide to travel, hospitality, and unforgettable experiences worldwide.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#destinations">Destinations</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Follow Us</h3>
+        <div class="social-links">
+          <a href="#" aria-label="Twitter">Twitter</a>
+          <a href="#" aria-label="Facebook">Facebook</a>
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="LinkedIn">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 AdvanceStay Blog. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </div>
+  </footer>
+
+  <!-- Blog Post Detail Modal (for single post view) -->
+  <div class="modal" id="postModal" role="dialog" aria-hidden="true">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()" aria-label="Close modal">&times;</button>
+      <article id="postDetail">
+        <!-- Post details will be inserted here -->
+      </article>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
