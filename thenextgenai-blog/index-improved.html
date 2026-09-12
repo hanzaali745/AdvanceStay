@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Next Gen AI - Practical, verified AI knowledge. No hype. Expert tutorials, research, and analysis from verified AI researchers and developers.">
+  <meta name="og:title" content="The Next Gen AI — AI Tutorials, Research & Analysis">
+  <meta name="og:description" content="Practical, verified knowledge about AI, machine learning, and emerging research. No hype, no BS—just substance.">
+  <meta name="theme-color" content="#0a1428">
+  <title>The Next Gen AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles-improved.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="header" role="banner">
+    <nav class="header-nav" role="navigation" aria-label="Main navigation">
+      <div class="nav-inner">
+        <a href="#home" class="brand" aria-label="The Next Gen AI Home">
+          <span class="brand-icon">⚡</span>
+          <span class="brand-name">thenextgenai</span>
+        </a>
+        <div class="nav-menu" id="navMenu">
+          <a href="#home" class="nav-item">Home</a>
+          <a href="#explore" class="nav-item">Explore</a>
+          <a href="#about" class="nav-item">About</a>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="hero" id="home" aria-label="Welcome section">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <h1 class="hero-title">Practical AI Knowledge</h1>
+          <p class="hero-subtitle">Verified insights from experts. No hype, no BS. Built for developers and researchers who think critically.</p>
+          <button class="hero-cta" onclick="scrollToSection('explore')">
+            Explore Articles
+            <span class="icon-arrow">→</span>
+          </button>
+        </div>
+        <div class="hero-visual">
+          <div class="gradient-orb"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Article Section -->
+    <section class="featured" aria-label="Featured article">
+      <div class="featured-inner">
+        <div class="featured-label">Featured</div>
+        <article class="featured-card">
+          <div class="featured-image">
+            <img src="https://images.unsplash.com/photo-1677442d019cecf8fbf1a3a5b3a2a6f?w=1000&h=600&fit=crop" alt="Understanding Large Language Models">
+          </div>
+          <div class="featured-content">
+            <div class="featured-meta">
+              <span class="category-badge" data-category="research">Research</span>
+              <span class="confidence-badge" title="Based on citation count and peer review">98% Verified</span>
+            </div>
+            <h2 class="featured-title">Understanding Large Language Models</h2>
+            <p class="featured-excerpt">A comprehensive breakdown of how LLMs work, their capabilities, limitations, and what's really happening under the hood.</p>
+            <div class="featured-author">
+              <div class="author-avatar">AR</div>
+              <div class="author-details">
+                <div class="author-name">Dr. Alex Rivera</div>
+                <div class="author-title">AI Researcher • MIT</div>
+              </div>
+            </div>
+            <button class="featured-read" onclick="navigateToBlog('understanding-llms')">Read Article</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Search & Discovery Section -->
+    <section class="discovery" aria-label="Search and discovery">
+      <div class="discovery-inner">
+        <div class="search-container">
+          <label for="search-field" class="search-label">Find articles</label>
+          <div class="search-box">
+            <input
+              type="text"
+              id="search-field"
+              class="search-input"
+              placeholder="Search by topic, author, or keyword..."
+              aria-label="Search articles"
+              autocomplete="off"
+            >
+            <button class="search-submit" onclick="performSearch()" aria-label="Search">
+              <span class="icon-search">→</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="filter-section">
+          <div class="filter-label">Content Type</div>
+          <div class="filter-group" role="group" aria-label="Filter by content type">
+            <button class="filter-tag active" data-filter="all" onclick="filterPosts('all', event)">
+              All
+            </button>
+            <button class="filter-tag" data-filter="tutorials" onclick="filterPosts('tutorials', event)">
+              Tutorials
+            </button>
+            <button class="filter-tag" data-filter="research" onclick="filterPosts('research', event)">
+              Research
+            </button>
+            <button class="filter-tag" data-filter="guides" onclick="filterPosts('guides', event)">
+              Guides
+            </button>
+            <button class="filter-tag" data-filter="analysis" onclick="filterPosts('analysis', event)">
+              Analysis
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Articles Grid -->
+    <section class="articles" id="explore" aria-label="Articles collection">
+      <div class="articles-inner">
+        <div class="articles-grid" id="articlesGrid">
+          <!-- Articles rendered here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Pagination -->
+    <nav class="pagination-section" aria-label="Article pagination">
+      <div class="pagination" id="pagination">
+        <!-- Pagination buttons rendered here -->
+      </div>
+    </nav>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter" aria-label="Newsletter signup">
+      <div class="newsletter-inner">
+        <div class="newsletter-content">
+          <h2 class="newsletter-title">Get verified insights weekly</h2>
+          <p class="newsletter-description">New articles on AI, ML research, and best practices delivered to your inbox every week. No spam, no fluff.</p>
+        </div>
+        <form class="newsletter-form" onsubmit="handleNewsletterSignup(event)">
+          <div class="form-row">
+            <input
+              type="email"
+              placeholder="your@email.com"
+              required
+              aria-label="Email address"
+              autocomplete="email"
+            >
+            <button type="submit" class="form-submit" aria-label="Subscribe">Subscribe</button>
+          </div>
+          <p class="form-note">No spam. Unsubscribe anytime.</p>
+        </form>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about" aria-label="About this platform">
+      <div class="about-inner">
+        <h2>About This Platform</h2>
+        <div class="about-content">
+          <p>
+            <strong>The Next Gen AI</strong> publishes practical, verified knowledge about artificial intelligence and machine learning. Every article is written by experts in the field, fact-checked for accuracy, and updated as the landscape evolves.
+          </p>
+          <p>
+            Our commitment: <em>substance over hype</em>, <em>accuracy over speculation</em>, and <em>clarity over jargon</em>. We believe the best technical writing explains not just the what, but the why.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3 class="footer-title">The Next Gen AI</h3>
+          <p>Practical knowledge for the AI era.</p>
+        </div>
+        <div class="footer-section">
+          <h4 class="footer-heading">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#explore">Articles</a></li>
+            <li><a href="#about">About</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4 class="footer-heading">Connect</h4>
+          <ul class="footer-links">
+            <li><a href="#" aria-label="Twitter">Twitter</a></li>
+            <li><a href="#" aria-label="GitHub">GitHub</a></li>
+            <li><a href="#" aria-label="Email">Email</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 The Next Gen AI. <a href="#">Privacy</a> • <a href="#">Terms</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Article Modal -->
+  <div class="modal" id="articleModal" role="dialog" aria-hidden="true" aria-label="Article viewer">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close article">×</button>
+    <div class="modal-inner">
+      <article id="articleContent">
+        <!-- Article content rendered here -->
+      </article>
+    </div>
+  </div>
+
+  <script src="app-improved.js"></script>
+</body>
+</html>
