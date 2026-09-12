@@ -13,7 +13,8 @@ const blogPosts = [
     date: '2024-09-10',
     image: 'https://images.unsplash.com/photo-1677442d019cecf8fbf1a3a5b3a2a6f?w=800&h=600&fit=crop',
     readTime: '12 min read',
-    confidence: 98
+    confidence: 98,
+    difficulty: 'Intermediate'
   },
   {
     id: 'building-first-ml-model',
@@ -25,7 +26,8 @@ const blogPosts = [
     date: '2024-09-08',
     image: 'https://images.unsplash.com/photo-1516321318423-f06f70db4397?w=800&h=600&fit=crop',
     readTime: '15 min read',
-    confidence: 92
+    confidence: 92,
+    difficulty: 'Beginner'
   },
   {
     id: 'transformers-latest',
