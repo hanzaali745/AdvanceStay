@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Next Gen AI - Practical, verified AI knowledge. No hype.">
+  <title>The Next Gen AI — AI Tutorials & Research</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Soho+Gothic:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="header" role="banner">
+    <nav class="nav-wrapper" role="navigation" aria-label="Main navigation">
+      <div class="nav-container">
+        <a href="#home" class="logo" aria-label="The Next Gen AI Home">
+          <span class="logo-icon">⚡</span>
+          <span class="logo-text">thenextgenai</span>
+        </a>
+        <div class="nav-links">
+          <a href="#home" class="nav-link">Home</a>
+          <a href="#explore" class="nav-link">Explore</a>
+          <a href="#about" class="nav-link">About</a>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" id="home" aria-label="Welcome section">
+      <div class="hero-wrapper">
+        <div class="hero-content">
+          <h1 class="hero-title">Practical AI Knowledge</h1>
+          <p class="hero-subtitle">Verified insights. No hype. Built for developers and researchers.</p>
+          <button class="cta-primary" onclick="scrollToSection('explore')" aria-label="Explore articles">
+            Explore Articles
+            <span class="cta-arrow">→</span>
+          </button>
+        </div>
+        <div class="hero-visual">
+          <div class="visual-accent"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="featured-insight" aria-label="Featured article">
+      <article class="insight-card featured">
+        <div class="insight-image">
+          <img src="https://images.unsplash.com/photo-1677442d019cecf8fbf1a3a5b3a2a6f?w=800&h=500&fit=crop" alt="Large Language Models visualization">
+        </div>
+        <div class="insight-content">
+          <div class="insight-meta">
+            <span class="category-badge" data-category="research">Research</span>
+            <span class="confidence-score" title="Based on citation count, peer review, and recency">Confidence: <strong>98%</strong></span>
+          </div>
+          <h2 class="insight-title">Understanding Large Language Models</h2>
+          <p class="insight-excerpt">A comprehensive breakdown of how LLMs work, their capabilities, limitations, and what's really happening under the hood—moving beyond marketing hype to solid technical understanding.</p>
+          <div class="insight-footer">
+            <div class="author-info">
+              <span class="author-name">Dr. Alex Rivera</span>
+              <span class="author-verified" title="Verified researcher">✓</span>
+            </div>
+            <span class="read-time">12 min read</span>
+          </div>
+          <button class="cta-secondary" onclick="navigateToBlog('understanding-llms')" aria-label="Read full article about understanding LLMs">
+            Read Article
+          </button>
+        </div>
+      </article>
+    </section>
+
+    <section class="search-filters" aria-label="Search and filter articles">
+      <div class="search-wrapper">
+        <label for="search-input" class="search-label">Search by topic, author, or keyword</label>
+        <div class="search-box">
+          <input
+            type="text"
+            id="search-input"
+            class="search-input"
+            placeholder="E.g., 'transformers', 'prompt engineering', 'ethics'..."
+            aria-label="Search articles"
+            autocomplete="off"
+          >
+          <button class="search-btn" onclick="performSearch()" aria-label="Search">
+            <span>→</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="filters-wrapper">
+        <div class="filter-label">Filter by type:</div>
+        <div class="filter-buttons" role="group" aria-label="Content type filters">
+          <button class="filter-btn active" data-filter="all" onclick="filterPosts('all', event)">
+            All Content
+          </button>
+          <button class="filter-btn" data-filter="tutorials" onclick="filterPosts('tutorials', event)">
+            Tutorials
+          </button>
+          <button class="filter-btn" data-filter="research" onclick="filterPosts('research', event)">
+            Research
+          </button>
+          <button class="filter-btn" data-filter="guides" onclick="filterPosts('guides', event)">
+            Guides
+          </button>
+          <button class="filter-btn" data-filter="analysis" onclick="filterPosts('analysis', event)">
+            Analysis
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="articles-section" id="explore" aria-label="Articles collection">
+      <div class="articles-grid" id="articlesGrid">
+      </div>
+    </section>
+
+    <nav class="pagination-wrapper" aria-label="Article pagination">
+      <div class="pagination" id="pagination">
+      </div>
+    </nav>
+
+    <section class="newsletter-section" aria-label="Newsletter subscription">
+      <div class="newsletter-card">
+        <div class="newsletter-content">
+          <h2 class="newsletter-title">Stay Updated</h2>
+          <p class="newsletter-subtitle">Weekly insights on AI, machine learning, and emerging research—delivered verified and hype-free.</p>
+        </div>
+        <form class="newsletter-form" onsubmit="handleNewsletterSignup(event)" aria-label="Email subscription form">
+          <div class="form-group">
+            <input
+              type="email"
+              placeholder="your.email@example.com"
+              required
+              aria-label="Email address for subscription"
+              autocomplete="email"
+            >
+            <button type="submit" class="form-submit" aria-label="Subscribe to newsletter">
+              Subscribe
+            </button>
+          </div>
+          <p class="form-note">No spam. Unsubscribe anytime.</p>
+        </form>
+      </div>
+    </section>
+
+    <section class="about-section" id="about" aria-label="About this blog">
+      <div class="about-content">
+        <h2>About This Blog</h2>
+        <p>We publish practical, verified knowledge about AI and machine learning. Every article is written by experts in the field, fact-checked, and updated as the landscape evolves.</p>
+        <p>Our commitment: substance over hype, accuracy over speculation, and clarity over jargon.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-wrapper">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>The Next Gen AI</h3>
+          <p>Practical AI knowledge for the future.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#explore">Articles</a></li>
+            <li><a href="#about">About</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="#" aria-label="Twitter">Twitter/X</a></li>
+            <li><a href="#" aria-label="GitHub">GitHub</a></li>
+            <li><a href="#" aria-label="Email">Email</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 The Next Gen AI. <a href="#">Privacy</a> • <a href="#">Terms</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal" id="articleModal" role="dialog" aria-hidden="true" aria-label="Article content">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()" aria-label="Close article">
+        <span>×</span>
+      </button>
+      <article id="articleDetail" class="article-full">
+      </article>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
