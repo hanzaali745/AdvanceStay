@@ -1,9 +1,9 @@
 :root {
   /* Primary palette - minimalist approach */
-  --color-navy-dark: #0a1428;
-  --color-navy-med: #1e2139;
-  --color-navy-light: #2a3656;
-  --color-cyan: #00d9ff;
+  --color-navy-dark: #1a3a52;
+  --color-navy-med: #2a4a6a;
+  --color-navy-light: #3a5a7a;
+  --color-cyan: #33e5ff;
   --color-cyan-muted: #00d9ff33;
   --color-purple: #6b5b95;
   --color-coral: #ff6b35;
