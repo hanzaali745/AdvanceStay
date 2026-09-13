@@ -1004,6 +1004,126 @@
       font-size: 15px;
     }
 
+    .reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--color-border);
+      z-index: 101;
+      display: none;
+    }
+
+    .reading-progress.visible {
+      display: block;
+    }
+
+    .reading-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-cyan), var(--color-coral));
+      width: 0%;
+      transition: width 0.1s ease;
+    }
+
+    .article-toc {
+      background: rgba(26, 36, 68, 0.4);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-lg);
+      margin: var(--spacing-xl) 0;
+    }
+
+    .article-toc-title {
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .article-toc-list {
+      list-style: none;
+    }
+
+    .article-toc-list li {
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .article-toc-list a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-size: 13px;
+      transition: all 0.2s ease;
+      display: block;
+      padding: 4px 0;
+    }
+
+    .article-toc-list a:hover {
+      color: var(--color-cyan);
+      padding-left: 4px;
+    }
+
+    .related-articles {
+      margin-top: var(--spacing-2xl);
+      padding-top: var(--spacing-xl);
+      border-top: 1px solid var(--color-border);
+    }
+
+    .related-articles-title {
+      font-family: var(--font-article-title);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .related-articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--spacing-lg);
+    }
+
+    .related-article-card {
+      background: rgba(26, 36, 68, 0.4);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-md);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .related-article-card:hover {
+      border-color: var(--color-cyan);
+      background: rgba(26, 36, 68, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .related-article-category {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--color-cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .related-article-title {
+      font-family: var(--font-article-title);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-bottom: var(--spacing-sm);
+      line-height: 1.3;
+    }
+
+    .related-article-meta {
+      font-size: 12px;
+      color: var(--color-text-muted);
+    }
+
     .toast {
       position: fixed;
       bottom: var(--spacing-lg);
@@ -1150,6 +1270,10 @@
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="reading-progress" id="readingProgress">
+    <div class="reading-progress-bar" id="readingProgressBar"></div>
+  </div>
 
   <header class="header" role="banner">
     <nav class="header-nav" role="navigation" aria-label="Main navigation">
@@ -1348,18 +1472,18 @@
 
   <script>
     const blogPosts = [
-      { id: 'understanding-llms', title: 'Understanding Large Language Models', category: 'research', excerpt: 'A deep dive into how LLMs work, their capabilities, limitations, and what\'s really happening under the hood.', content: 'Large Language Models have revolutionized AI. This comprehensive guide covers transformers, attention mechanisms, tokenization, and mathematical foundations. We explore limitations including hallucinations and reasoning gaps, plus solutions researchers are developing. Learn the fundamentals powering GPT, Claude, and state-of-the-art models.', author: 'Dr. Alex Rivera', authorTitle: 'AI Researcher', authorAffiliation: 'MIT', authorInitials: 'AR', date: '2024-09-10', readTime: '12 min', confidence: 98, difficulty: 'Intermediate', trending: 1 },
-      { id: 'building-first-ml-model', title: 'Building Your First ML Model', category: 'tutorials', excerpt: 'Step-by-step guide to creating and training a machine learning model using Python.', content: 'Build your first machine learning model from scratch. We cover data preparation, feature engineering, model selection, training, and evaluation. Using Python libraries like scikit-learn and TensorFlow, create a complete end-to-end ML pipeline with practical examples and best practices for production-ready code.', author: 'Sarah Chen', authorTitle: 'ML Engineer', authorAffiliation: 'Google Brain', authorInitials: 'SC', date: '2024-09-08', readTime: '15 min', confidence: 92, difficulty: 'Beginner', trending: 2 },
-      { id: 'transformers-latest', title: 'Latest Developments in Transformers', category: 'research', excerpt: 'Analysis of recent breakthroughs in transformer architecture and their implications.', content: 'The transformer architecture continues evolving rapidly. We analyze recent papers on Vision Transformers, mixture-of-experts models, and efficient attention mechanisms. Understand innovations improving performance, reducing computational costs, and enabling new applications across NLP, computer vision, and multimodal learning.', author: 'Dr. James Park', authorTitle: 'Research Scientist', authorAffiliation: 'DeepMind', authorInitials: 'JP', date: '2024-09-05', readTime: '10 min', confidence: 95, difficulty: 'Advanced', trending: 3 },
-      { id: 'ai-ethics', title: 'AI Ethics Fundamentals', category: 'guides', excerpt: 'Understanding bias, fairness, and responsible AI development principles.', content: 'Build ethical AI systems by understanding bias at every stage. This guide covers data bias, algorithmic bias, fairness metrics, and bias mitigation strategies. Learn building transparent, interpretable, and fair AI systems with real-world examples and practical approaches to responsible AI development.', author: 'Dr. Maria Santos', authorTitle: 'AI Ethics Lead', authorAffiliation: 'Anthropic', authorInitials: 'MS', date: '2024-09-01', readTime: '9 min', confidence: 88, difficulty: 'Intermediate' },
-      { id: 'fine-tuning-vs-rag', title: 'Fine-Tuning vs RAG: When to Use Each', category: 'analysis', excerpt: 'Comprehensive comparison of fine-tuning and retrieval-augmented generation for your use case.', content: 'When should you fine-tune a model vs use RAG? We break down tradeoffs, costs, performance implications, and implementation complexity. Make informed decisions based on requirements, data availability, and computational resources. Includes case studies and cost calculators.', author: 'Alex Thompson', authorTitle: 'ML Architect', authorAffiliation: 'OpenAI', authorInitials: 'AT', date: '2024-08-29', readTime: '11 min', confidence: 90, difficulty: 'Intermediate' },
-      { id: 'computer-vision-basics', title: 'Computer Vision Fundamentals', category: 'tutorials', excerpt: 'Learn image processing, feature extraction, and deep learning for vision tasks.', content: 'Master computer vision from the ground up. Covers image fundamentals, convolutions, CNNs, ResNets, and Vision Transformers. Build practical applications including classification, object detection, and segmentation using PyTorch and OpenCV. Includes hands-on code examples.', author: 'Lisa Wang', authorTitle: 'Computer Vision Engineer', authorAffiliation: 'Tesla', authorInitials: 'LW', date: '2024-08-26', readTime: '13 min', confidence: 89, difficulty: 'Intermediate' },
-      { id: 'nlp-pipeline', title: 'Building an NLP Pipeline from Scratch', category: 'tutorials', excerpt: 'Complete guide to creating production-ready NLP systems with preprocessing to inference.', content: 'Build a complete NLP pipeline from data collection to production deployment. Cover tokenization, embeddings, training, evaluation, and serving. Learn best practices for edge cases, performance monitoring, and quality maintenance in production NLP systems with real-world optimizations.', author: 'Dr. Kumar Sharma', authorTitle: 'NLP Specialist', authorAffiliation: 'Stanford', authorInitials: 'KS', date: '2024-08-23', readTime: '14 min', confidence: 91, difficulty: 'Advanced' },
-      { id: 'prompt-engineering', title: 'Advanced Prompt Engineering Techniques', category: 'guides', excerpt: 'Master the art of crafting effective prompts for maximum model performance.', content: 'Prompt engineering is both art and science. Covers prompt structure, few-shot learning, chain-of-thought reasoning, and retrieval-augmented prompting. Learn techniques improving accuracy, reducing hallucinations, and getting consistent results. Includes templates and evaluation frameworks.', author: 'Emma Rodriguez', authorTitle: 'Prompt Engineer', authorAffiliation: 'Hugging Face', authorInitials: 'ER', date: '2024-08-20', readTime: '8 min', confidence: 85, difficulty: 'Beginner' },
-      { id: 'reinforcement-learning', title: 'Introduction to Reinforcement Learning', category: 'guides', excerpt: 'Learn how agents learn through interaction: MDPs, Q-learning, policy gradients, and more.', content: 'Discover reinforcement learning fundamentals. Explains Markov Decision Processes, value functions, policy gradients, and deep Q-learning. Build agents learning optimal behavior through trial and error, with applications from games to robotics. Implemented with OpenAI Gym and PyTorch.', author: 'Dr. Michael Zhang', authorTitle: 'RL Researcher', authorAffiliation: 'UC Berkeley', authorInitials: 'MZ', date: '2024-08-17', readTime: '12 min', confidence: 87, difficulty: 'Advanced' },
-      { id: 'model-optimization', title: 'Model Optimization Techniques', category: 'analysis', excerpt: 'Quantization, pruning, distillation, and other methods to improve inference performance.', content: 'Deploy models faster and cheaper. Explore quantization (int8, fp16), knowledge distillation for compression, and pruning techniques. Maintain accuracy while reducing size and latency for production. Includes benchmarks and comparison tables for optimization strategies.', author: 'David Kim', authorTitle: 'Performance Engineer', authorAffiliation: 'NVIDIA', authorInitials: 'DK', date: '2024-08-14', readTime: '10 min', confidence: 86, difficulty: 'Advanced' },
-      { id: 'multimodal-ai', title: 'Multimodal AI: Text, Vision & Beyond', category: 'research', excerpt: 'Understanding models that process multiple types of data simultaneously.', content: 'Multimodal models like CLIP and GPT-4V reshape AI. Learn combining text, images, and modalities. Explore visual question answering, image captioning, and cross-modal retrieval. Understand architectures and training techniques behind state-of-the-art multimodal systems.', author: 'Dr. Priya Patel', authorTitle: 'Multimodal Lead', authorAffiliation: 'Meta AI', authorInitials: 'PP', date: '2024-08-11', readTime: '11 min', confidence: 93, difficulty: 'Advanced' },
-      { id: 'ml-deployment', title: 'Deploying ML Models to Production', category: 'guides', excerpt: 'Containerization, monitoring, scaling, and maintaining ML systems in production.', content: 'Move from notebook to production with confidence. Covers Docker containerization, FastAPI serving, performance monitoring, data drift handling, and scaling. Learn DevOps practices specific to ML systems with real-world examples and best practices.', author: 'Tarek Hassan', authorTitle: 'MLOps Engineer', authorAffiliation: 'Amazon', authorInitials: 'TH', date: '2024-08-08', readTime: '13 min', confidence: 89, difficulty: 'Advanced' }
+      { id: 'understanding-llms', title: 'Understanding Large Language Models', category: 'research', excerpt: 'A deep dive into how LLMs work, their capabilities, limitations, and what\'s really happening under the hood.', content: 'Large Language Models have revolutionized AI. This comprehensive guide covers transformers, attention mechanisms, tokenization, and mathematical foundations.<h2 id="toc-how-llms-work">How LLMs Work</h2> The fundamental architecture relies on transformer layers processing input tokens through self-attention mechanisms. Each layer refines representations through multiple attention heads, enabling the model to capture complex semantic relationships. This process repeats across dozens of layers, building increasingly abstract representations.<h2 id="toc-training-and-scaling">Training and Scaling</h2> LLMs train on massive text datasets through next-token prediction. Scaling laws show that larger models trained on more data consistently improve performance. We explore the compute requirements, data curation, and training techniques behind state-of-the-art models.<h2 id="toc-capabilities-and-limitations">Capabilities and Limitations</h2> Modern LLMs excel at language understanding, generation, reasoning, and knowledge synthesis. However, they struggle with hallucinations, numerical reasoning, and factual updates. Understanding these boundaries is crucial for responsible deployment.', author: 'Dr. Alex Rivera', authorTitle: 'AI Researcher', authorAffiliation: 'MIT', authorInitials: 'AR', date: '2024-09-10', readTime: '12 min', confidence: 98, difficulty: 'Intermediate', trending: 1 },
+      { id: 'building-first-ml-model', title: 'Building Your First ML Model', category: 'tutorials', excerpt: 'Step-by-step guide to creating and training a machine learning model using Python.', content: 'Build your first machine learning model from scratch. We cover essential steps from data preparation to model evaluation.<h2 id="toc-data-preparation">Data Preparation</h2> Quality data is foundational. Learn techniques for handling missing values, scaling features, and creating train-test splits. Proper data preprocessing prevents training issues and improves model performance.<h2 id="toc-model-selection-and-training">Model Selection and Training</h2> Choose appropriate algorithms for your problem. We guide you through model training, hyperparameter tuning, and validation strategies using scikit-learn and TensorFlow.<h2 id="toc-evaluation-and-deployment">Evaluation and Deployment</h2> Evaluate model performance with appropriate metrics. Learn best practices for production-ready code, including error handling and monitoring.', author: 'Sarah Chen', authorTitle: 'ML Engineer', authorAffiliation: 'Google Brain', authorInitials: 'SC', date: '2024-09-08', readTime: '15 min', confidence: 92, difficulty: 'Beginner', trending: 2 },
+      { id: 'transformers-latest', title: 'Latest Developments in Transformers', category: 'research', excerpt: 'Analysis of recent breakthroughs in transformer architecture and their implications.', content: 'The transformer architecture continues evolving rapidly with exciting innovations.<h2 id="toc-vision-transformers">Vision Transformers</h2> Vision Transformers apply the transformer architecture to computer vision tasks. We analyze ViT, DeiT, and recent variants achieving state-of-the-art results on image classification and detection.<h2 id="toc-efficient-attention">Efficient Attention Mechanisms</h2> Standard attention has O(n²) complexity. Recent research introduces sparse attention, linear attention, and other techniques enabling efficient transformers for long sequences.<h2 id="toc-mixture-of-experts">Mixture of Experts</h2> MoE models activate different subsets of parameters per input, enabling sparse computation and scaling. We explore Switch Transformers and recent conditional computation approaches.', author: 'Dr. James Park', authorTitle: 'Research Scientist', authorAffiliation: 'DeepMind', authorInitials: 'JP', date: '2024-09-05', readTime: '10 min', confidence: 95, difficulty: 'Advanced', trending: 3 },
+      { id: 'ai-ethics', title: 'AI Ethics Fundamentals', category: 'guides', excerpt: 'Understanding bias, fairness, and responsible AI development principles.', content: 'Build ethical AI systems by understanding bias at every stage.<h2 id="toc-types-of-bias">Types of Bias</h2> Data bias comes from imbalanced training data. Algorithmic bias emerges from model architecture and training procedures. We explore sources and detection methods.<h2 id="toc-fairness-metrics">Fairness Metrics</h2> Measuring fairness is complex and context-dependent. Learn about demographic parity, equalized odds, and other metrics for different applications.<h2 id="toc-mitigation-strategies">Mitigation Strategies</h2> Apply techniques including data balancing, fairness constraints, and post-processing to build more equitable systems.', author: 'Dr. Maria Santos', authorTitle: 'AI Ethics Lead', authorAffiliation: 'Anthropic', authorInitials: 'MS', date: '2024-09-01', readTime: '9 min', confidence: 88, difficulty: 'Intermediate' },
+      { id: 'fine-tuning-vs-rag', title: 'Fine-Tuning vs RAG: When to Use Each', category: 'analysis', excerpt: 'Comprehensive comparison of fine-tuning and retrieval-augmented generation for your use case.', content: 'When should you fine-tune versus use RAG? We break down tradeoffs comprehensively.<h2 id="toc-fine-tuning-approach">Fine-Tuning Approach</h2> Fine-tuning updates model weights on your data. Ideal for specialized tasks where you have significant training data. Consider computational costs and storage requirements.<h2 id="toc-rag-approach">RAG Approach</h2> Retrieval-Augmented Generation retrieves relevant context without updating model weights. Faster to implement and update knowledge without retraining.<h2 id="toc-cost-and-performance">Cost and Performance Analysis</h2> Compare training time, inference latency, knowledge freshness, and scalability for your specific use case.', author: 'Alex Thompson', authorTitle: 'ML Architect', authorAffiliation: 'OpenAI', authorInitials: 'AT', date: '2024-08-29', readTime: '11 min', confidence: 90, difficulty: 'Intermediate' },
+      { id: 'computer-vision-basics', title: 'Computer Vision Fundamentals', category: 'tutorials', excerpt: 'Learn image processing, feature extraction, and deep learning for vision tasks.', content: 'Master computer vision from the ground up with practical foundations.<h2 id="toc-image-fundamentals">Image Fundamentals</h2> Learn about pixel representations, color spaces, and image operations. Understand how computers interpret images as numerical data.<h2 id="toc-convolutional-networks">Convolutional Networks</h2> Explore CNNs, convolution operations, and architectures like ResNet. Build intuition for how networks extract visual features.<h2 id="toc-vision-applications">Vision Applications</h2> Implement classification, object detection, and segmentation using PyTorch and OpenCV with hands-on examples.', author: 'Lisa Wang', authorTitle: 'Computer Vision Engineer', authorAffiliation: 'Tesla', authorInitials: 'LW', date: '2024-08-26', readTime: '13 min', confidence: 89, difficulty: 'Intermediate' },
+      { id: 'nlp-pipeline', title: 'Building an NLP Pipeline from Scratch', category: 'tutorials', excerpt: 'Complete guide to creating production-ready NLP systems with preprocessing to inference.', content: 'Build a complete NLP pipeline from data collection to production deployment.<h2 id="toc-data-processing">Data Processing and Tokenization</h2> Learn tokenization strategies, handling special tokens, and preparing text for models. Explore preprocessing techniques improving model performance.<h2 id="toc-model-training">Model Training and Fine-tuning</h2> Train NLP models effectively with proper sampling strategies, loss functions, and validation approaches.<h2 id="toc-production-considerations">Production Considerations</h2> Deploy NLP systems with monitoring, performance optimization, and handling data drift in production.', author: 'Dr. Kumar Sharma', authorTitle: 'NLP Specialist', authorAffiliation: 'Stanford', authorInitials: 'KS', date: '2024-08-23', readTime: '14 min', confidence: 91, difficulty: 'Advanced' },
+      { id: 'prompt-engineering', title: 'Advanced Prompt Engineering Techniques', category: 'guides', excerpt: 'Master the art of crafting effective prompts for maximum model performance.', content: 'Prompt engineering is both art and science for maximizing model outputs.<h2 id="toc-prompt-structure">Prompt Structure and Clarity</h2> Write clear, specific prompts with proper context. Learn formatting techniques improving model understanding and output quality.<h2 id="toc-advanced-techniques">Advanced Techniques</h2> Explore few-shot learning, chain-of-thought reasoning, and retrieval-augmented prompting for complex tasks.<h2 id="toc-evaluation-and-iteration">Evaluation and Iteration</h2> Measure prompt effectiveness, debug issues, and iteratively improve prompts for your application.', author: 'Emma Rodriguez', authorTitle: 'Prompt Engineer', authorAffiliation: 'Hugging Face', authorInitials: 'ER', date: '2024-08-20', readTime: '8 min', confidence: 85, difficulty: 'Beginner' },
+      { id: 'reinforcement-learning', title: 'Introduction to Reinforcement Learning', category: 'guides', excerpt: 'Learn how agents learn through interaction: MDPs, Q-learning, policy gradients, and more.', content: 'Discover reinforcement learning fundamentals where agents learn through interaction.<h2 id="toc-mdps-and-value-functions">MDPs and Value Functions</h2> Learn Markov Decision Processes, value functions, and Bellman equations—the mathematical foundations of RL.<h2 id="toc-learning-algorithms">Learning Algorithms</h2> Explore Q-learning, SARSA, and policy gradients. Understand exploration-exploitation tradeoffs and algorithm convergence.<h2 id="toc-applications">Applications and Challenges</h2> See RL applications from games to robotics. Understand challenges like sample efficiency and reward design.', author: 'Dr. Michael Zhang', authorTitle: 'RL Researcher', authorAffiliation: 'UC Berkeley', authorInitials: 'MZ', date: '2024-08-17', readTime: '12 min', confidence: 87, difficulty: 'Advanced' },
+      { id: 'model-optimization', title: 'Model Optimization Techniques', category: 'analysis', excerpt: 'Quantization, pruning, distillation, and other methods to improve inference performance.', content: 'Deploy models faster and cheaper through effective optimization.<h2 id="toc-quantization">Quantization Methods</h2> Reduce model size and latency through quantization to lower precision formats. Understand int8, fp16, and dynamic quantization approaches.<h2 id="toc-knowledge-distillation">Knowledge Distillation</h2> Transfer knowledge from large models to smaller ones. Create efficient models maintaining performance.<h2 id="toc-pruning-and-sparsity">Pruning and Sparsity</h2> Remove unnecessary parameters and connections. Achieve sparse models maintaining accuracy with fewer operations.', author: 'David Kim', authorTitle: 'Performance Engineer', authorAffiliation: 'NVIDIA', authorInitials: 'DK', date: '2024-08-14', readTime: '10 min', confidence: 86, difficulty: 'Advanced' },
+      { id: 'multimodal-ai', title: 'Multimodal AI: Text, Vision & Beyond', category: 'research', excerpt: 'Understanding models that process multiple types of data simultaneously.', content: 'Multimodal models like CLIP and GPT-4V reshape AI by combining modalities.<h2 id="toc-multimodal-architectures">Multimodal Architectures</h2> Explore vision encoders, text encoders, and fusion mechanisms combining multiple modalities effectively.<h2 id="toc-training-approaches">Training Approaches</h2> Learn contrastive learning for alignment, paired data requirements, and scaling multimodal systems.<h2 id="toc-applications">Applications and Future</h2> See applications from visual question answering to cross-modal retrieval. Explore emerging trends in multimodal AI.', author: 'Dr. Priya Patel', authorTitle: 'Multimodal Lead', authorAffiliation: 'Meta AI', authorInitials: 'PP', date: '2024-08-11', readTime: '11 min', confidence: 93, difficulty: 'Advanced' },
+      { id: 'ml-deployment', title: 'Deploying ML Models to Production', category: 'guides', excerpt: 'Containerization, monitoring, scaling, and maintaining ML systems in production.', content: 'Move from notebook to production with confidence and best practices.<h2 id="toc-containerization">Containerization and Serving</h2> Package models with Docker. Serve efficiently with FastAPI, Flask, or TensorFlow Serving. Understand API design for production.<h2 id="toc-monitoring-and-maintenance">Monitoring and Maintenance</h2> Monitor model performance, detect data drift, and maintain system health. Setup alerting for production issues.<h2 id="toc-scaling-and-optimization">Scaling and Optimization</h2> Scale deployments across multiple replicas. Optimize inference latency and resource usage for production demands.', author: 'Tarek Hassan', authorTitle: 'MLOps Engineer', authorAffiliation: 'Amazon', authorInitials: 'TH', date: '2024-08-08', readTime: '13 min', confidence: 89, difficulty: 'Advanced' }
     ];
 
     const ARTICLES_PER_PAGE = 6;
@@ -1447,9 +1571,76 @@
       });
     }
 
+    function generateTableOfContents(content) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(`<div>${content}</div>`, 'text/html');
+      const headings = doc.querySelectorAll('h2[id]');
+      if (headings.length === 0) return '';
+
+      let toc = '<div class="article-toc"><div class="article-toc-title">📍 Table of Contents</div><ul class="article-toc-list">';
+      headings.forEach(h => {
+        const id = h.id;
+        const text = h.textContent;
+        toc += `<li><a href="#${id}" onclick="scrollToTocItem(event, '${id}')">${text}</a></li>`;
+      });
+      toc += '</ul></div>';
+      return toc;
+    }
+
+    function getRelatedArticles(post, limit = 3) {
+      return blogPosts.filter(p => p.category === post.category && p.id !== post.id).slice(0, limit);
+    }
+
+    function scrollToTocItem(event, itemId) {
+      event.preventDefault();
+      const element = document.querySelector(`#${itemId}`);
+      if (element) {
+        const content = document.getElementById('articleContent');
+        content.scrollTop = element.offsetTop;
+      }
+    }
+
+    function trackReadingProgress() {
+      const modal = document.getElementById('articleModal');
+      const progressBar = document.getElementById('readingProgressBar');
+      const progress = document.getElementById('readingProgress');
+
+      if (!modal.classList.contains('open')) {
+        progress.classList.remove('visible');
+        return;
+      }
+
+      progress.classList.add('visible');
+      const scrollTop = modal.scrollTop;
+      const scrollHeight = modal.scrollHeight - modal.clientHeight;
+      const scrollPercent = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+      progressBar.style.width = scrollPercent + '%';
+    }
+
     function showArticleModal(post) {
       const modal = document.getElementById('articleModal');
       const content = document.getElementById('articleContent');
+      const relatedArticles = getRelatedArticles(post);
+      const tocHtml = generateTableOfContents(post.content);
+
+      let relatedHtml = '';
+      if (relatedArticles.length > 0) {
+        relatedHtml = `
+          <div class="related-articles">
+            <h3 class="related-articles-title">Recommended Reading</h3>
+            <div class="related-articles-grid">
+              ${relatedArticles.map(article => `
+                <div class="related-article-card" onclick="showArticleModal(blogPosts.find(p => p.id === '${article.id}'))">
+                  <div class="related-article-category">${article.category}</div>
+                  <h4 class="related-article-title">${article.title}</h4>
+                  <div class="related-article-meta">${article.readTime} • ${article.confidence}% verified</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
       content.innerHTML = `
         <h2>${post.title}</h2>
         <div style="display: flex; gap: var(--spacing-md); margin: var(--spacing-lg) 0; padding-bottom: var(--spacing-lg); border-bottom: 1px solid var(--color-border); flex-wrap: wrap;">
@@ -1469,10 +1660,13 @@
             <div style="font-size: 13px; color: var(--color-text-muted); margin-top: 2px; font-family: var(--font-mono);">@ ${post.authorAffiliation}</div>
           </div>
         </div>
-        <p>${post.content}</p>
+        ${tocHtml}
+        <div style="line-height: 1.9; color: var(--color-text-secondary);">${post.content}</div>
+        ${relatedHtml}
       `;
       modal.classList.add('open');
       document.body.style.overflow = 'hidden';
+      setTimeout(() => trackReadingProgress(), 100);
     }
 
     function closeModal() {
@@ -1501,12 +1695,15 @@
     document.addEventListener('DOMContentLoaded', () => {
       renderTrending();
       renderArticles();
-      document.getElementById('articleModal').addEventListener('click', (e) => {
+      const modal = document.getElementById('articleModal');
+      modal.addEventListener('click', (e) => {
         if (e.target.id === 'articleModal') closeModal();
       });
+      modal.addEventListener('scroll', trackReadingProgress);
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeModal();
       });
+      window.addEventListener('resize', trackReadingProgress);
     });
   </script>
 </body>
