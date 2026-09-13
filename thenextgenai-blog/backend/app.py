@@ -68,17 +68,17 @@ def root():
         "status": "operational"
     }
 
-# TODO: Import and include routers
-# from api import auth, articles, authors, search, newsletter, bookmarks, analytics
+# Import routers
+from api import auth, articles, authors, search, newsletter, trending, analytics
 
-# Include routers (when created)
-# app.include_router(auth.router)
-# app.include_router(articles.router)
-# app.include_router(authors.router)
-# app.include_router(search.router)
-# app.include_router(newsletter.router)
-# app.include_router(bookmarks.router)
-# app.include_router(analytics.router)
+# Include routers
+app.include_router(auth.router)
+app.include_router(articles.router)
+app.include_router(authors.router)
+app.include_router(search.router)
+app.include_router(newsletter.router)
+app.include_router(trending.router)
+app.include_router(analytics.router)
 
 if __name__ == "__main__":
     import uvicorn
