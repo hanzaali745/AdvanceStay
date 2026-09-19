@@ -768,6 +768,14 @@
       }
     }
 
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      font-size: 16px !important;
+      min-height: 44px !important;
+      box-sizing: border-box !important;
+    }
+
     input[type="text"]:focus-visible,
     input[type="email"]:focus-visible,
     textarea:focus-visible {
@@ -829,6 +837,83 @@
       .articles-grid {
         grid-template-columns: 1fr;
       }
+
+      /* Responsive Newsletter */
+      .newsletter-form {
+        flex-direction: column;
+        gap: var(--spacing-md);
+      }
+      .newsletter-email {
+        width: 100%;
+      }
+      .newsletter-submit {
+        width: 100%;
+      }
+      .newsletter-container {
+        padding: var(--spacing-xl);
+      }
+
+      /* Responsive Social Share */
+      .social-share {
+        flex-wrap: wrap;
+        gap: var(--spacing-sm);
+      }
+      .social-share-btn {
+        flex: 1;
+        min-width: 120px;
+        padding: 10px 12px;
+        font-size: 13px;
+      }
+
+      /* Responsive Author Info */
+      .author-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+        padding: var(--spacing-lg);
+      }
+      .author-avatar {
+        width: 56px;
+        height: 56px;
+        font-size: 28px;
+      }
+
+      /* Responsive Toast */
+      .toast {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        max-width: none;
+      }
+
+      /* Responsive FAQ */
+      .faq-item {
+        padding: var(--spacing-md);
+        margin-bottom: var(--spacing-lg);
+      }
+      .faq-question {
+        font-size: 14px;
+        gap: var(--spacing-sm);
+      }
+
+      /* Responsive Featured Tutorial */
+      [style*="background: linear-gradient(135deg, rgba(75, 122, 255"] {
+        padding: var(--spacing-lg) !important;
+        margin-bottom: var(--spacing-lg) !important;
+      }
+
+      /* Responsive Breadcrumb */
+      .breadcrumb {
+        flex-wrap: wrap;
+        font-size: 12px;
+        gap: var(--spacing-xs);
+      }
+
+      /* Responsive Read Time Badge */
+      .read-time {
+        font-size: 11px;
+        padding: 3px 8px;
+      }
     }
 
     @media (max-width: 480px) {
@@ -842,9 +927,60 @@
       .cta-primary, .cta-secondary {
         width: 100%;
         justify-content: center;
+        padding: 12px 24px;
       }
       .section-title {
         font-size: 28px;
+      }
+
+      /* Extra Small Screen Responsive */
+      .page-title {
+        font-size: 24px;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+      }
+
+      .newsletter-email,
+      .newsletter-submit {
+        width: 100%;
+        font-size: 14px;
+      }
+
+      .social-share-btn {
+        font-size: 12px;
+        padding: 8px 10px;
+      }
+
+      .author-info {
+        padding: var(--spacing-md);
+      }
+
+      .author-avatar {
+        width: 48px;
+        height: 48px;
+        font-size: 24px;
+      }
+
+      .faq-question {
+        font-size: 13px;
+      }
+
+      .faq-item {
+        padding: var(--spacing-sm);
+      }
+
+      #backToTop {
+        width: 40px;
+        height: 40px;
+        bottom: 16px;
+        right: 16px;
+        font-size: 16px;
+      }
+
+      .section-inner {
+        padding: var(--spacing-lg);
       }
     }
 
@@ -1070,13 +1206,15 @@
     }
     .newsletter-email {
       flex: 1;
-      min-width: 200px;
-      padding: var(--spacing-md);
+      min-width: 150px;
+      padding: 12px var(--spacing-lg);
       background: rgba(26, 42, 69, 0.3);
       border: 1px solid var(--color-border-light);
       border-radius: var(--radius-md);
       color: var(--color-text-primary);
       font-family: var(--font-body);
+      font-size: 16px;
+      min-height: 44px;
     }
     .newsletter-email::placeholder {
       color: var(--color-text-muted);
@@ -1133,6 +1271,7 @@
     .faq-toggle {
       display: inline-block;
       transition: transform 0.2s;
+      flex-shrink: 0;
     }
     .faq-toggle.active {
       transform: rotate(90deg);
@@ -1145,6 +1284,60 @@
     }
     .faq-answer.active {
       display: block;
+    }
+
+    /* Ensure all card content boxes are responsive */
+    [style*="background: rgba(26, 42, 69"] {
+      box-sizing: border-box !important;
+    }
+
+    /* Mobile-friendly featured sections */
+    @media (max-width: 768px) {
+      .article-card {
+        flex-direction: column;
+      }
+
+      .content-box {
+        padding: var(--spacing-lg);
+      }
+
+      /* Testimonials responsive */
+      .articles-grid > div {
+        padding: var(--spacing-lg);
+      }
+
+      /* Newsletter container responsive */
+      .newsletter-container {
+        margin: var(--spacing-2xl) 0;
+      }
+    }
+
+    /* Ensure proper spacing on all pages */
+    .section-inner {
+      padding: var(--spacing-2xl) var(--spacing-lg);
+      max-width: var(--width-container);
+      margin: 0 auto;
+    }
+
+    /* Responsive content sections */
+    .content-section {
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+
+    /* Ensure all text elements are readable on mobile */
+    @media (max-width: 480px) {
+      h1, h2, h3, h4, h5, h6 {
+        word-break: break-word;
+      }
+
+      p, a, span {
+        word-break: break-word;
+      }
+
+      .section-inner {
+        padding: var(--spacing-lg);
+      }
     }
   </style>
 </head>
