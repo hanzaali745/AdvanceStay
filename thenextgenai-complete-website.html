@@ -4,6 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <meta name="description" content="The Next Gen AI — Practical, verified AI knowledge. Educational tutorials, research, and reviews for AI tools and products.">
+  <meta property="og:title" content="The Next Gen AI — Educational AI Tutorials & Reviews">
+  <meta property="og:description" content="Practical, verified AI knowledge. Educational tutorials, research, and reviews for AI tools and products.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://thenextgenai.com">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Next Gen AI — Educational AI Tutorials & Reviews">
+  <meta name="twitter:description" content="Practical, verified AI knowledge. Educational tutorials, research, and reviews for AI tools and products.">
   <title>The Next Gen AI — Educational AI Tutorials & Reviews</title>
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +29,7 @@
       --color-accent-purple: #a78bfa;
       --color-text-primary: #f0f4f9;
       --color-text-secondary: #cbd5e1;
-      --color-text-muted: #94a3b8;
+      --color-text-muted: #b0bdd1;
       --color-text-inverse: #0a0e27;
       --color-border-dark: #1a2a45;
       --color-border-light: #2a3a55;
@@ -150,6 +157,10 @@
       font-weight: 500;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      min-height: 44px;
     }
 
     .nav-item a:hover {
@@ -218,7 +229,9 @@
       color: var(--color-text-secondary);
       padding: 12px 20px;
       text-decoration: none;
-      display: block;
+      display: flex;
+      align-items: center;
+      min-height: 44px;
       transition: all 0.2s;
       font-size: 14px;
       cursor: pointer;
@@ -1203,16 +1216,16 @@
             <p>Fill out the form below and we'll get back to you as soon as possible.</p>
             <form style="margin-top: var(--spacing-lg);">
               <div style="margin-bottom: var(--spacing-lg);">
-                <label style="display: block; margin-bottom: var(--spacing-sm); color: var(--color-text-secondary);">Name</label>
-                <input type="text" placeholder="Your name" style="width: 100%; padding: var(--spacing-md); background: rgba(26, 42, 69, 0.3); border: 1px solid var(--color-border-light); border-radius: var(--radius-md); color: var(--color-text-primary); font-family: var(--font-body);" />
+                <label for="contact-name" style="display: block; margin-bottom: var(--spacing-sm); color: var(--color-text-secondary);">Name</label>
+                <input id="contact-name" type="text" placeholder="Your name" style="width: 100%; padding: var(--spacing-md); background: rgba(26, 42, 69, 0.3); border: 1px solid var(--color-border-light); border-radius: var(--radius-md); color: var(--color-text-primary); font-family: var(--font-body);" />
               </div>
               <div style="margin-bottom: var(--spacing-lg);">
-                <label style="display: block; margin-bottom: var(--spacing-sm); color: var(--color-text-secondary);">Email</label>
-                <input type="email" placeholder="your@email.com" style="width: 100%; padding: var(--spacing-md); background: rgba(26, 42, 69, 0.3); border: 1px solid var(--color-border-light); border-radius: var(--radius-md); color: var(--color-text-primary); font-family: var(--font-body);" />
+                <label for="contact-email" style="display: block; margin-bottom: var(--spacing-sm); color: var(--color-text-secondary);">Email</label>
+                <input id="contact-email" type="email" placeholder="your@email.com" style="width: 100%; padding: var(--spacing-md); background: rgba(26, 42, 69, 0.3); border: 1px solid var(--color-border-light); border-radius: var(--radius-md); color: var(--color-text-primary); font-family: var(--font-body);" />
               </div>
               <div style="margin-bottom: var(--spacing-lg);">
-                <label style="display: block; margin-bottom: var(--spacing-sm); color: var(--color-text-secondary);">Message</label>
-                <textarea placeholder="Your message..." style="width: 100%; padding: var(--spacing-md); background: rgba(26, 42, 69, 0.3); border: 1px solid var(--color-border-light); border-radius: var(--radius-md); color: var(--color-text-primary); font-family: var(--font-body); min-height: 150px;"></textarea>
+                <label for="contact-message" style="display: block; margin-bottom: var(--spacing-sm); color: var(--color-text-secondary);">Message</label>
+                <textarea id="contact-message" placeholder="Your message..." style="width: 100%; padding: var(--spacing-md); background: rgba(26, 42, 69, 0.3); border: 1px solid var(--color-border-light); border-radius: var(--radius-md); color: var(--color-text-primary); font-family: var(--font-body); min-height: 150px;"></textarea>
               </div>
               <button type="submit" class="cta-primary">Send Message</button>
             </form>
@@ -1446,29 +1459,87 @@
     const dropdownContent = document.querySelector('.dropdown-content');
     const dropdownLinks = document.querySelectorAll('.dropdown-content a');
 
+    dropdownToggle.setAttribute('role', 'button');
+    dropdownToggle.setAttribute('aria-haspopup', 'true');
+    dropdownToggle.setAttribute('aria-expanded', 'false');
+
     dropdownToggle.addEventListener('click', (e) => {
       e.preventDefault();
       dropdownContent.classList.toggle('active');
+      const isOpen = dropdownContent.classList.contains('active');
+      dropdownToggle.setAttribute('aria-expanded', isOpen);
+      if (isOpen && dropdownLinks.length > 0) {
+        dropdownLinks[0].focus();
+      }
     });
 
-    dropdownLinks.forEach(link => {
+    dropdownToggle.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        dropdownContent.classList.toggle('active');
+        const isOpen = dropdownContent.classList.contains('active');
+        dropdownToggle.setAttribute('aria-expanded', isOpen);
+        if (isOpen && dropdownLinks.length > 0) {
+          dropdownLinks[0].focus();
+        }
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (!dropdownContent.classList.contains('active')) {
+          dropdownContent.classList.add('active');
+          dropdownToggle.setAttribute('aria-expanded', 'true');
+        }
+        if (dropdownLinks.length > 0) {
+          dropdownLinks[0].focus();
+        }
+      }
+    });
+
+    dropdownLinks.forEach((link, index) => {
+      link.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          if (index < dropdownLinks.length - 1) {
+            dropdownLinks[index + 1].focus();
+          }
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          if (index > 0) {
+            dropdownLinks[index - 1].focus();
+          } else {
+            dropdownToggle.focus();
+          }
+        } else if (e.key === 'Escape') {
+          e.preventDefault();
+          dropdownContent.classList.remove('active');
+          dropdownToggle.setAttribute('aria-expanded', 'false');
+          dropdownToggle.focus();
+        } else if (e.key === 'Enter') {
+          e.preventDefault();
+          link.click();
+        }
+      });
+
       link.addEventListener('click', () => {
         dropdownContent.classList.remove('active');
+        dropdownToggle.setAttribute('aria-expanded', 'false');
       });
     });
 
     document.addEventListener('click', (e) => {
       if (!dropdown.contains(e.target)) {
         dropdownContent.classList.remove('active');
+        dropdownToggle.setAttribute('aria-expanded', 'false');
       }
     });
 
     dropdown.addEventListener('mouseenter', () => {
       dropdownContent.classList.add('active');
+      dropdownToggle.setAttribute('aria-expanded', 'true');
     });
 
     dropdown.addEventListener('mouseleave', () => {
       dropdownContent.classList.remove('active');
+      dropdownToggle.setAttribute('aria-expanded', 'false');
     });
 
     // Contact form handling
