@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="description" content="The Next Gen AI — Practical, verified AI knowledge. Educational tutorials, research, and reviews for AI tools and products.">
+  <title>The Next Gen AI — Educational AI Tutorials & Reviews</title>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cera+Pro:wght@400;500;700&family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg-dark: #0a0e27;
+      --color-bg-mid: #12192f;
+      --color-bg-light: #1a2a45;
+      --color-bg-card: #141d36;
+      --color-accent-gold: #FDB022;
+      --color-accent-blue: #4B7AFF;
+      --color-accent-green: #10b981;
+      --color-accent-red: #ef4444;
+      --color-accent-purple: #a78bfa;
+      --color-text-primary: #f0f4f9;
+      --color-text-secondary: #cbd5e1;
+      --color-text-muted: #94a3b8;
+      --color-text-inverse: #0a0e27;
+      --color-border-dark: #1a2a45;
+      --color-border-light: #2a3a55;
+      --color-border-accent: rgba(253, 176, 34, 0.2);
+      --font-display: 'Cera Pro', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'Fira Code', 'Courier New', monospace;
+      --spacing-xs: 4px;
+      --spacing-sm: 8px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 32px;
+      --spacing-2xl: 48px;
+      --spacing-3xl: 64px;
+      --spacing-4xl: 96px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --width-container: 1280px;
+      --z-sticky: 50;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg-dark);
+      color: var(--color-text-primary);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(32px); }
+    }
+
+    @keyframes slide-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .affiliate-banner {
+      background: linear-gradient(135deg, rgba(167, 139, 250, 0.1), rgba(253, 176, 34, 0.05));
+      border-bottom: 1px solid rgba(167, 139, 250, 0.2);
+      padding: var(--spacing-md) var(--spacing-lg);
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      text-align: center;
+    }
+
+    .affiliate-banner strong {
+      color: var(--color-accent-purple);
+    }
+
+    .affiliate-banner a {
+      color: var(--color-accent-blue);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(180deg, rgba(10, 14, 39, 0.98), rgba(10, 14, 39, 0.95));
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border-accent);
+      z-index: var(--z-sticky);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    }
+
+    .header-nav {
+      max-width: var(--width-container);
+      margin: 0 auto;
+      padding: 0 var(--spacing-lg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 72px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .brand:hover {
+      color: var(--color-accent-gold);
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: var(--spacing-xl);
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-item a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .nav-item a:hover {
+      color: var(--color-accent-gold);
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-toggle {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .dropdown-toggle:hover {
+      color: var(--color-accent-gold);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background: linear-gradient(180deg, rgba(20, 29, 54, 0.98), rgba(18, 25, 47, 0.95));
+      min-width: 200px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      padding: var(--spacing-sm) 0;
+      z-index: 1;
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-md);
+      top: 100%;
+      left: 0;
+      margin-top: var(--spacing-sm);
+    }
+
+    .dropdown-content a {
+      color: var(--color-text-secondary);
+      padding: 12px 20px;
+      text-decoration: none;
+      display: block;
+      transition: all 0.2s;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .dropdown-content a:hover {
+      background: rgba(253, 176, 34, 0.1);
+      color: var(--color-accent-gold);
+      padding-left: 24px;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .hero {
+      padding: var(--spacing-4xl) var(--spacing-lg);
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(75, 122, 255, 0.03), rgba(253, 176, 34, 0.02));
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -30%;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(253, 176, 34, 0.08), transparent 70%);
+      border-radius: 50%;
+      animation: float 12s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(75, 122, 255, 0.06), transparent 70%);
+      border-radius: 50%;
+      animation: float 15s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: var(--width-container);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: var(--spacing-4xl);
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-lg);
+      animation: slide-up 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 9vw, 72px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-title .accent {
+      background: linear-gradient(135deg, var(--color-accent-gold), var(--color-accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--color-text-secondary);
+      line-height: 1.8;
+      max-width: 540px;
+      font-weight: 500;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: var(--spacing-md);
+      flex-wrap: wrap;
+    }
+
+    .cta-primary, .cta-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      padding: 14px 32px;
+      border-radius: var(--radius-md);
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: none;
+      min-height: 48px;
+      text-decoration: none;
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+    }
+
+    .cta-primary {
+      background: linear-gradient(135deg, var(--color-accent-gold), #FF9800);
+      color: var(--color-text-inverse);
+      box-shadow: 0 8px 24px rgba(253, 176, 34, 0.3);
+    }
+
+    .cta-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(253, 176, 34, 0.4);
+    }
+
+    .cta-secondary {
+      background: rgba(75, 122, 255, 0.1);
+      color: var(--color-accent-blue);
+      border: 2px solid var(--color-accent-blue);
+    }
+
+    .cta-secondary:hover {
+      background: var(--color-accent-blue);
+      color: #ffffff;
+      transform: translateY(-3px);
+    }
+
+    .section {
+      padding: var(--spacing-3xl) var(--spacing-lg);
+      border-bottom: 1px solid var(--color-border-dark);
+    }
+
+    .section-inner {
+      max-width: var(--width-container);
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: var(--spacing-2xl);
+      background: linear-gradient(135deg, var(--color-text-primary), var(--color-accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: var(--spacing-lg);
+    }
+
+    .article-card {
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(135deg, rgba(26, 42, 69, 0.5), rgba(18, 25, 47, 0.3));
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+    }
+
+    .article-card:hover {
+      border-color: var(--color-accent-blue);
+      box-shadow: 0 16px 40px rgba(75, 122, 255, 0.15);
+      transform: translateY(-8px);
+    }
+
+    .article-icon {
+      font-size: 32px;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .article-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .article-excerpt {
+      color: var(--color-text-secondary);
+      font-size: 14px;
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      font-size: 12px;
+      color: var(--color-text-muted);
+      padding-top: var(--spacing-md);
+      border-top: 1px solid var(--color-border-light);
+    }
+
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 8vw, 64px);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: var(--spacing-2xl);
+      color: var(--color-text-primary);
+    }
+
+    .content-box {
+      background: linear-gradient(135deg, rgba(26, 42, 69, 0.3), rgba(18, 25, 47, 0.2));
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-2xl);
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .content-section {
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .content-section h2 {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: var(--spacing-lg);
+      color: var(--color-text-primary);
+    }
+
+    .content-section p {
+      color: var(--color-text-secondary);
+      line-height: 1.8;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .content-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .contact-box {
+      background: rgba(75, 122, 255, 0.1);
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-2xl);
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .contact-box h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: var(--spacing-md);
+      color: var(--color-text-primary);
+    }
+
+    .contact-box a {
+      color: var(--color-accent-gold);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .contact-box a:hover {
+      opacity: 0.8;
+    }
+
+    .methodology-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-2xl);
+    }
+
+    .methodology-card {
+      background: rgba(26, 42, 69, 0.3);
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+    }
+
+    .methodology-card .number {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--color-accent-gold);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .methodology-card h4 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: var(--spacing-md);
+      color: var(--color-text-primary);
+    }
+
+    .methodology-card p {
+      color: var(--color-text-secondary);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .rule-box {
+      background: rgba(253, 176, 34, 0.1);
+      border-left: 4px solid var(--color-accent-gold);
+      padding: var(--spacing-lg);
+      margin-top: var(--spacing-2xl);
+      border-radius: var(--radius-md);
+    }
+
+    .footer {
+      background: linear-gradient(180deg, rgba(10, 14, 39, 0.9), rgba(10, 14, 39, 0.95));
+      border-top: 1px solid var(--color-border-dark);
+      padding: var(--spacing-3xl) var(--spacing-lg) var(--spacing-2xl);
+    }
+
+    .footer-inner {
+      max-width: var(--width-container);
+      margin: 0 auto;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--spacing-2xl);
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .footer-section h3 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      margin-bottom: var(--spacing-md);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section li {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .footer-section a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .footer-section a:hover {
+      color: var(--color-accent-gold);
+      transform: translateX(2px);
+    }
+
+    .footer-bottom {
+      padding-top: var(--spacing-2xl);
+      border-top: 1px solid var(--color-border-dark);
+      text-align: center;
+      font-size: 13px;
+      color: var(--color-text-muted);
+    }
+
+    @media (max-width: 1024px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-nav {
+        height: 64px;
+      }
+      .nav-menu {
+        gap: var(--spacing-lg);
+      }
+      .hero {
+        padding: var(--spacing-2xl) var(--spacing-lg);
+      }
+      .articles-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 36px;
+      }
+      .hero-ctas {
+        flex-direction: column;
+        width: 100%;
+      }
+      .cta-primary, .cta-secondary {
+        width: 100%;
+        justify-content: center;
+      }
+      .section-title {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="affiliate-banner">
+    <strong>📢 Affiliate Disclosure:</strong> This site contains affiliate links to AI tools and products. We earn a small commission at no extra cost to you. <a onclick="showPage('affiliate')">Learn more</a>
+  </div>
+
+  <header class="header" role="banner">
+    <nav class="header-nav" role="navigation" aria-label="Primary">
+      <a onclick="showPage('home')" class="brand">
+        <span style="background: var(--color-accent-gold); color: var(--color-text-inverse); width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px;">◆</span>
+        <span>thenextgenai</span>
+      </a>
+      <ul class="nav-menu">
+        <li class="nav-item"><a onclick="showPage('home')">Home</a></li>
+        <li class="nav-item"><a onclick="showPage('tutorials')">Tutorials</a></li>
+        <li class="nav-item"><a onclick="showPage('tools')">AI Tools</a></li>
+        <li class="nav-item"><a onclick="showPage('tools')">Find by task</a></li>
+        <li class="nav-item"><a onclick="showPage('how-test')">How We Test</a></li>
+        <li class="nav-item dropdown" id="aboutDropdown">
+          <a class="dropdown-toggle">About</a>
+          <div class="dropdown-content">
+            <a onclick="showPage('about')">About</a>
+            <a onclick="showPage('contact')">Contact Us</a>
+            <a onclick="showPage('how-test')">How we test</a>
+            <a onclick="showPage('privacy')">Privacy</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HOME PAGE -->
+  <div id="home" class="page active">
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-inner">
+          <div class="hero-content">
+            <h1 id="hero-title" class="hero-title">
+              <span class="accent">Practical AI</span> Knowledge.<br>No Hype.
+            </h1>
+            <p class="hero-subtitle">
+              Expert tutorials, research, and honest reviews from verified AI researchers and developers.
+            </p>
+            <div class="hero-ctas">
+              <a onclick="showPage('tutorials')" class="cta-primary">Read Tutorials →</a>
+              <a onclick="showPage('about')" class="cta-secondary">How We Work</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="featured">
+        <div class="section-inner">
+          <h2 class="section-title">Explore Our Content</h2>
+          <div class="articles-grid">
+            <div class="article-card" onclick="showPage('tutorials')" style="border-left: 4px solid var(--color-accent-gold);">
+              <div class="article-icon">📚</div>
+              <h3 class="article-title">Tutorials & Guides</h3>
+              <p class="article-excerpt">9 in-depth tutorials covering model comparisons, frameworks, and practical how-tos for AI tools and workflows.</p>
+              <div class="article-meta">
+                <span>Updated regularly</span>
+              </div>
+            </div>
+
+            <div class="article-card" onclick="showPage('tools')" style="border-left: 4px solid var(--color-accent-blue);">
+              <div class="article-icon">🛠️</div>
+              <h3 class="article-title">AI Tools Directory</h3>
+              <p class="article-excerpt">7 AI tools reviewed and tested. Specs, ratings, and our transparent methodology for every recommendation.</p>
+              <div class="article-meta">
+                <span>Verified tested</span>
+              </div>
+            </div>
+
+            <div class="article-card" onclick="showPage('about')" style="border-left: 4px solid var(--color-accent-green);">
+              <div class="article-icon">ℹ️</div>
+              <h3 class="article-title">About Us & Methodology</h3>
+              <p class="article-excerpt">Our mission, values, testing framework, editorial standards, and FAQ about what makes us different.</p>
+              <div class="article-meta">
+                <span>Our story</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" style="background: linear-gradient(135deg, rgba(75, 122, 255, 0.03), rgba(253, 176, 34, 0.02));">
+        <div class="section-inner">
+          <h2 class="section-title">Featured Tutorials</h2>
+          <div class="articles-grid">
+            <div class="article-card" onclick="showPage('tutorials')">
+              <div class="article-icon">⚖️</div>
+              <h3 class="article-title">Claude vs ChatGPT vs Gemini</h3>
+              <p class="article-excerpt">Head-to-head comparison for long-document analysis. Context windows, pricing, and best use cases.</p>
+              <div class="article-meta">
+                <span>Comparison guide</span>
+              </div>
+            </div>
+
+            <div class="article-card" onclick="showPage('tutorials')">
+              <div class="article-icon">📖</div>
+              <h3 class="article-title">Gemini Notebook Workflow</h3>
+              <p class="article-excerpt">Step-by-step guide to using Gemini Notebook for source-grounded research and document analysis.</p>
+              <div class="article-meta">
+                <span>How-to guide</span>
+              </div>
+            </div>
+
+            <div class="article-card" onclick="showPage('tutorials')">
+              <div class="article-icon">📧</div>
+              <h3 class="article-title">ChatGPT for Professional Emails</h3>
+              <p class="article-excerpt">Templates, prompts, and best practices for writing business emails with AI assistance.</p>
+              <div class="article-meta">
+                <span>Practical guide</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: center; margin-top: var(--spacing-3xl);">
+            <a onclick="showPage('tutorials')" class="cta-primary">View All 9 Tutorials →</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-inner">
+          <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+            <h2 class="section-title">How We Test & Recommend</h2>
+            <p style="font-size: 16px; color: var(--color-text-secondary); margin-bottom: var(--spacing-2xl); line-height: 1.8;">
+              Every tool, tutorial, and recommendation is backed by real testing and verification—never speculation or assumptions.
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--spacing-lg); margin-top: var(--spacing-2xl);">
+              <div style="padding: var(--spacing-lg); background: rgba(75, 122, 255, 0.1); border-radius: var(--radius-lg);">
+                <div style="font-size: 28px; margin-bottom: var(--spacing-md);">📚</div>
+                <div style="font-weight: 600; font-size: 14px; color: var(--color-text-primary);">Learn</div>
+                <div style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">Research & understand</div>
+              </div>
+              <div style="padding: var(--spacing-lg); background: rgba(16, 185, 129, 0.1); border-radius: var(--radius-lg);">
+                <div style="font-size: 28px; margin-bottom: var(--spacing-md);">✓</div>
+                <div style="font-weight: 600; font-size: 14px; color: var(--color-text-primary);">Verify</div>
+                <div style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">Test with real data</div>
+              </div>
+              <div style="padding: var(--spacing-lg); background: rgba(167, 139, 250, 0.1); border-radius: var(--radius-lg);">
+                <div style="font-size: 28px; margin-bottom: var(--spacing-md);">💡</div>
+                <div style="font-weight: 600; font-size: 14px; color: var(--color-text-primary);">Recommend</div>
+                <div style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">Share honest insights</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- TUTORIALS PAGE -->
+  <div id="tutorials" class="page">
+    <main>
+      <section class="section">
+        <div class="section-inner">
+          <h1 class="page-title">Tutorials & Guides</h1>
+
+          <div class="content-box">
+            <div class="content-section">
+              <h2>AI Tool Tutorials</h2>
+              <p>Complete step-by-step guides for using popular AI tools. Each tutorial focuses on solving one real problem with practical, tested workflows.</p>
+            </div>
+
+            <div style="margin-top: var(--spacing-2xl);">
+              <div class="articles-grid">
+                <div class="article-card">
+                  <div class="article-icon">⚖️</div>
+                  <h3 class="article-title">Claude vs ChatGPT vs Gemini</h3>
+                  <p class="article-excerpt">Detailed comparison for long-document analysis, context windows, and best use cases for each model.</p>
+                </div>
+                <div class="article-card">
+                  <div class="article-icon">📖</div>
+                  <h3 class="article-title">Gemini Notebook Workflow</h3>
+                  <p class="article-excerpt">Complete guide to using Gemini Notebook for research, source grounding, and document analysis.</p>
+                </div>
+                <div class="article-card">
+                  <div class="article-icon">📧</div>
+                  <h3 class="article-title">ChatGPT for Business Emails</h3>
+                  <p class="article-excerpt">Templates, prompts, and best practices for professional email writing with AI assistance.</p>
+                </div>
+                <div class="article-card">
+                  <div class="article-icon">🎨</div>
+                  <h3 class="article-title">Midjourney Image Generation</h3>
+                  <p class="article-excerpt">Step-by-step guide to creating stunning images with prompts, settings, and best practices.</p>
+                </div>
+                <div class="article-card">
+                  <div class="article-icon">🎬</div>
+                  <h3 class="article-title">Video AI Tools Comparison</h3>
+                  <p class="article-excerpt">Compare Synthesia, HeyGen, Pictory, and other video generation tools with real examples.</p>
+                </div>
+                <div class="article-card">
+                  <div class="article-icon">💻</div>
+                  <h3 class="article-title">Copilot for Coding</h3>
+                  <p class="article-excerpt">How to use GitHub Copilot effectively for faster development and learning programming.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- AI TOOLS PAGE -->
+  <div id="tools" class="page">
+    <main>
+      <section class="section">
+        <div class="section-inner">
+          <h1 class="page-title">AI Tools Directory</h1>
+
+          <div class="content-box">
+            <div class="content-section">
+              <h2>AI Tools We've Tested</h2>
+              <p>All tools below are verified tested with real-world scenarios. Each includes specs, pricing, ratings, and our transparent testing methodology.</p>
+            </div>
+
+            <div style="margin-top: var(--spacing-2xl);">
+              <div class="articles-grid">
+                <div class="article-card">
+                  <div class="article-icon">🤖</div>
+                  <h3 class="article-title">Claude (Anthropic)</h3>
+                  <p class="article-excerpt">Advanced language model with long context window. Best for analysis, coding, writing, and research.</p>
+                  <div class="article-meta">
+                    <span>⭐ Verified tested</span>
+                  </div>
+                </div>
+                <div class="article-card">
+                  <div class="article-icon">💬</div>
+                  <h3 class="article-title">ChatGPT (OpenAI)</h3>
+                  <p class="article-excerpt">Versatile AI assistant. GPT-4 for complex tasks, GPT-4 Turbo for cost-effective processing.</p>
+                  <div class="article-meta">
+                    <span>⭐ Verified tested</span>
+                  </div>
+                </div>
+                <div class="article-card">
+                  <div class="article-icon">🔍</div>
+                  <h3 class="article-title">Gemini (Google)</h3>
+                  <p class="article-excerpt">Google's AI with web search integration. Good for research and real-time information.</p>
+                  <div class="article-meta">
+                    <span>⭐ Verified tested</span>
+                  </div>
+                </div>
+                <div class="article-card">
+                  <div class="article-icon">🎨</div>
+                  <h3 class="article-title">Midjourney</h3>
+                  <p class="article-excerpt">Image generation with stunning quality. Best for creative professionals and detailed visuals.</p>
+                  <div class="article-meta">
+                    <span>⭐ Verified tested</span>
+                  </div>
+                </div>
+                <div class="article-card">
+                  <div class="article-icon">🎬</div>
+                  <h3 class="article-title">Synthesia</h3>
+                  <p class="article-excerpt">AI video generator with avatars. Perfect for marketing, training, and explainer videos.</p>
+                  <div class="article-meta">
+                    <span>⭐ Verified tested</span>
+                  </div>
+                </div>
+                <div class="article-card">
+                  <div class="article-icon">💻</div>
+                  <h3 class="article-title">GitHub Copilot</h3>
+                  <p class="article-excerpt">AI code assistant. Accelerates development and helps learn new programming languages.</p>
+                  <div class="article-meta">
+                    <span>⭐ Verified tested</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ABOUT PAGE -->
+  <div id="about" class="page">
+    <main>
+      <section class="section">
+        <div class="section-inner">
+          <h1 class="page-title">About Us</h1>
+
+          <div class="content-box">
+            <div class="content-section">
+              <h2>About TheNextGenAI</h2>
+              <p>thenextgenai.com publishes practical, step-by-step guides for using AI tools — coding assistants, business and marketing tools, and productivity software. Every article aims to answer one specific question a reader actually has: how do I set this up, how do I get this tool to do X, is this worth paying for compared to the alternative.</p>
+            </div>
+
+            <div class="content-section">
+              <h2>Our Approach</h2>
+              <p>Most AI tools keep their actual product behind a login, so most guides here are built from official documentation and public product pages, cross-checked against the tool's real public site rather than written from memory. We're upfront about what we've tested hands-on versus what we've verified from official sources.</p>
+            </div>
+
+            <div class="content-section">
+              <h2>Affiliate Disclosure</h2>
+              <p>Some articles contain affiliate links, clearly marked at the top of the post. <a onclick="showPage('affiliate')" style="color: var(--color-accent-gold); text-decoration: none;">See our Affiliate Disclosure page</a> for details.</p>
+            </div>
+          </div>
+
+          <div class="contact-box">
+            <h3>Contact</h3>
+            <p><a href="mailto:contact@thenextgenai.com">contact@thenextgenai.com</a></p>
+          </div>
+
+          <div class="content-box">
+            <div class="content-section">
+              <h2>Editorial Standard</h2>
+              <h3 style="font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--color-accent-gold); margin-bottom: var(--spacing-md);">How we review AI tools.</h3>
+              <p style="font-style: italic; color: var(--color-text-muted);">Affiliate revenue can support TheNextGenAI, but it does not replace the evidence. The tutorial and the reader's task come first.</p>
+
+              <div class="methodology-grid" style="margin-top: var(--spacing-2xl);">
+                <div class="methodology-card">
+                  <div class="number">01</div>
+                  <h4>Start with a real task</h4>
+                  <p>We choose a concrete problem or workflow rather than writing a feature list simply because a tool has an affiliate program.</p>
+                </div>
+                <div class="methodology-card">
+                  <div class="number">02</div>
+                  <h4>Research current sources</h4>
+                  <p>Product claims, workflow steps and pricing statements must trace back to current sources. Official documentation is preferred.</p>
+                </div>
+                <div class="methodology-card">
+                  <div class="number">03</div>
+                  <h4>Show the verification level</h4>
+                  <p>Hands-on testing, official-source verification and limited secondary-source verification are labeled differently.</p>
+                </div>
+                <div class="methodology-card">
+                  <div class="number">04</div>
+                  <h4>Separate trust from commission</h4>
+                  <p>An affiliate link is used only when the tool is relevant to the article and useful to readers considering it.</p>
+                </div>
+              </div>
+
+              <div class="rule-box" style="margin-top: var(--spacing-2xl);">
+                <strong style="color: var(--color-accent-gold);">Our rule:</strong>
+                <p style="margin-top: var(--spacing-sm); color: var(--color-text-secondary);">A tutorial should still be useful even if the reader never clicks an affiliate link.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- CONTACT PAGE -->
+  <div id="contact" class="page">
+    <main>
+      <section class="section">
+        <div class="section-inner">
+          <h1 class="page-title">Contact Us</h1>
+
+          <div class="content-box">
+            <h2>Get In Touch</h2>
+            <p>Have a question, feedback, or want to collaborate? We'd love to hear from you.</p>
+
+            <h2 style="margin-top: var(--spacing-2xl);">Contact Methods</h2>
+            <div class="methodology-grid">
+              <div class="contact-box" style="background: rgba(75, 122, 255, 0.1);">
+                <h3>📧 Email</h3>
+                <p style="margin-top: var(--spacing-md);">For general inquiries and feedback</p>
+                <a href="mailto:hello@thenextgenai.com" style="display: block; margin-top: var(--spacing-md);">hello@thenextgenai.com</a>
+              </div>
+              <div class="contact-box" style="background: rgba(253, 176, 34, 0.1);">
+                <h3>🐦 Social</h3>
+                <p style="margin-top: var(--spacing-md);">Follow us for updates and insights</p>
+                <a href="https://twitter.com" style="display: block; margin-top: var(--spacing-md);">Twitter / X</a>
+              </div>
+            </div>
+
+            <h2 style="margin-top: var(--spacing-2xl);">Send us a Message</h2>
+            <p>Fill out the form below and we'll get back to you as soon as possible.</p>
+            <form style="margin-top: var(--spacing-lg);">
+              <div style="margin-bottom: var(--spacing-lg);">
+                <label style="display: block; margin-bottom: var(--spacing-sm); color: var(--color-text-secondary);">Name</label>
+                <input type="text" placeholder="Your name" style="width: 100%; padding: var(--spacing-md); background: rgba(26, 42, 69, 0.3); border: 1px solid var(--color-border-light); border-radius: var(--radius-md); color: var(--color-text-primary); font-family: var(--font-body);" />
+              </div>
+              <div style="margin-bottom: var(--spacing-lg);">
+                <label style="display: block; margin-bottom: var(--spacing-sm); color: var(--color-text-secondary);">Email</label>
+                <input type="email" placeholder="your@email.com" style="width: 100%; padding: var(--spacing-md); background: rgba(26, 42, 69, 0.3); border: 1px solid var(--color-border-light); border-radius: var(--radius-md); color: var(--color-text-primary); font-family: var(--font-body);" />
+              </div>
+              <div style="margin-bottom: var(--spacing-lg);">
+                <label style="display: block; margin-bottom: var(--spacing-sm); color: var(--color-text-secondary);">Message</label>
+                <textarea placeholder="Your message..." style="width: 100%; padding: var(--spacing-md); background: rgba(26, 42, 69, 0.3); border: 1px solid var(--color-border-light); border-radius: var(--radius-md); color: var(--color-text-primary); font-family: var(--font-body); min-height: 150px;"></textarea>
+              </div>
+              <button type="submit" class="cta-primary">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- HOW WE TEST PAGE -->
+  <div id="how-test" class="page">
+    <main>
+      <section class="hero" style="padding: var(--spacing-3xl) var(--spacing-lg);">
+        <div class="section-inner" style="text-align: center;">
+          <h1 id="hero-title" class="hero-title" style="margin-bottom: var(--spacing-lg);">
+            Our Testing <span class="accent">Methodology</span>
+          </h1>
+          <p class="hero-subtitle" style="margin: 0 auto;">
+            How we review and verify AI tools with transparency and integrity.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-inner">
+          <div class="content-box">
+            <h2 style="font-size: 28px; margin-bottom: 24px;">Our Approach</h2>
+            <p style="font-size: 16px; line-height: 1.8;">
+              At TheNextGenAI, we believe in honest, transparent reviews. Every AI tool we review is tested with real-world scenarios, and we clearly mark whether claims come from official sources, our testing, or affiliate relationships.
+            </p>
+
+            <div class="methodology-grid" style="margin-top: var(--spacing-3xl);">
+              <div class="methodology-card">
+                <div class="number">01</div>
+                <h4>Research & Learn</h4>
+                <p>We start by researching the tool thoroughly, reading official documentation, understanding its capabilities and limitations.</p>
+              </div>
+              <div class="methodology-card">
+                <div class="number">02</div>
+                <h4>Hands-On Testing</h4>
+                <p>We use the tool ourselves with real-world tasks to understand its actual performance and identify what works and what doesn't.</p>
+              </div>
+              <div class="methodology-card">
+                <div class="number">03</div>
+                <h4>Transparent Marking</h4>
+                <p>We clearly label what we've hands-on tested, what comes from official sources, and which reviews include affiliate links.</p>
+              </div>
+              <div class="methodology-card">
+                <div class="number">04</div>
+                <h4>Honest Recommendations</h4>
+                <p>We recommend tools based on genuine usefulness and fit for the task, never just because of affiliate programs.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- PRIVACY PAGE -->
+  <div id="privacy" class="page">
+    <main>
+      <section class="section">
+        <div class="section-inner">
+          <h1 class="page-title">Privacy Policy</h1>
+          <p style="color: var(--color-text-muted); margin-bottom: var(--spacing-2xl);">Last updated: September 2025</p>
+
+          <div class="content-box">
+            <div class="content-section">
+              <h2>Introduction</h2>
+              <p>TheNextGenAI ("we," "our," or "us") operates thenextgenai.com (the "Site"). This Privacy Policy explains how we collect, use, and protect your information when you visit our website.</p>
+            </div>
+
+            <div class="content-section">
+              <h2>1. Information We Collect</h2>
+              <h3 style="color: var(--color-text-secondary); font-weight: 600; margin-top: var(--spacing-lg);">Automatically Collected Information</h3>
+              <p>When you visit our Site, we automatically collect certain information, including:</p>
+              <ul style="margin-left: var(--spacing-lg); margin-top: var(--spacing-md);">
+                <li style="margin-bottom: var(--spacing-sm);">Your IP address and browser type</li>
+                <li style="margin-bottom: var(--spacing-sm);">Pages you visit and time spent on each page</li>
+                <li style="margin-bottom: var(--spacing-sm);">Referring website information</li>
+                <li>Device information (operating system, screen resolution)</li>
+              </ul>
+            </div>
+
+            <div class="content-section">
+              <h2>2. How We Use Your Information</h2>
+              <p>We use the information we collect for the following purposes:</p>
+              <ul style="margin-left: var(--spacing-lg); margin-top: var(--spacing-md);">
+                <li style="margin-bottom: var(--spacing-sm);">To respond to your inquiries and provide customer support</li>
+                <li style="margin-bottom: var(--spacing-sm);">To improve and optimize our website</li>
+                <li style="margin-bottom: var(--spacing-sm);">To analyze site usage and trends</li>
+                <li>To detect and prevent fraud or abuse</li>
+              </ul>
+            </div>
+
+            <div class="content-section">
+              <h2>3. Your Rights</h2>
+              <p>You have the right to:</p>
+              <ul style="margin-left: var(--spacing-lg); margin-top: var(--spacing-md);">
+                <li style="margin-bottom: var(--spacing-sm);">Access the personal information we hold about you</li>
+                <li style="margin-bottom: var(--spacing-sm);">Request deletion of your information</li>
+                <li style="margin-bottom: var(--spacing-sm);">Opt-out of certain data collection practices</li>
+                <li>Request correction of inaccurate information</li>
+              </ul>
+            </div>
+
+            <div class="content-section">
+              <h2>4. Contact Us</h2>
+              <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:privacy@thenextgenai.com" style="color: var(--color-accent-gold); text-decoration: none;">privacy@thenextgenai.com</a></p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- AFFILIATE DISCLOSURE PAGE -->
+  <div id="affiliate" class="page">
+    <main>
+      <section class="section">
+        <div class="section-inner">
+          <h1 class="page-title">Affiliate Disclosure</h1>
+
+          <div class="content-box">
+            <div class="content-section">
+              <h2>What is an Affiliate Link?</h2>
+              <p>An affiliate link is a special URL that includes a unique identifier. When you click an affiliate link and make a purchase, the seller knows you came from our site and we receive a small commission at no extra cost to you.</p>
+            </div>
+
+            <div class="content-section">
+              <h2>Our Affiliate Partnerships</h2>
+              <p>We partner with AI tool companies to provide you with access to their products. These partnerships allow us to earn a commission while providing valuable content to you.</p>
+              <p style="margin-top: var(--spacing-lg);">We disclose affiliate partnerships clearly:</p>
+              <ul style="margin-left: var(--spacing-lg); margin-top: var(--spacing-md);">
+                <li style="margin-bottom: var(--spacing-sm);">At the top of every article that contains affiliate links</li>
+                <li style="margin-bottom: var(--spacing-sm);">Individually next to each affiliate link</li>
+                <li style="margin-bottom: var(--spacing-sm);">In product recommendations and reviews</li>
+              </ul>
+            </div>
+
+            <div class="content-section">
+              <h2>Our Promise</h2>
+              <p>We never recommend a product solely because it has an affiliate program. Our recommendations are based on genuine usefulness and value to you.</p>
+              <p style="margin-top: var(--spacing-lg);">Our rule: <strong>A tutorial or review should be useful even if you never click an affiliate link.</strong></p>
+            </div>
+
+            <div class="content-section">
+              <h2>Your Support</h2>
+              <p>When you use our affiliate links, you're supporting TheNextGenAI while getting a great product. We appreciate your support!</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Content</h3>
+          <ul>
+            <li><a onclick="showPage('tutorials')">Tutorials & Guides</a></li>
+            <li><a onclick="showPage('tools')">AI Tools</a></li>
+            <li><a onclick="showPage('about')">About Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Reviews & Info</h3>
+          <ul>
+            <li><a onclick="showPage('affiliate')">Affiliate Disclosure</a></li>
+            <li><a onclick="showPage('privacy')">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Connect</h3>
+          <ul>
+            <li><a onclick="showPage('contact')">Contact Us</a></li>
+            <li><a href="mailto:hello@thenextgenai.com">Email</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a onclick="showPage('home')">Home</a></li>
+            <li><a onclick="showPage('how-test')">Methodology</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 The Next Gen AI. Practical knowledge, verified sources, no hype.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function showPage(pageId) {
+      // Hide all pages
+      const pages = document.querySelectorAll('.page');
+      pages.forEach(page => page.classList.remove('active'));
+
+      // Show selected page
+      const selectedPage = document.getElementById(pageId);
+      if (selectedPage) {
+        selectedPage.classList.add('active');
+        window.scrollTo(0, 0);
+      }
+    }
+  </script>
+</body>
+</html>
