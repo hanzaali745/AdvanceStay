@@ -2111,30 +2111,14 @@
   <button id="backToTop" title="Back to top" aria-label="Scroll back to top">↑</button>
 
   <script>
-    // Global showPage function
-    window.showPage = function(pageId) {
-      console.log('showPage called with:', pageId);
-      document.querySelectorAll('.page').forEach(page => {
-        page.classList.remove('active');
-      });
-      const selectedPage = document.getElementById(pageId);
-      if (selectedPage) {
-        console.log('Page found, showing:', pageId);
-        selectedPage.classList.add('active');
-        window.scrollTo(0, 0);
-      } else {
-        console.error('Page not found:', pageId);
-      }
-      const hamburger = document.getElementById('hamburgerMenu');
-      const menu = document.querySelector('.nav-menu');
-      if (hamburger && menu) {
-        hamburger.classList.remove('active');
-        menu.classList.remove('active');
-      }
-      if (window.gtag) {
-        gtag('event', 'page_view', {'page_title': pageId, 'page_path': '/' + pageId});
-      }
-    };
+    // Simple showPage function - works with inline onclick handlers
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      const page = document.getElementById(pageId);
+      if (page) page.classList.add('active');
+      window.scrollTo(0, 0);
+    }
+    window.showPage = showPage;
 
     // Hamburger menu toggle
     const hamburgerMenu = document.getElementById('hamburgerMenu');
@@ -2158,22 +2142,6 @@
       }
     });
 
-    // Master event listener - handles ALL clicks on navigation links
-    // Using capture phase (true) to intercept clicks before other handlers
-    document.addEventListener('click', function(e) {
-      const link = e.target.closest('[onclick*="showPage"]');
-      if (link) {
-        console.log('Navigation link clicked:', link.getAttribute('onclick'));
-        e.preventDefault();
-        e.stopPropagation();
-        const onclickAttr = link.getAttribute('onclick');
-        const match = onclickAttr.match(/showPage\('([^']+)'\)/);
-        if (match && match[1]) {
-          console.log('Calling showPage with:', match[1]);
-          window.showPage(match[1]);
-        }
-      }
-    }, true);
 
     // Dropdown menu handling - stays visible during scroll
     const dropdown = document.querySelector('.dropdown');
