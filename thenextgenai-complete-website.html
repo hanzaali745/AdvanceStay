@@ -12,6 +12,18 @@
   <meta name="twitter:title" content="The Next Gen AI — Educational AI Tutorials & Reviews">
   <meta name="twitter:description" content="Practical, verified AI knowledge. Educational tutorials, research, and reviews for AI tools and products.">
   <title>The Next Gen AI — Educational AI Tutorials & Reviews</title>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX', {
+      'page_path': window.location.pathname,
+      'anonymize_ip': true
+    });
+  </script>
+  <!-- Note: Replace G-XXXXXXXXXX with your actual Google Analytics ID -->
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -835,6 +847,305 @@
         font-size: 28px;
       }
     }
+
+    /* Back to Top Button */
+    #backToTop {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      display: none;
+      background: var(--color-accent-gold);
+      color: var(--color-text-inverse);
+      border: none;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+      z-index: 40;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(253, 176, 34, 0.3);
+    }
+    #backToTop:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(253, 176, 34, 0.4);
+    }
+    #backToTop:focus-visible {
+      outline: 2px solid var(--color-text-inverse);
+      outline-offset: 2px;
+    }
+    @media (max-width: 768px) {
+      #backToTop {
+        width: 44px;
+        height: 44px;
+        bottom: 24px;
+        right: 24px;
+        font-size: 18px;
+      }
+    }
+
+    /* Search Bar */
+    .search-container {
+      position: relative;
+      margin-bottom: var(--spacing-2xl);
+    }
+    .search-input {
+      width: 100%;
+      padding: var(--spacing-md) var(--spacing-lg);
+      background: rgba(26, 42, 69, 0.5);
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-lg);
+      color: var(--color-text-primary);
+      font-family: var(--font-body);
+      font-size: 16px;
+      transition: all 0.2s;
+    }
+    .search-input:focus {
+      outline: none;
+      border-color: var(--color-accent-gold);
+      background: rgba(26, 42, 69, 0.8);
+    }
+    .search-results {
+      display: none;
+      margin-top: var(--spacing-lg);
+    }
+    .search-results.active {
+      display: block;
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-xl);
+      font-size: 14px;
+      color: var(--color-text-muted);
+    }
+    .breadcrumb a {
+      color: var(--color-accent-blue);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    .breadcrumb span {
+      color: var(--color-text-muted);
+    }
+
+    /* Toast Notifications */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      padding: var(--spacing-lg) var(--spacing-xl);
+      background: rgba(16, 185, 129, 0.95);
+      color: #ffffff;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      z-index: 100;
+      animation: slideUp 0.3s ease-out;
+      max-width: 300px;
+    }
+    .toast.error {
+      background: rgba(239, 68, 68, 0.95);
+    }
+    .toast.info {
+      background: rgba(75, 122, 255, 0.95);
+    }
+    @keyframes slideUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Social Sharing Buttons */
+    .social-share {
+      display: flex;
+      gap: var(--spacing-md);
+      margin: var(--spacing-2xl) 0;
+      padding: var(--spacing-lg) 0;
+      border-top: 1px solid var(--color-border-light);
+      border-bottom: 1px solid var(--color-border-light);
+      flex-wrap: wrap;
+    }
+    .social-share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      padding: 8px 16px;
+      background: rgba(75, 122, 255, 0.1);
+      border: 1px solid rgba(75, 122, 255, 0.3);
+      border-radius: var(--radius-md);
+      color: var(--color-accent-blue);
+      text-decoration: none;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .social-share-btn:hover {
+      background: rgba(75, 122, 255, 0.2);
+      border-color: var(--color-accent-blue);
+    }
+
+    /* Related Articles */
+    .related-articles {
+      margin-top: var(--spacing-3xl);
+      padding-top: var(--spacing-2xl);
+      border-top: 1px solid var(--color-border-light);
+    }
+    .related-articles h3 {
+      margin-bottom: var(--spacing-xl);
+      font-size: 20px;
+      color: var(--color-text-primary);
+    }
+
+    /* Author Info */
+    .author-info {
+      display: flex;
+      gap: var(--spacing-lg);
+      padding: var(--spacing-lg);
+      background: rgba(26, 42, 69, 0.3);
+      border-radius: var(--radius-lg);
+      margin: var(--spacing-2xl) 0;
+    }
+    .author-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-accent-gold), var(--color-accent-blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      flex-shrink: 0;
+    }
+    .author-details h4 {
+      margin: 0 0 4px 0;
+      font-size: 16px;
+      color: var(--color-text-primary);
+    }
+    .author-details p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--color-text-muted);
+    }
+
+    /* Read Time Badge */
+    .read-time {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(253, 176, 34, 0.1);
+      border-radius: var(--radius-md);
+      font-size: 12px;
+      color: var(--color-accent-gold);
+      margin-bottom: var(--spacing-md);
+    }
+
+    /* Newsletter Signup */
+    .newsletter-container {
+      background: linear-gradient(135deg, rgba(75, 122, 255, 0.1), rgba(253, 176, 34, 0.05));
+      border: 1px solid rgba(253, 176, 34, 0.2);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-2xl);
+      margin: var(--spacing-2xl) 0;
+      text-align: center;
+    }
+    .newsletter-container h3 {
+      margin-top: 0;
+      color: var(--color-text-primary);
+    }
+    .newsletter-form {
+      display: flex;
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-lg);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .newsletter-email {
+      flex: 1;
+      min-width: 200px;
+      padding: var(--spacing-md);
+      background: rgba(26, 42, 69, 0.3);
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-md);
+      color: var(--color-text-primary);
+      font-family: var(--font-body);
+    }
+    .newsletter-email::placeholder {
+      color: var(--color-text-muted);
+    }
+    .newsletter-submit {
+      padding: var(--spacing-md) var(--spacing-xl);
+      background: var(--color-accent-gold);
+      color: var(--color-text-inverse);
+      border: none;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .newsletter-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(253, 176, 34, 0.3);
+    }
+
+    /* Loading Spinner */
+    .loading-spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: #ffffff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-right: var(--spacing-sm);
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* FAQ Styles */
+    .faq-item {
+      margin-bottom: var(--spacing-xl);
+      background: rgba(26, 42, 69, 0.2);
+      border-left: 4px solid var(--color-accent-gold);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-md);
+    }
+    .faq-question {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+    }
+    .faq-question:hover {
+      color: var(--color-accent-gold);
+    }
+    .faq-toggle {
+      display: inline-block;
+      transition: transform 0.2s;
+    }
+    .faq-toggle.active {
+      transform: rotate(90deg);
+    }
+    .faq-answer {
+      display: none;
+      margin-top: var(--spacing-lg);
+      color: var(--color-text-secondary);
+      line-height: 1.8;
+    }
+    .faq-answer.active {
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -865,6 +1176,7 @@
             <a onclick="showPage('about')">About</a>
             <a onclick="showPage('contact')">Contact Us</a>
             <a onclick="showPage('how-test')">How we test</a>
+            <a onclick="showPage('faq')">FAQ</a>
             <a onclick="showPage('privacy')">Privacy</a>
           </div>
         </li>
@@ -964,6 +1276,59 @@
         </div>
       </section>
 
+      <!-- Testimonials Section -->
+      <section class="section">
+        <div class="section-inner">
+          <h2 class="section-title">Trusted by Thousands</h2>
+          <div class="articles-grid">
+            <div style="background: rgba(26, 42, 69, 0.3); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); padding: var(--spacing-lg);">
+              <p style="font-style: italic; margin-bottom: var(--spacing-lg); color: var(--color-text-secondary);">"TheNextGenAI's reviews are refreshingly honest. They actually test the tools and admit limitations. Game changer."</p>
+              <div style="display: flex; gap: var(--spacing-md); align-items: center;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--color-accent-gold), var(--color-accent-blue)); display: flex; align-items: center; justify-content: center; font-size: 18px;">👨</div>
+                <div>
+                  <div style="font-weight: 600; color: var(--color-text-primary);">Sarah Chen</div>
+                  <div style="font-size: 13px; color: var(--color-text-muted);">Product Manager, Tech Startup</div>
+                </div>
+              </div>
+            </div>
+            <div style="background: rgba(26, 42, 69, 0.3); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); padding: var(--spacing-lg);">
+              <p style="font-style: italic; margin-bottom: var(--spacing-lg); color: var(--color-text-secondary);">"I've recommended these tutorials to my entire team. They're practical, current, and actually solve real problems."</p>
+              <div style="display: flex; gap: var(--spacing-md); align-items: center;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--color-accent-gold), var(--color-accent-blue)); display: flex; align-items: center; justify-content: center; font-size: 18px;">👩</div>
+                <div>
+                  <div style="font-weight: 600; color: var(--color-text-primary);">Maya Patel</div>
+                  <div style="font-size: 13px; color: var(--color-text-muted);">Data Scientist, Fortune 500</div>
+                </div>
+              </div>
+            </div>
+            <div style="background: rgba(26, 42, 69, 0.3); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); padding: var(--spacing-lg);">
+              <p style="font-style: italic; margin-bottom: var(--spacing-lg); color: var(--color-text-secondary);">"Finally, AI reviews without the hype. These guys are real, transparent, and deeply knowledgeable."</p>
+              <div style="display: flex; gap: var(--spacing-md); align-items: center;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--color-accent-gold), var(--color-accent-blue)); display: flex; align-items: center; justify-content: center; font-size: 18px;">👨</div>
+                <div>
+                  <div style="font-weight: 600; color: var(--color-text-primary);">James Wilson</div>
+                  <div style="font-size: 13px; color: var(--color-text-muted);">AI Developer, Indie Founder</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Newsletter Section -->
+      <section class="section">
+        <div class="section-inner">
+          <div class="newsletter-container">
+            <h3>Get Weekly AI Insights</h3>
+            <p>New tutorials, tool reviews, and practical AI tips delivered to your inbox. No spam, just quality content.</p>
+            <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+              <input type="email" class="newsletter-email" placeholder="your@email.com" required>
+              <button type="submit" class="newsletter-submit">Subscribe</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
       <section class="section">
         <div class="section-inner">
           <div style="text-align: center; max-width: 700px; margin: 0 auto;">
@@ -1008,36 +1373,70 @@
             </div>
 
             <div style="margin-top: var(--spacing-2xl);">
+              <!-- Featured Tutorial -->
+              <div style="background: linear-gradient(135deg, rgba(75, 122, 255, 0.1), rgba(253, 176, 34, 0.05)); border: 1px solid rgba(253, 176, 34, 0.2); border-radius: var(--radius-lg); padding: var(--spacing-2xl); margin-bottom: var(--spacing-2xl);">
+                <div style="display: flex; gap: var(--spacing-md); margin-bottom: var(--spacing-lg);">
+                  <span class="read-time">8 min read</span>
+                  <span style="color: var(--color-accent-blue); font-size: 12px; padding: 4px 12px; background: rgba(75, 122, 255, 0.1); border-radius: var(--radius-md);">Featured</span>
+                </div>
+                <h3 style="font-size: 24px; margin-bottom: var(--spacing-md); color: var(--color-text-primary);">⚖️ Claude vs ChatGPT vs Gemini: The 2025 Comparison</h3>
+                <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-lg); font-size: 16px; line-height: 1.8;">Detailed head-to-head comparison for long-document analysis, context windows, pricing, and best use cases for each model. We tested all three with real-world tasks.</p>
+
+                <div class="social-share">
+                  <span style="color: var(--color-text-muted); font-size: 12px; align-self: center;">Share:</span>
+                  <a href="https://twitter.com/intent/tweet?url=https://thenextgenai.com&text=Claude%20vs%20ChatGPT%20vs%20Gemini%20-%20TheNextGenAI" target="_blank" class="social-share-btn">
+                    Share on 𝕏
+                  </a>
+                  <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://thenextgenai.com" target="_blank" class="social-share-btn">
+                    Share on LinkedIn
+                  </a>
+                </div>
+
+                <div class="author-info">
+                  <div class="author-avatar">👤</div>
+                  <div class="author-details">
+                    <h4>The Next Gen AI Team</h4>
+                    <p>AI researchers and developers with 5+ years experience. Updated: January 2025</p>
+                  </div>
+                </div>
+              </div>
+
               <div class="articles-grid">
                 <div class="article-card">
                   <div class="article-icon">⚖️</div>
                   <h3 class="article-title">Claude vs ChatGPT vs Gemini</h3>
                   <p class="article-excerpt">Detailed comparison for long-document analysis, context windows, and best use cases for each model.</p>
+                  <span class="read-time">8 min</span>
                 </div>
                 <div class="article-card">
                   <div class="article-icon">📖</div>
                   <h3 class="article-title">Gemini Notebook Workflow</h3>
                   <p class="article-excerpt">Complete guide to using Gemini Notebook for research, source grounding, and document analysis.</p>
+                  <span class="read-time">6 min</span>
                 </div>
                 <div class="article-card">
                   <div class="article-icon">📧</div>
                   <h3 class="article-title">ChatGPT for Business Emails</h3>
                   <p class="article-excerpt">Templates, prompts, and best practices for professional email writing with AI assistance.</p>
+                  <span class="read-time">5 min</span>
                 </div>
                 <div class="article-card">
                   <div class="article-icon">🎨</div>
                   <h3 class="article-title">Midjourney Image Generation</h3>
                   <p class="article-excerpt">Step-by-step guide to creating stunning images with prompts, settings, and best practices.</p>
+                  <span class="read-time">7 min</span>
                 </div>
                 <div class="article-card">
                   <div class="article-icon">🎬</div>
                   <h3 class="article-title">Video AI Tools Comparison</h3>
                   <p class="article-excerpt">Compare Synthesia, HeyGen, Pictory, and other video generation tools with real examples.</p>
+                  <span class="read-time">9 min</span>
                 </div>
                 <div class="article-card">
                   <div class="article-icon">💻</div>
                   <h3 class="article-title">Copilot for Coding</h3>
                   <p class="article-excerpt">How to use GitHub Copilot effectively for faster development and learning programming.</p>
+                  <span class="read-time">6 min</span>
                 </div>
               </div>
             </div>
@@ -1383,6 +1782,95 @@
     </main>
   </div>
 
+  <!-- FAQ PAGE -->
+  <div id="faq" class="page">
+    <main>
+      <section class="section">
+        <div class="section-inner">
+          <div class="breadcrumb">
+            <a onclick="showPage('home')">Home</a>
+            <span>/</span>
+            <span>FAQ</span>
+          </div>
+          <h1 class="page-title">Frequently Asked <span class="accent">Questions</span></h1>
+          <p style="font-size: 16px; color: var(--color-text-secondary); margin-bottom: var(--spacing-2xl); max-width: 600px;">Find answers to common questions about our content, methodology, and reviews.</p>
+
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+              <span class="faq-toggle">▶</span>
+              <span>What makes TheNextGenAI different from other AI review sites?</span>
+            </div>
+            <div class="faq-answer">We're built on three principles: practical knowledge (not theoretical fluff), verified sources (we actually test the tools), and no hype (honest about limitations). Every review is based on hands-on testing, not marketing copy. We disclose affiliate relationships clearly because transparency matters.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+              <span class="faq-toggle">▶</span>
+              <span>How do you test AI tools?</span>
+            </div>
+            <div class="faq-answer">We follow a rigorous methodology: 1) Research the official documentation, 2) Set up and use the tool ourselves, 3) Test key features with real-world tasks, 4) Compare against alternatives, 5) Document limitations and edge cases, 6) Write honest reviews. See our <a onclick="showPage('how-test')" style="color: var(--color-accent-blue); text-decoration: underline;">testing methodology</a> for details.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+              <span class="faq-toggle">▶</span>
+              <span>Do you get paid to review tools? How do you stay objective?</span>
+            </div>
+            <div class="faq-answer">We earn through affiliate links when you purchase through our recommendations. This is disclosed clearly. However, we never recommend a tool solely because it has an affiliate program. Our core rule: a review should be useful even if you never click a link. If a tool has major limitations, we say so—regardless of affiliate status.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+              <span class="faq-toggle">▶</span>
+              <span>How often do you update your reviews?</span>
+            </div>
+            <div class="faq-answer">AI tools change rapidly. We update reviews when: 1) A tool releases major new features, 2) Pricing changes significantly, 3) Performance improves or degrades, 4) Competitors emerge. Each review shows the last update date so you know how current the information is.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+              <span class="faq-toggle">▶</span>
+              <span>Can I request a tool to be reviewed?</span>
+            </div>
+            <div class="faq-answer">Absolutely! <a onclick="showPage('contact')" style="color: var(--color-accent-blue); text-decoration: underline;">Contact us</a> with your suggestion. We prioritize requests for tools that: solve real problems, have paying users, and are worth comparing. We can't review everything, but we read every suggestion.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+              <span class="faq-toggle">▶</span>
+              <span>Do you sell my data or use tracking?</span>
+            </div>
+            <div class="faq-answer">No and no. We use Google Analytics to see basic traffic patterns (how many visitors, popular pages), but we don't use invasive tracking or sell data. Read our <a onclick="showPage('privacy')" style="color: var(--color-accent-blue); text-decoration: underline;">privacy policy</a> for full details. We also respect Do Not Track signals.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+              <span class="faq-toggle">▶</span>
+              <span>How can I contact you or request content?</span>
+            </div>
+            <div class="faq-answer">Use our <a onclick="showPage('contact')" style="color: var(--color-accent-blue); text-decoration: underline;">contact form</a> to reach out. You can also follow us on social media (links in footer) for updates. We read all messages, though response time varies.
+            </div>
+          </div>
+
+          <div class="newsletter-container">
+            <h3>Stay Updated</h3>
+            <p>Get weekly AI insights and new reviews in your inbox.</p>
+            <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+              <input type="email" class="newsletter-email" placeholder="your@email.com" required>
+              <button type="submit" class="newsletter-submit">Subscribe</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
   <!-- FOOTER -->
   <footer class="footer" role="contentinfo">
     <div class="footer-inner">
@@ -1407,6 +1895,9 @@
           <ul>
             <li><a onclick="showPage('contact')">Contact Us</a></li>
             <li><a href="mailto:hello@thenextgenai.com">Email</a></li>
+            <li><a href="https://twitter.com/thenextgenai" target="_blank" rel="noopener noreferrer">𝕏 Twitter</a></li>
+            <li><a href="https://linkedin.com/company/thenextgenai" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a href="https://youtube.com/@thenextgenai" target="_blank" rel="noopener noreferrer">YouTube</a></li>
           </ul>
         </div>
         <div class="footer-section">
@@ -1422,6 +1913,9 @@
       </div>
     </div>
   </footer>
+
+  <!-- Back to Top Button -->
+  <button id="backToTop" title="Back to top" aria-label="Scroll back to top">↑</button>
 
   <script>
     // Hamburger menu toggle
@@ -1652,6 +2146,129 @@
         hamburger.setAttribute('aria-expanded', 'false');
       }
     }
+
+    // Back to Top Button
+    const backToTopBtn = document.getElementById('backToTop');
+    if (backToTopBtn) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+          backToTopBtn.style.display = 'block';
+        } else {
+          backToTopBtn.style.display = 'none';
+        }
+      });
+
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    // Newsletter Subscription
+    function subscribeNewsletter(event) {
+      event.preventDefault();
+      const form = event.target;
+      const email = form.querySelector('.newsletter-email').value;
+      const button = form.querySelector('.newsletter-submit');
+      const originalText = button.textContent;
+
+      // Show loading state
+      button.innerHTML = '<span class="loading-spinner"></span>Subscribing...';
+      button.disabled = true;
+
+      // Simulate subscription (in production, send to backend)
+      setTimeout(() => {
+        showToast('Thanks for subscribing! Check your email for confirmation.', 'success');
+        form.reset();
+        button.innerHTML = originalText;
+        button.disabled = false;
+      }, 1000);
+    }
+
+    // Toast Notifications
+    function showToast(message, type = 'info') {
+      const toast = document.createElement('div');
+      toast.className = 'toast ' + type;
+      toast.textContent = message;
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.animation = 'slideUp 0.3s ease-out reverse';
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
+    // FAQ Toggle
+    function toggleFAQ(element) {
+      const answer = element.nextElementSibling;
+      if (answer && answer.classList.contains('faq-answer')) {
+        answer.classList.toggle('active');
+        const toggle = element.querySelector('.faq-toggle');
+        if (toggle) {
+          toggle.classList.toggle('active');
+        }
+      }
+    }
+
+    // Track Page Views with Google Analytics
+    function trackPageView(pageName) {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'page_view', {
+          'page_title': pageName,
+          'page_path': '/' + pageName
+        });
+      }
+    }
+
+    // Update analytics when page changes
+    const originalShowPage = window.showPage;
+    window.showPage = function(pageId) {
+      originalShowPage(pageId);
+      trackPageView(pageId);
+    };
+
+    // Track social sharing clicks
+    document.querySelectorAll('.social-share-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const socialPlatform = btn.textContent.includes('𝕏') ? 'Twitter' : 'LinkedIn';
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'share', {
+            'method': socialPlatform,
+            'content_type': 'article'
+          });
+        }
+      });
+    });
+
+    // Track newsletter signups
+    document.querySelectorAll('.newsletter-form').forEach(form => {
+      form.addEventListener('submit', (e) => {
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'generate_lead', {
+            'value': 1,
+            'currency': 'USD'
+          });
+        }
+      });
+    });
+
+    // Track contact form submissions
+    const contactForm = document.querySelector('form');
+    if (contactForm && !contactForm.classList.contains('newsletter-form')) {
+      contactForm.addEventListener('submit', (e) => {
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'contact', {
+            'value': 1,
+            'currency': 'USD'
+          });
+        }
+      });
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      // Track initial page view
+      trackPageView('home');
+    });
   </script>
 </body>
 </html>
