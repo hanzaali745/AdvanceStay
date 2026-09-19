@@ -367,11 +367,22 @@
     }
 
     .page {
-      display: none;
+      display: none !important;
+      opacity: 0;
+      visibility: hidden;
+      width: 100%;
     }
 
     .page.active {
-      display: block;
+      display: block !important;
+      opacity: 1;
+      visibility: visible;
+      animation: fadeIn 0.3s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .hero {
@@ -2115,29 +2126,112 @@
     // showPage function for data-page navigation
     function showPage(pageId) {
       console.log('showPage called with:', pageId);
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+
+      // Remove active class from all pages
+      const allPages = document.querySelectorAll('.page');
+      console.log('Total pages found:', allPages.length);
+
+      allPages.forEach(p => {
+        p.classList.remove('active');
+      });
+
+      // Find and activate the target page
       const page = document.getElementById(pageId);
-      console.log('Page element found:', !!page);
+      console.log('Target page:', pageId, 'Found:', !!page);
+
       if (page) {
         page.classList.add('active');
         console.log('Page activated:', pageId);
       } else {
         console.error('Page ID not found:', pageId);
+        return false;
       }
-      window.scrollTo(0, 0);
+
+      // Scroll to top
+      window.scrollTo({top: 0, behavior: 'smooth'});
+      return true;
     }
+
+    // Expose showPage globally
     window.showPage = showPage;
 
-    // Handle clicks on data-page elements (CSP-safe)
+    // Handle clicks on data-page elements with EXPLICIT onclick handlers
+    // This is a more reliable approach than event delegation
+    function handlePageNavigation(pageId, event) {
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+
+      // Close mobile menu if open
+      const hamburgerMenu = document.getElementById('hamburgerMenu');
+      const navMenu = document.querySelector('.nav-menu');
+      if (hamburgerMenu && navMenu) {
+        hamburgerMenu.classList.remove('active');
+        navMenu.classList.remove('active');
+      }
+
+      // Close dropdown if open
+      const dropdownContent = document.querySelector('.dropdown-content');
+      if (dropdownContent) {
+        dropdownContent.classList.remove('active');
+      }
+
+      return showPage(pageId);
+    }
+
+    // Expose navigation handler globally
+    window.handlePageNavigation = handlePageNavigation;
+
+    // BACKUP: Also add event delegation listener for any missed clicks
     document.addEventListener('click', function(e) {
       const link = e.target.closest('[data-page]');
-      if (link) {
-        console.log('Navigation click detected, data-page:', link.getAttribute('data-page'));
-        e.preventDefault();
+      if (link && e.button === 0) { // only left clicks
         const pageId = link.getAttribute('data-page');
-        showPage(pageId);
+        if (pageId) {
+          console.log('Navigation click detected via event delegation:', pageId);
+          e.preventDefault();
+          e.stopPropagation();
+          handlePageNavigation(pageId);
+        }
       }
+    }, true); // Use capture phase for better compatibility
+
+    // Wire up all data-page links with explicit onclick handlers
+    document.addEventListener('DOMContentLoaded', function() {
+      const pageLinks = document.querySelectorAll('[data-page]');
+      console.log('Found ' + pageLinks.length + ' navigation links');
+
+      pageLinks.forEach(link => {
+        link.style.cursor = 'pointer';
+        link.onclick = function(e) {
+          const pageId = this.getAttribute('data-page');
+          console.log('Direct onclick fired for:', pageId);
+          e.preventDefault();
+          e.stopPropagation();
+          handlePageNavigation(pageId, e);
+          return false;
+        };
+      });
+
+      console.log('Navigation wiring complete');
     });
+
+    // Also wire them up immediately for any that might already be loaded
+    (function() {
+      const pageLinks = document.querySelectorAll('[data-page]');
+      pageLinks.forEach(link => {
+        link.style.cursor = 'pointer';
+        link.onclick = function(e) {
+          const pageId = this.getAttribute('data-page');
+          console.log('Direct onclick fired for:', pageId);
+          e.preventDefault();
+          e.stopPropagation();
+          handlePageNavigation(pageId, e);
+          return false;
+        };
+      });
+    })();
 
     // Hamburger menu toggle
     const hamburgerMenu = document.getElementById('hamburgerMenu');
