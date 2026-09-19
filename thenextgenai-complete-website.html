@@ -2111,6 +2111,37 @@
   <button id="backToTop" title="Back to top" aria-label="Scroll back to top">↑</button>
 
   <script>
+    // Define showPage function in global scope FIRST
+    window.showPage = function(pageId) {
+      // Hide all pages
+      const pages = document.querySelectorAll('.page');
+      pages.forEach(page => page.classList.remove('active'));
+
+      // Show selected page
+      const selectedPage = document.getElementById(pageId);
+      if (selectedPage) {
+        selectedPage.classList.add('active');
+        window.scrollTo(0, 0);
+      }
+
+      // Close hamburger menu when navigating
+      const hamburger = document.getElementById('hamburgerMenu');
+      const menu = document.querySelector('.nav-menu');
+      if (hamburger && menu) {
+        hamburger.classList.remove('active');
+        menu.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+
+      // Track page view
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'page_view', {
+          'page_title': pageId,
+          'page_path': '/' + pageId
+        });
+      }
+    };
+
     // Hamburger menu toggle
     const hamburgerMenu = document.getElementById('hamburgerMenu');
     const navMenu = document.querySelector('.nav-menu');
@@ -2121,14 +2152,14 @@
       hamburgerMenu.setAttribute('aria-expanded', hamburgerMenu.classList.contains('active'));
     });
 
-    // Close menu when a nav link is clicked
-    const navItems = document.querySelectorAll('.nav-menu .nav-item a, .nav-menu .dropdown-toggle');
-    navItems.forEach(item => {
-      item.addEventListener('click', () => {
-        hamburgerMenu.classList.remove('active');
-        navMenu.classList.remove('active');
-        hamburgerMenu.setAttribute('aria-expanded', 'false');
-      });
+    // Add event listeners to all navigation links
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a[onclick*="showPage"]');
+      if (link) {
+        e.preventDefault();
+        const pageId = link.getAttribute('onclick').match(/'([^']+)'/)[1];
+        window.showPage(pageId);
+      }
     });
 
     // Close menu when clicking outside
@@ -2317,36 +2348,6 @@
         }
       }
     }
-
-    window.showPage = function(pageId) {
-      // Hide all pages
-      const pages = document.querySelectorAll('.page');
-      pages.forEach(page => page.classList.remove('active'));
-
-      // Show selected page
-      const selectedPage = document.getElementById(pageId);
-      if (selectedPage) {
-        selectedPage.classList.add('active');
-        window.scrollTo(0, 0);
-      }
-
-      // Close hamburger menu when navigating
-      const hamburger = document.getElementById('hamburgerMenu');
-      const menu = document.querySelector('.nav-menu');
-      if (hamburger && menu) {
-        hamburger.classList.remove('active');
-        menu.classList.remove('active');
-        hamburger.setAttribute('aria-expanded', 'false');
-      }
-
-      // Track page view
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'page_view', {
-          'page_title': pageId,
-          'page_path': '/' + pageId
-        });
-      }
-    };
 
     // Back to Top Button
     const backToTopBtn = document.getElementById('backToTop');
