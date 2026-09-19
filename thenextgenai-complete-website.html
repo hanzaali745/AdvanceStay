@@ -2318,7 +2318,7 @@
       }
     }
 
-    function showPage(pageId) {
+    window.showPage = function(pageId) {
       // Hide all pages
       const pages = document.querySelectorAll('.page');
       pages.forEach(page => page.classList.remove('active'));
@@ -2338,7 +2338,15 @@
         menu.classList.remove('active');
         hamburger.setAttribute('aria-expanded', 'false');
       }
-    }
+
+      // Track page view
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'page_view', {
+          'page_title': pageId,
+          'page_path': '/' + pageId
+        });
+      }
+    };
 
     // Back to Top Button
     const backToTopBtn = document.getElementById('backToTop');
@@ -2402,22 +2410,6 @@
       }
     }
 
-    // Track Page Views with Google Analytics
-    function trackPageView(pageName) {
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'page_view', {
-          'page_title': pageName,
-          'page_path': '/' + pageName
-        });
-      }
-    }
-
-    // Update analytics when page changes
-    const originalShowPage = window.showPage;
-    window.showPage = function(pageId) {
-      originalShowPage(pageId);
-      trackPageView(pageId);
-    };
 
     // Track social sharing clicks
     document.querySelectorAll('.social-share-btn').forEach(btn => {
