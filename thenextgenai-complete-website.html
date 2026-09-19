@@ -1355,12 +1355,12 @@
 </head>
 <body>
   <div class="affiliate-banner">
-    <strong>📢 Affiliate Disclosure:</strong> This site contains affiliate links to AI tools and products. We earn a small commission at no extra cost to you. <a onclick="showPage(\'affiliate\')">Learn more</a>
+    <strong>📢 Affiliate Disclosure:</strong> This site contains affiliate links to AI tools and products. We earn a small commission at no extra cost to you. <a data-page="affiliate\">Learn more</a>
   </div>
 
   <header class="header" role="banner">
     <nav class="header-nav" role="navigation" aria-label="Primary">
-      <a onclick="showPage(\'home\')" class="brand">
+      <a data-page="home\" class="brand">
         <span style="background: var(--color-accent-gold); color: var(--color-text-inverse); width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px;">◆</span>
         <span>thenextgenai</span>
       </a>
@@ -1370,19 +1370,19 @@
         <span></span>
       </button>
       <ul class="nav-menu">
-        <li class="nav-item"><a onclick="showPage(\'home\')">Home</a></li>
-        <li class="nav-item"><a onclick="showPage(\'tutorials\')">Tutorials</a></li>
-        <li class="nav-item"><a onclick="showPage(\'tools\')">AI Tools</a></li>
-        <li class="nav-item"><a onclick="showPage(\'tools\')">Find by task</a></li>
-        <li class="nav-item"><a onclick="showPage(\'how-test\')">How We Test</a></li>
+        <li class="nav-item"><a data-page="home\">Home</a></li>
+        <li class="nav-item"><a data-page="tutorials\">Tutorials</a></li>
+        <li class="nav-item"><a data-page="tools\">AI Tools</a></li>
+        <li class="nav-item"><a data-page="tools\">Find by task</a></li>
+        <li class="nav-item"><a data-page="how-test\">How We Test</a></li>
         <li class="nav-item dropdown" id="aboutDropdown">
           <a class="dropdown-toggle">About</a>
           <div class="dropdown-content">
-            <a onclick="showPage(\'about\')">About</a>
-            <a onclick="showPage(\'contact\')">Contact Us</a>
-            <a onclick="showPage(\'how-test\')">How we test</a>
-            <a onclick="showPage(\'faq\')">FAQ</a>
-            <a onclick="showPage(\'privacy\')">Privacy</a>
+            <a data-page="about\">About</a>
+            <a data-page="contact\">Contact Us</a>
+            <a data-page="how-test\">How we test</a>
+            <a data-page="faq\">FAQ</a>
+            <a data-page="privacy\">Privacy</a>
           </div>
         </li>
       </ul>
@@ -1402,8 +1402,8 @@
               Expert tutorials, research, and honest reviews from verified AI researchers and developers.
             </p>
             <div class="hero-ctas">
-              <a onclick="showPage(\'tutorials\')" class="cta-primary">Read Tutorials →</a>
-              <a onclick="showPage(\'about\')" class="cta-secondary">How We Work</a>
+              <a data-page="tutorials\" class="cta-primary">Read Tutorials →</a>
+              <a data-page="about\" class="cta-secondary">How We Work</a>
             </div>
           </div>
         </div>
@@ -1413,7 +1413,7 @@
         <div class="section-inner">
           <h2 class="section-title">Explore Our Content</h2>
           <div class="articles-grid">
-            <div class="article-card" onclick="showPage(\'tutorials\')" style="border-left: 4px solid var(--color-accent-gold);">
+            <div class="article-card" data-page="tutorials\" style="border-left: 4px solid var(--color-accent-gold);">
               <div class="article-icon">📚</div>
               <h3 class="article-title">Tutorials & Guides</h3>
               <p class="article-excerpt">9 in-depth tutorials covering model comparisons, frameworks, and practical how-tos for AI tools and workflows.</p>
@@ -1422,7 +1422,7 @@
               </div>
             </div>
 
-            <div class="article-card" onclick="showPage(\'tools\')" style="border-left: 4px solid var(--color-accent-blue);">
+            <div class="article-card" data-page="tools\" style="border-left: 4px solid var(--color-accent-blue);">
               <div class="article-icon">🛠️</div>
               <h3 class="article-title">AI Tools Directory</h3>
               <p class="article-excerpt">7 AI tools reviewed and tested. Specs, ratings, and our transparent methodology for every recommendation.</p>
@@ -1431,7 +1431,7 @@
               </div>
             </div>
 
-            <div class="article-card" onclick="showPage(\'about\')" style="border-left: 4px solid var(--color-accent-green);">
+            <div class="article-card" data-page="about\" style="border-left: 4px solid var(--color-accent-green);">
               <div class="article-icon">ℹ️</div>
               <h3 class="article-title">About Us & Methodology</h3>
               <p class="article-excerpt">Our mission, values, testing framework, editorial standards, and FAQ about what makes us different.</p>
@@ -1447,7 +1447,7 @@
         <div class="section-inner">
           <h2 class="section-title">Featured Tutorials</h2>
           <div class="articles-grid">
-            <div class="article-card" onclick="showPage(\'tutorials\')">
+            <div class="article-card" data-page="tutorials\">
               <div class="article-icon">⚖️</div>
               <h3 class="article-title">Claude vs ChatGPT vs Gemini</h3>
               <p class="article-excerpt">Head-to-head comparison for long-document analysis. Context windows, pricing, and best use cases.</p>
@@ -1456,7 +1456,7 @@
               </div>
             </div>
 
-            <div class="article-card" onclick="showPage(\'tutorials\')">
+            <div class="article-card" data-page="tutorials\">
               <div class="article-icon">📖</div>
               <h3 class="article-title">Gemini Notebook Workflow</h3>
               <p class="article-excerpt">Step-by-step guide to using Gemini Notebook for source-grounded research and document analysis.</p>
@@ -1465,7 +1465,7 @@
               </div>
             </div>
 
-            <div class="article-card" onclick="showPage(\'tutorials\')">
+            <div class="article-card" data-page="tutorials\">
               <div class="article-icon">📧</div>
               <h3 class="article-title">ChatGPT for Professional Emails</h3>
               <p class="article-excerpt">Templates, prompts, and best practices for writing business emails with AI assistance.</p>
@@ -1476,7 +1476,7 @@
           </div>
 
           <div style="text-align: center; margin-top: var(--spacing-3xl);">
-            <a onclick="showPage(\'tutorials\')" class="cta-primary">View All 9 Tutorials →</a>
+            <a data-page="tutorials\" class="cta-primary">View All 9 Tutorials →</a>
           </div>
         </div>
       </section>
@@ -1742,7 +1742,7 @@
 
             <div class="content-section">
               <h2>Affiliate Disclosure</h2>
-              <p>Some articles contain affiliate links, clearly marked at the top of the post. <a onclick="showPage(\'affiliate\')" style="color: var(--color-accent-gold); text-decoration: none;">See our Affiliate Disclosure page</a> for details.</p>
+              <p>Some articles contain affiliate links, clearly marked at the top of the post. <a data-page="affiliate\" style="color: var(--color-accent-gold); text-decoration: none;">See our Affiliate Disclosure page</a> for details.</p>
             </div>
           </div>
 
@@ -1993,7 +1993,7 @@
       <section class="section">
         <div class="section-inner">
           <div class="breadcrumb">
-            <a onclick="showPage(\'home\')">Home</a>
+            <a data-page="home\">Home</a>
             <span>/</span>
             <span>FAQ</span>
           </div>
@@ -2014,7 +2014,7 @@
               <span class="faq-toggle">▶</span>
               <span>How do you test AI tools?</span>
             </div>
-            <div class="faq-answer">We follow a rigorous methodology: 1) Research the official documentation, 2) Set up and use the tool ourselves, 3) Test key features with real-world tasks, 4) Compare against alternatives, 5) Document limitations and edge cases, 6) Write honest reviews. See our <a onclick="showPage(\'how-test\')" style="color: var(--color-accent-blue); text-decoration: underline;">testing methodology</a> for details.
+            <div class="faq-answer">We follow a rigorous methodology: 1) Research the official documentation, 2) Set up and use the tool ourselves, 3) Test key features with real-world tasks, 4) Compare against alternatives, 5) Document limitations and edge cases, 6) Write honest reviews. See our <a data-page="how-test\" style="color: var(--color-accent-blue); text-decoration: underline;">testing methodology</a> for details.
             </div>
           </div>
 
@@ -2041,7 +2041,7 @@
               <span class="faq-toggle">▶</span>
               <span>Can I request a tool to be reviewed?</span>
             </div>
-            <div class="faq-answer">Absolutely! <a onclick="showPage(\'contact\')" style="color: var(--color-accent-blue); text-decoration: underline;">Contact us</a> with your suggestion. We prioritize requests for tools that: solve real problems, have paying users, and are worth comparing. We can't review everything, but we read every suggestion.
+            <div class="faq-answer">Absolutely! <a data-page="contact\" style="color: var(--color-accent-blue); text-decoration: underline;">Contact us</a> with your suggestion. We prioritize requests for tools that: solve real problems, have paying users, and are worth comparing. We can't review everything, but we read every suggestion.
             </div>
           </div>
 
@@ -2050,7 +2050,7 @@
               <span class="faq-toggle">▶</span>
               <span>Do you sell my data or use tracking?</span>
             </div>
-            <div class="faq-answer">No and no. We use Google Analytics to see basic traffic patterns (how many visitors, popular pages), but we don't use invasive tracking or sell data. Read our <a onclick="showPage(\'privacy\')" style="color: var(--color-accent-blue); text-decoration: underline;">privacy policy</a> for full details. We also respect Do Not Track signals.
+            <div class="faq-answer">No and no. We use Google Analytics to see basic traffic patterns (how many visitors, popular pages), but we don't use invasive tracking or sell data. Read our <a data-page="privacy\" style="color: var(--color-accent-blue); text-decoration: underline;">privacy policy</a> for full details. We also respect Do Not Track signals.
             </div>
           </div>
 
@@ -2059,7 +2059,7 @@
               <span class="faq-toggle">▶</span>
               <span>How can I contact you or request content?</span>
             </div>
-            <div class="faq-answer">Use our <a onclick="showPage(\'contact\')" style="color: var(--color-accent-blue); text-decoration: underline;">contact form</a> to reach out. You can also follow us on social media (links in footer) for updates. We read all messages, though response time varies.
+            <div class="faq-answer">Use our <a data-page="contact\" style="color: var(--color-accent-blue); text-decoration: underline;">contact form</a> to reach out. You can also follow us on social media (links in footer) for updates. We read all messages, though response time varies.
             </div>
           </div>
 
@@ -2083,22 +2083,22 @@
         <div class="footer-section">
           <h3>Content</h3>
           <ul>
-            <li><a onclick="showPage(\'tutorials\')">Tutorials & Guides</a></li>
-            <li><a onclick="showPage(\'tools\')">AI Tools</a></li>
-            <li><a onclick="showPage(\'about\')">About Us</a></li>
+            <li><a data-page="tutorials\">Tutorials & Guides</a></li>
+            <li><a data-page="tools\">AI Tools</a></li>
+            <li><a data-page="about\">About Us</a></li>
           </ul>
         </div>
         <div class="footer-section">
           <h3>Reviews & Info</h3>
           <ul>
-            <li><a onclick="showPage(\'affiliate\')">Affiliate Disclosure</a></li>
-            <li><a onclick="showPage(\'privacy\')">Privacy Policy</a></li>
+            <li><a data-page="affiliate\">Affiliate Disclosure</a></li>
+            <li><a data-page="privacy\">Privacy Policy</a></li>
           </ul>
         </div>
         <div class="footer-section">
           <h3>Connect</h3>
           <ul>
-            <li><a onclick="showPage(\'contact\')">Contact Us</a></li>
+            <li><a data-page="contact\">Contact Us</a></li>
             <li><a href="mailto:hello@thenextgenai.com">Email</a></li>
             <li><a href="https://twitter.com/thenextgenai" target="_blank" rel="noopener noreferrer">𝕏 Twitter</a></li>
             <li><a href="https://linkedin.com/company/thenextgenai" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
@@ -2108,8 +2108,8 @@
         <div class="footer-section">
           <h3>Quick Links</h3>
           <ul>
-            <li><a onclick="showPage(\'home\')">Home</a></li>
-            <li><a onclick="showPage(\'how-test\')">Methodology</a></li>
+            <li><a data-page="home\">Home</a></li>
+            <li><a data-page="how-test\">Methodology</a></li>
           </ul>
         </div>
       </div>
@@ -2183,53 +2183,30 @@
     // Expose navigation handler globally
     window.handlePageNavigation = handlePageNavigation;
 
-    // BACKUP: Also add event delegation listener for any missed clicks
+    // ROBUST: Event delegation listener for data-page navigation
+    // This works with the artifact viewer's CSP by using event listeners instead of inline handlers
     document.addEventListener('click', function(e) {
-      const link = e.target.closest('[data-page]');
-      if (link && e.button === 0) { // only left clicks
-        const pageId = link.getAttribute('data-page');
-        if (pageId) {
-          console.log('Navigation click detected via event delegation:', pageId);
-          e.preventDefault();
-          e.stopPropagation();
-          handlePageNavigation(pageId);
+      let element = e.target;
+
+      // Walk up the DOM tree to find an element with data-page
+      while (element && element !== document) {
+        if (element.hasAttribute && element.hasAttribute('data-page')) {
+          const pageId = element.getAttribute('data-page');
+          if (pageId) {
+            console.log('Navigation triggered for page:', pageId);
+            handlePageNavigation(pageId, e);
+            return false;
+          }
         }
+        element = element.parentNode;
       }
-    }, true); // Use capture phase for better compatibility
+    }, false); // Bubble phase for maximum compatibility
 
-    // Wire up all data-page links with explicit onclick handlers
-    document.addEventListener('DOMContentLoaded', function() {
-      const pageLinks = document.querySelectorAll('[data-page]');
-      console.log('Found ' + pageLinks.length + ' navigation links');
-
-      pageLinks.forEach(link => {
-        link.style.cursor = 'pointer';
-        link.onclick = function(e) {
-          const pageId = this.getAttribute('data-page');
-          console.log('Direct onclick fired for:', pageId);
-          e.preventDefault();
-          e.stopPropagation();
-          handlePageNavigation(pageId, e);
-          return false;
-        };
-      });
-
-      console.log('Navigation wiring complete');
-    });
-
-    // Also wire them up immediately for any that might already be loaded
+    // Apply cursor styling immediately
     (function() {
       const pageLinks = document.querySelectorAll('[data-page]');
       pageLinks.forEach(link => {
         link.style.cursor = 'pointer';
-        link.onclick = function(e) {
-          const pageId = this.getAttribute('data-page');
-          console.log('Direct onclick fired for:', pageId);
-          e.preventDefault();
-          e.stopPropagation();
-          handlePageNavigation(pageId, e);
-          return false;
-        };
       });
     })();
 
