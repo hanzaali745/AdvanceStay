@@ -156,6 +156,11 @@
       color: var(--color-accent-gold);
     }
 
+    .nav-item a:focus-visible {
+      outline: 2px solid var(--color-accent-gold);
+      outline-offset: 4px;
+    }
+
     .dropdown {
       position: relative;
       display: inline-block;
@@ -174,6 +179,12 @@
     }
 
     .dropdown-toggle:hover {
+      color: var(--color-accent-gold);
+    }
+
+    .dropdown-toggle:focus-visible {
+      outline: 2px solid var(--color-accent-gold);
+      outline-offset: 4px;
       color: var(--color-accent-gold);
     }
 
@@ -224,6 +235,109 @@
       opacity: 1;
       visibility: visible;
       transform: translateY(0);
+    }
+
+    .hamburger-menu {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      min-width: 44px;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .hamburger-menu:focus-visible {
+      outline: 2px solid var(--color-accent-gold);
+      outline-offset: 2px;
+    }
+
+    .hamburger-menu span {
+      width: 24px;
+      height: 2px;
+      background: var(--color-text-primary);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: block;
+    }
+
+    .hamburger-menu.active span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .hamburger-menu.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger-menu.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(8px, -8px);
+    }
+
+    .nav-menu-mobile {
+      display: none;
+      position: absolute;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: linear-gradient(180deg, rgba(10, 14, 39, 0.98), rgba(12, 18, 35, 0.95));
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border-accent);
+      flex-direction: column;
+      gap: 0;
+      padding: var(--spacing-lg) 0;
+      z-index: 99;
+    }
+
+    .nav-menu-mobile.active {
+      display: flex;
+    }
+
+    .nav-menu-mobile .nav-item {
+      padding: var(--spacing-md) var(--spacing-lg);
+    }
+
+    .nav-menu-mobile .nav-item a {
+      display: block;
+    }
+
+    .nav-menu-mobile .dropdown {
+      position: static;
+    }
+
+    .nav-menu-mobile .dropdown-content {
+      position: static;
+      background: rgba(26, 42, 69, 0.4);
+      border: none;
+      box-shadow: none;
+      margin: 0;
+      padding: var(--spacing-sm) 0 var(--spacing-sm) var(--spacing-lg);
+      transform: none !important;
+      opacity: 1;
+      visibility: visible;
+      display: none;
+      flex-direction: column;
+    }
+
+    .nav-menu-mobile .dropdown-content.active {
+      display: flex;
+    }
+
+    .nav-menu-mobile .dropdown-content a {
+      padding: 8px 0;
+    }
+
+    .nav-menu-mobile .dropdown-toggle::after {
+      content: '▼';
+      font-size: 10px;
+      margin-left: 4px;
+    }
+
+    .nav-menu-mobile .dropdown-toggle.active::after {
+      transform: rotate(180deg);
     }
 
     .page {
@@ -343,6 +457,11 @@
       box-shadow: 0 12px 32px rgba(253, 176, 34, 0.4);
     }
 
+    .cta-primary:focus-visible {
+      outline: 2px solid var(--color-text-inverse);
+      outline-offset: 2px;
+    }
+
     .cta-secondary {
       background: rgba(75, 122, 255, 0.1);
       color: var(--color-accent-blue);
@@ -353,6 +472,11 @@
       background: var(--color-accent-blue);
       color: #ffffff;
       transform: translateY(-3px);
+    }
+
+    .cta-secondary:focus-visible {
+      outline: 2px solid var(--color-accent-blue);
+      outline-offset: 2px;
     }
 
     .section {
@@ -396,6 +520,12 @@
       color: inherit;
       outline: 2px solid transparent;
       outline-offset: 2px;
+    }
+
+    .article-card:focus-visible {
+      outline: 2px solid var(--color-accent-gold);
+      outline-offset: 2px;
+      transform: translateY(-4px);
     }
 
     .article-card:hover {
@@ -606,12 +736,60 @@
       }
     }
 
+    input[type="text"]:focus-visible,
+    input[type="email"]:focus-visible,
+    textarea:focus-visible {
+      outline: 2px solid var(--color-accent-gold);
+      outline-offset: 2px;
+      background: rgba(26, 42, 69, 0.5);
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--color-accent-gold);
+      outline-offset: 2px;
+    }
+
     @media (max-width: 768px) {
       .header-nav {
         height: 64px;
       }
+      .hamburger-menu {
+        display: flex;
+      }
+      .nav-menu {
+        display: none;
+      }
+      .nav-menu.active {
+        display: flex;
+      }
       .nav-menu {
         gap: var(--spacing-lg);
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: linear-gradient(180deg, rgba(10, 14, 39, 0.98), rgba(12, 18, 35, 0.95));
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--color-border-accent);
+        padding: var(--spacing-lg) 0;
+        z-index: 99;
+      }
+      .dropdown-content {
+        position: static;
+        background: rgba(26, 42, 69, 0.4);
+        border: none;
+        box-shadow: none;
+        margin: 0;
+        padding: var(--spacing-sm) 0 var(--spacing-sm) var(--spacing-lg);
+        transform: none !important;
+        opacity: 1;
+        visibility: visible;
+        display: none;
+        flex-direction: column;
+      }
+      .dropdown-content.active {
+        display: flex;
       }
       .hero {
         padding: var(--spacing-2xl) var(--spacing-lg);
@@ -650,6 +828,11 @@
         <span style="background: var(--color-accent-gold); color: var(--color-text-inverse); width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px;">◆</span>
         <span>thenextgenai</span>
       </a>
+      <button class="hamburger-menu" id="hamburgerMenu" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <ul class="nav-menu">
         <li class="nav-item"><a onclick="showPage('home')">Home</a></li>
         <li class="nav-item"><a onclick="showPage('tutorials')">Tutorials</a></li>
@@ -1221,6 +1404,35 @@
   </footer>
 
   <script>
+    // Hamburger menu toggle
+    const hamburgerMenu = document.getElementById('hamburgerMenu');
+    const navMenu = document.querySelector('.nav-menu');
+
+    hamburgerMenu.addEventListener('click', () => {
+      hamburgerMenu.classList.toggle('active');
+      navMenu.classList.toggle('active');
+      hamburgerMenu.setAttribute('aria-expanded', hamburgerMenu.classList.contains('active'));
+    });
+
+    // Close menu when a nav link is clicked
+    const navItems = document.querySelectorAll('.nav-menu .nav-item a, .nav-menu .dropdown-toggle');
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        hamburgerMenu.classList.remove('active');
+        navMenu.classList.remove('active');
+        hamburgerMenu.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('nav') && !e.target.closest('.hamburger-menu')) {
+        hamburgerMenu.classList.remove('active');
+        navMenu.classList.remove('active');
+        hamburgerMenu.setAttribute('aria-expanded', 'false');
+      }
+    });
+
     // Dropdown menu handling - stays visible during scroll
     const dropdown = document.querySelector('.dropdown');
     const dropdownToggle = document.querySelector('.dropdown-toggle');
@@ -1252,6 +1464,95 @@
       dropdownContent.classList.remove('active');
     });
 
+    // Contact form handling
+    const contactForm = document.querySelector('form');
+    if (contactForm) {
+      const formInputs = contactForm.querySelectorAll('input, textarea');
+      let formMessage = null;
+
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Get form values
+        const nameInput = contactForm.querySelector('input[type="text"]');
+        const emailInput = contactForm.querySelector('input[type="email"]');
+        const messageInput = contactForm.querySelector('textarea');
+
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const message = messageInput.value.trim();
+
+        // Validate form
+        if (!name || !email || !message) {
+          showFormMessage('Please fill in all fields', 'error');
+          return;
+        }
+
+        if (!email.includes('@')) {
+          showFormMessage('Please enter a valid email address', 'error');
+          return;
+        }
+
+        // Send form data via FormSubmit.co
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('email', email);
+        formData.append('message', message);
+        formData.append('_captcha', 'false');
+
+        fetch('https://formsubmit.co/ajax/hello@thenextgenai.com', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => {
+          if (response.ok) {
+            showFormMessage('Message sent successfully! We\'ll get back to you soon.', 'success');
+            contactForm.reset();
+          } else {
+            showFormMessage('Failed to send message. Please try again.', 'error');
+          }
+        })
+        .catch(error => {
+          showFormMessage('Error sending message. Please try again.', 'error');
+        });
+      });
+
+      function showFormMessage(message, type) {
+        // Remove existing message if any
+        if (formMessage) {
+          formMessage.remove();
+        }
+
+        // Create new message element
+        formMessage = document.createElement('div');
+        formMessage.style.cssText = `
+          padding: var(--spacing-md);
+          margin-bottom: var(--spacing-lg);
+          border-radius: var(--radius-md);
+          font-weight: 500;
+          animation: slide-up 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          ${type === 'success'
+            ? 'background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: var(--color-accent-green);'
+            : 'background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: var(--color-accent-red);'
+          }
+        `;
+        formMessage.textContent = message;
+
+        // Insert message before form
+        contactForm.parentNode.insertBefore(formMessage, contactForm);
+
+        // Auto-remove error messages after 5 seconds
+        if (type === 'error') {
+          setTimeout(() => {
+            if (formMessage) {
+              formMessage.remove();
+              formMessage = null;
+            }
+          }, 5000);
+        }
+      }
+    }
+
     function showPage(pageId) {
       // Hide all pages
       const pages = document.querySelectorAll('.page');
@@ -1262,6 +1563,15 @@
       if (selectedPage) {
         selectedPage.classList.add('active');
         window.scrollTo(0, 0);
+      }
+
+      // Close hamburger menu when navigating
+      const hamburger = document.getElementById('hamburgerMenu');
+      const menu = document.querySelector('.nav-menu');
+      if (hamburger && menu) {
+        hamburger.classList.remove('active');
+        menu.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
       }
     }
   </script>
