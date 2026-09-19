@@ -2111,37 +2111,30 @@
   <button id="backToTop" title="Back to top" aria-label="Scroll back to top">↑</button>
 
   <script>
-    // Global showPage function - MUST be defined before any onclick handlers execute
-    function showPage(pageId) {
-      try {
-        // Hide all pages
-        document.querySelectorAll('.page').forEach(page => {
-          page.classList.remove('active');
-        });
-
-        // Show selected page
-        const selectedPage = document.getElementById(pageId);
-        if (selectedPage) {
-          selectedPage.classList.add('active');
-          window.scrollTo(0, 0);
-        }
-
-        // Close mobile menu
-        const hamburger = document.getElementById('hamburgerMenu');
-        const menu = document.querySelector('.nav-menu');
-        if (hamburger && menu) {
-          hamburger.classList.remove('active');
-          menu.classList.remove('active');
-        }
-
-        // Analytics
-        if (window.gtag) {
-          gtag('event', 'page_view', {'page_title': pageId, 'page_path': '/' + pageId});
-        }
-      } catch (error) {
-        console.error('Error in showPage:', error);
+    // Global showPage function
+    window.showPage = function(pageId) {
+      console.log('showPage called with:', pageId);
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+      });
+      const selectedPage = document.getElementById(pageId);
+      if (selectedPage) {
+        console.log('Page found, showing:', pageId);
+        selectedPage.classList.add('active');
+        window.scrollTo(0, 0);
+      } else {
+        console.error('Page not found:', pageId);
       }
-    }
+      const hamburger = document.getElementById('hamburgerMenu');
+      const menu = document.querySelector('.nav-menu');
+      if (hamburger && menu) {
+        hamburger.classList.remove('active');
+        menu.classList.remove('active');
+      }
+      if (window.gtag) {
+        gtag('event', 'page_view', {'page_title': pageId, 'page_path': '/' + pageId});
+      }
+    };
 
     // Hamburger menu toggle
     const hamburgerMenu = document.getElementById('hamburgerMenu');
@@ -2165,20 +2158,22 @@
       }
     });
 
-    // Add click listeners to all navigation links with showPage onclick
-    // This bypasses potential CSP restrictions on inline onclick handlers
-    document.addEventListener('DOMContentLoaded', function() {
-      document.querySelectorAll('[onclick*="showPage"]').forEach(element => {
-        element.addEventListener('click', function(e) {
-          e.preventDefault();
-          const onclickAttr = this.getAttribute('onclick');
-          const match = onclickAttr.match(/showPage\('([^']+)'\)/);
-          if (match && match[1]) {
-            showPage(match[1]);
-          }
-        });
-      });
-    });
+    // Master event listener - handles ALL clicks on navigation links
+    // Using capture phase (true) to intercept clicks before other handlers
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('[onclick*="showPage"]');
+      if (link) {
+        console.log('Navigation link clicked:', link.getAttribute('onclick'));
+        e.preventDefault();
+        e.stopPropagation();
+        const onclickAttr = link.getAttribute('onclick');
+        const match = onclickAttr.match(/showPage\('([^']+)'\)/);
+        if (match && match[1]) {
+          console.log('Calling showPage with:', match[1]);
+          window.showPage(match[1]);
+        }
+      }
+    }, true);
 
     // Dropdown menu handling - stays visible during scroll
     const dropdown = document.querySelector('.dropdown');
