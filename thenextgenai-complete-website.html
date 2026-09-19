@@ -2114,9 +2114,16 @@
   <script>
     // showPage function for data-page navigation
     function showPage(pageId) {
+      console.log('showPage called with:', pageId);
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       const page = document.getElementById(pageId);
-      if (page) page.classList.add('active');
+      console.log('Page element found:', !!page);
+      if (page) {
+        page.classList.add('active');
+        console.log('Page activated:', pageId);
+      } else {
+        console.error('Page ID not found:', pageId);
+      }
       window.scrollTo(0, 0);
     }
     window.showPage = showPage;
@@ -2125,6 +2132,7 @@
     document.addEventListener('click', function(e) {
       const link = e.target.closest('[data-page]');
       if (link) {
+        console.log('Navigation click detected, data-page:', link.getAttribute('data-page'));
         e.preventDefault();
         const pageId = link.getAttribute('data-page');
         showPage(pageId);
