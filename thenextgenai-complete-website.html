@@ -2242,6 +2242,16 @@
       }
     }
 
+    // Close menu on Escape key press (standard UX pattern)
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const menuToggle = document.getElementById('menuToggle');
+        if (menuToggle && menuToggle.checked) {
+          closeMenu();
+        }
+      }
+    });
+
     // Close menu when page hash changes (when clicking navigation links)
     // This is more reliable than click event listeners in artifact viewers
     window.addEventListener('hashchange', function() {
@@ -2261,15 +2271,24 @@
       }, true);
     }
 
-    // Close menu when clicking outside nav-menu and hamburger
+    // Close menu when clicking the overlay or outside nav-menu
+    const menuOverlay = document.querySelector('.menu-overlay');
+
+    if (menuOverlay) {
+      menuOverlay.addEventListener('click', function(e) {
+        closeMenu();
+      }, true);
+    }
+
     document.addEventListener('click', function(e) {
       const menuToggle = document.getElementById('menuToggle');
       const hamburgerLabel = document.querySelector('label[for="menuToggle"]');
 
       const isClickOnMenu = navMenu && navMenu.contains(e.target);
       const isClickOnHamburger = hamburgerLabel && hamburgerLabel.contains(e.target);
+      const isClickOnOverlay = menuOverlay && menuOverlay.contains(e.target);
 
-      if (!isClickOnMenu && !isClickOnHamburger && menuToggle && menuToggle.checked) {
+      if ((isClickOnOverlay || (!isClickOnMenu && !isClickOnHamburger)) && menuToggle && menuToggle.checked) {
         closeMenu();
       }
     }, false);
