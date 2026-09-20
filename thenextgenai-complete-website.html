@@ -892,12 +892,6 @@
         display: block;
       }
 
-      /* Label wrapper for menu - allows clicking menu items to toggle checkbox */
-      .nav-menu-label {
-        display: contents;
-        cursor: inherit;
-      }
-
       .nav-menu [data-page],
       .nav-menu a {
         pointer-events: auto;
@@ -1474,8 +1468,6 @@
       <!-- Invisible overlay to close menu when clicked -->
       <label for="menuToggle" class="menu-overlay" aria-label="Close menu" aria-hidden="true"></label>
 
-      <!-- Wrap menu in label - clicking any menu item toggles checkbox and closes menu -->
-      <label for="menuToggle" class="nav-menu-label">
       <ul class="nav-menu">
         <li class="nav-item"><a href="#home">Home</a></li>
         <li class="nav-item"><a href="#tutorials">Tutorials</a></li>
@@ -1493,7 +1485,6 @@
           </div>
         </li>
       </ul>
-      </label>
     </nav>
   </header>
 
