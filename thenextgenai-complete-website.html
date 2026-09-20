@@ -2206,28 +2206,34 @@
       const menuToggle = document.getElementById('menuToggle');
       const navMenu = document.querySelector('.nav-menu');
 
-      if (menuToggle && menuToggle.checked) {
+      // Uncheck the checkbox using both methods for reliability
+      if (menuToggle) {
         menuToggle.checked = false;
+        menuToggle.removeAttribute('checked');
       }
 
-      // Clear any inline styles that might interfere with CSS
+      // Force hide menu with !important inline styles
       if (navMenu) {
-        navMenu.removeAttribute('style');
+        navMenu.style.setProperty('display', 'none', 'important');
+        navMenu.style.setProperty('visibility', 'hidden', 'important');
+        navMenu.style.setProperty('opacity', '0', 'important');
+        navMenu.style.setProperty('pointer-events', 'none', 'important');
       }
     }
 
     // Close menu when clicking on any navigation link (except dropdown toggle)
+    // Use event delegation with capture phase for reliability
     const navMenu = document.querySelector('.nav-menu');
-    const navLinks = navMenu ? navMenu.querySelectorAll('a') : [];
 
-    navLinks.forEach(link => {
-      link.addEventListener('click', function() {
-        // Don't close menu for dropdown-toggle (it just opens the dropdown)
-        if (!link.classList.contains('dropdown-toggle')) {
-          closeMenu();
+    if (navMenu) {
+      navMenu.addEventListener('click', function(e) {
+        const link = e.target.closest('a');
+        // Only close menu for real navigation links (not dropdown-toggle)
+        if (link && !link.classList.contains('dropdown-toggle') && link.href) {
+          setTimeout(() => closeMenu(), 50);
         }
-      });
-    });
+      }, true); // capture phase to fire before any other handlers
+    }
 
     // Close menu when clicking outside nav-menu and hamburger
     document.addEventListener('click', function(e) {
