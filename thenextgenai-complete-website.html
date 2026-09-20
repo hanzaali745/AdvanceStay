@@ -874,6 +874,24 @@
         visibility: visible !important;
         opacity: 1 !important;
       }
+
+      /* Menu overlay - invisible full-screen label that closes menu when clicked */
+      .menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: none;
+        cursor: pointer;
+        z-index: 99;
+      }
+
+      /* Show overlay when menu is open */
+      #menuToggle:checked ~ .menu-overlay {
+        display: block;
+      }
+
       .nav-menu [data-page],
       .nav-menu a {
         pointer-events: auto;
@@ -1447,6 +1465,9 @@
         <span></span>
         <span></span>
       </label>
+      <!-- Invisible overlay to close menu when clicked -->
+      <label for="menuToggle" class="menu-overlay" aria-label="Close menu" aria-hidden="true"></label>
+
       <ul class="nav-menu">
         <li class="nav-item"><a href="#home">Home</a></li>
         <li class="nav-item"><a href="#tutorials">Tutorials</a></li>
