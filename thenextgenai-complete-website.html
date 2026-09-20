@@ -832,20 +832,17 @@
     @media (max-width: 768px) {
       .header-nav {
         height: 64px;
+        position: relative;
       }
       .hamburger-menu {
         display: flex;
         pointer-events: auto;
+        z-index: 100;
+        position: relative;
       }
       .nav-menu {
-        display: none;
-        pointer-events: none;
-      }
-      .nav-menu.active {
-        display: flex;
-        pointer-events: auto;
-      }
-      .nav-menu {
+        display: none !important;
+        pointer-events: none !important;
         gap: var(--spacing-lg);
         position: absolute;
         top: 64px;
@@ -857,6 +854,17 @@
         border-bottom: 1px solid var(--color-border-accent);
         padding: var(--spacing-lg) 0;
         z-index: 99;
+        width: 100%;
+        height: auto;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
+      .nav-menu.active {
+        display: flex !important;
+        pointer-events: auto !important;
+        visibility: visible !important;
+        opacity: 1 !important;
       }
       .nav-menu [data-page],
       .nav-menu a {
@@ -2184,42 +2192,37 @@
   <button id="backToTop" title="Back to top" aria-label="Scroll back to top">↑</button>
 
   <script>
-    // Hamburger menu toggle - MUST run first and reliably
-    (function() {
-      const hamburgerMenu = document.getElementById('hamburgerMenu');
-      const navMenu = document.querySelector('.nav-menu');
+    // Get menu elements (accessible to all handlers)
+    const hamburgerMenu = document.getElementById('hamburgerMenu');
+    const navMenu = document.querySelector('.nav-menu');
 
-      if (hamburgerMenu && navMenu) {
-        hamburgerMenu.addEventListener('click', function(e) {
-          e.stopPropagation();
-          hamburgerMenu.classList.toggle('active');
-          navMenu.classList.toggle('active');
-        }, true); // Use capture phase for reliability
-      }
-    })();
+    // Hamburger menu toggle
+    if (hamburgerMenu && navMenu) {
+      hamburgerMenu.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        hamburgerMenu.classList.toggle('active');
+        navMenu.classList.toggle('active');
+      });
 
-    // Close mobile menu when navigation link is clicked
-    // Navigation is handled by CSS :target selector with href="#pageId"
-    document.addEventListener('click', function(e) {
-      const hamburgerMenu = document.getElementById('hamburgerMenu');
-      const navMenu = document.querySelector('.nav-menu');
-      const isNavLink = e.target.closest('a[href^="#"]');
+      // Close mobile menu when navigation link is clicked
+      document.addEventListener('click', function(e) {
+        const isNavLink = e.target.closest('a[href^="#"]');
+        if (isNavLink && navMenu.classList.contains('active')) {
+          hamburgerMenu.classList.remove('active');
+          navMenu.classList.remove('active');
+        }
+      }, false);
 
-      if (isNavLink && hamburgerMenu && navMenu && navMenu.classList.contains('active')) {
-        hamburgerMenu.classList.remove('active');
-        navMenu.classList.remove('active');
-      }
-    }, false);
-
-    // Close menu when clicking outside (but don't interfere with navigation)
-    document.addEventListener('click', function(e) {
-      // Don't close menu if clicking on nav, hamburger, or data-page elements (which trigger navigation)
-      const isNavClick = e.target.closest('nav') || e.target.closest('.hamburger-menu') || e.target.closest('[data-page]');
-      if (!isNavClick && hamburgerMenu && navMenu && navMenu.classList.contains('active')) {
-        hamburgerMenu.classList.remove('active');
-        navMenu.classList.remove('active');
-      }
-    });
+      // Close menu when clicking outside
+      document.addEventListener('click', function(e) {
+        const isNavClick = e.target.closest('nav') || e.target.closest('.hamburger-menu');
+        if (!isNavClick && navMenu.classList.contains('active')) {
+          hamburgerMenu.classList.remove('active');
+          navMenu.classList.remove('active');
+        }
+      }, false);
+    }
 
 
     // Dropdown menu handling - stays visible during scroll
