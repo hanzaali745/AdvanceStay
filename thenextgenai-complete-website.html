@@ -2201,33 +2201,55 @@
   <button id="backToTop" title="Back to top" aria-label="Scroll back to top">↑</button>
 
   <script>
-    // Reliable menu close function
+    // Force close menu - both uncheck checkbox AND hide menu directly
     function closeMenu() {
       const menuToggle = document.getElementById('menuToggle');
+      const navMenu = document.querySelector('.nav-menu');
+
       if (menuToggle) {
         menuToggle.checked = false;
       }
+      if (navMenu) {
+        navMenu.style.display = 'none';
+        navMenu.style.opacity = '0';
+        navMenu.style.visibility = 'hidden';
+        navMenu.style.pointerEvents = 'none';
+      }
     }
 
-    // Close menu when ANY navigation link is clicked
+    // Open menu - uncheck then check to open
+    function openMenu() {
+      const menuToggle = document.getElementById('menuToggle');
+      const navMenu = document.querySelector('.nav-menu');
+
+      if (menuToggle) {
+        menuToggle.checked = true;
+      }
+      if (navMenu) {
+        navMenu.style.display = '';
+        navMenu.style.opacity = '';
+        navMenu.style.visibility = '';
+        navMenu.style.pointerEvents = '';
+      }
+    }
+
+    // Close menu when clicking on any navigation link
     document.addEventListener('click', function(e) {
-      // Check if the clicked element is a link inside the nav-menu
       const navMenu = document.querySelector('.nav-menu');
       const clickedLink = e.target.closest('a');
 
+      // If a link inside nav-menu was clicked, close the menu
       if (clickedLink && navMenu && navMenu.contains(clickedLink)) {
-        // Link was clicked inside nav menu - close it immediately
         closeMenu();
       }
-    }, true); // Use capture phase for reliability
+    }, true);
 
-    // Also close menu when clicking outside (but not on the hamburger button)
+    // Close menu when clicking outside nav-menu and hamburger
     document.addEventListener('click', function(e) {
       const navMenu = document.querySelector('.nav-menu');
       const hamburgerLabel = document.querySelector('label[for="menuToggle"]');
       const menuToggle = document.getElementById('menuToggle');
 
-      // If menu is open and click is outside both menu and hamburger
       const isClickOnMenu = navMenu && navMenu.contains(e.target);
       const isClickOnHamburger = hamburgerLabel && hamburgerLabel.contains(e.target);
 
