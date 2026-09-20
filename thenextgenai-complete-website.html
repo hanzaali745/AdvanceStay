@@ -467,6 +467,7 @@
     .cta-primary, .cta-secondary {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: var(--spacing-sm);
       padding: 14px 32px;
       border-radius: var(--radius-md);
@@ -480,6 +481,8 @@
       text-decoration: none;
       outline: 2px solid transparent;
       outline-offset: 2px;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
     }
 
     .cta-primary {
@@ -491,6 +494,11 @@
     .cta-primary:hover {
       transform: translateY(-3px);
       box-shadow: 0 12px 32px rgba(253, 176, 34, 0.4);
+    }
+
+    .cta-primary:active {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(253, 176, 34, 0.3);
     }
 
     .cta-primary:focus-visible {
@@ -508,6 +516,12 @@
       background: var(--color-accent-blue);
       color: #ffffff;
       transform: translateY(-3px);
+    }
+
+    .cta-secondary:active {
+      transform: translateY(-1px);
+      background: var(--color-accent-blue);
+      color: #ffffff;
     }
 
     .cta-secondary:focus-visible {
@@ -925,6 +939,28 @@
         font-size: 11px;
         padding: 3px 8px;
       }
+
+      /* Responsive CTA Buttons (768px and below) */
+      .hero-ctas {
+        width: 100%;
+        flex-direction: column;
+        gap: var(--spacing-md);
+      }
+      .cta-primary, .cta-secondary {
+        width: 100%;
+        padding: 16px 24px !important;
+        min-height: 52px;
+        font-size: 15px;
+        justify-content: center;
+        display: flex;
+      }
+      /* All CTA buttons on tablet should be full width */
+      .article-card .cta-primary,
+      .article-card .cta-secondary,
+      .section .cta-primary,
+      .section .cta-secondary {
+        width: 100%;
+      }
     }
 
     @media (max-width: 480px) {
@@ -934,11 +970,15 @@
       .hero-ctas {
         flex-direction: column;
         width: 100%;
+        gap: var(--spacing-md);
       }
       .cta-primary, .cta-secondary {
         width: 100%;
         justify-content: center;
-        padding: 12px 24px;
+        padding: 16px 20px !important;
+        min-height: 56px;
+        font-size: 16px;
+        display: flex;
       }
       .section-title {
         font-size: 28px;
