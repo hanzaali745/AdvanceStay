@@ -370,13 +370,19 @@
       opacity: 0;
       visibility: hidden;
       width: 100%;
+      height: auto;
+      position: static;
+      pointer-events: none;
     }
 
     .page.active {
       display: block !important;
       opacity: 1;
       visibility: visible;
+      position: static;
+      pointer-events: auto;
       animation: fadeIn 0.3s ease-in;
+      z-index: 1;
     }
 
     @keyframes fadeIn {
@@ -820,12 +826,15 @@
       }
       .hamburger-menu {
         display: flex;
+        pointer-events: auto;
       }
       .nav-menu {
         display: none;
+        pointer-events: none;
       }
       .nav-menu.active {
         display: flex;
+        pointer-events: auto;
       }
       .nav-menu {
         gap: var(--spacing-lg);
@@ -839,6 +848,10 @@
         border-bottom: 1px solid var(--color-border-accent);
         padding: var(--spacing-lg) 0;
         z-index: 99;
+      }
+      .nav-menu [data-page],
+      .nav-menu a {
+        pointer-events: auto;
       }
       .dropdown-content {
         position: static;
@@ -2164,41 +2177,60 @@
   <script>
     // showPage function for data-page navigation
     function showPage(pageId) {
-      console.log('showPage called with:', pageId);
-
-      // Remove active class from all pages
-      const allPages = document.querySelectorAll('.page');
-      console.log('Total pages found:', allPages.length);
-
-      allPages.forEach(p => {
-        p.classList.remove('active');
-      });
-
-      // Find and activate the target page
-      const page = document.getElementById(pageId);
-      console.log('Target page:', pageId, 'Found:', !!page);
-
-      if (page) {
-        page.classList.add('active');
-        console.log('Page activated:', pageId);
-      } else {
-        console.error('Page ID not found:', pageId);
+      if (!pageId || typeof pageId !== 'string') {
+        console.error('showPage: Invalid pageId:', pageId);
         return false;
       }
 
-      // Scroll to top
+      // Find all pages
+      const allPages = document.querySelectorAll('.page');
+      if (!allPages || allPages.length === 0) {
+        console.error('showPage: No pages found with class "page"');
+        return false;
+      }
+
+      // Find the target page
+      const page = document.getElementById(pageId);
+      if (!page) {
+        console.error('showPage: Page ID not found:', pageId);
+        return false;
+      }
+
+      // Remove active class from all pages
+      allPages.forEach(p => {
+        if (p.classList.contains('active')) {
+          p.classList.remove('active');
+        }
+      });
+
+      // Add active class to target page
+      page.classList.add('active');
+
+      // Force reflow to ensure CSS is applied
+      void page.offsetHeight;
+
+      // Scroll to top smoothly
       window.scrollTo({top: 0, behavior: 'smooth'});
+
       return true;
     }
 
     // Expose showPage globally
     window.showPage = showPage;
 
-    // Handle clicks on data-page elements with EXPLICIT onclick handlers
-    // This is a more reliable approach than event delegation
+    // Handle page navigation and UI state
     function handlePageNavigation(pageId, event) {
-      if (event) {
+      // Validate pageId
+      if (!pageId || typeof pageId !== 'string') {
+        console.error('handlePageNavigation: Invalid pageId');
+        return false;
+      }
+
+      // Prevent default and stop propagation
+      if (event && typeof event.preventDefault === 'function') {
         event.preventDefault();
+      }
+      if (event && typeof event.stopPropagation === 'function') {
         event.stopPropagation();
       }
 
@@ -2216,30 +2248,140 @@
         dropdownContent.classList.remove('active');
       }
 
-      return showPage(pageId);
+      // Trigger page navigation
+      const result = showPage(pageId);
+      return result;
     }
 
     // Expose navigation handler globally
     window.handlePageNavigation = handlePageNavigation;
 
-    // ROBUST: Event delegation listener for data-page navigation
-    // This works with the artifact viewer's CSP by using event listeners instead of inline handlers
-    document.addEventListener('click', function(e) {
-      let element = e.target;
+    // Set up event delegation for data-page navigation
+    // This handles both click and touch events with robustness for mobile
+    function attachNavigationListener() {
+      document.addEventListener('click', function(e) {
+        let element = e.target;
 
-      // Walk up the DOM tree to find an element with data-page
-      while (element && element !== document) {
-        if (element.hasAttribute && element.hasAttribute('data-page')) {
-          const pageId = element.getAttribute('data-page');
-          if (pageId) {
-            console.log('Navigation triggered for page:', pageId);
-            handlePageNavigation(pageId, e);
-            return false;
+        // Walk up the DOM tree to find an element with data-page
+        while (element && element !== document) {
+          if (element.hasAttribute && element.hasAttribute('data-page')) {
+            const pageId = element.getAttribute('data-page');
+            if (pageId) {
+              handlePageNavigation(pageId, e);
+              break; // Exit loop after handling
+            }
           }
+          element = element.parentNode;
         }
-        element = element.parentNode;
+      }, false);
+
+      // Also handle touch events on mobile for better responsiveness
+      document.addEventListener('touchend', function(e) {
+        let element = e.target;
+
+        // Walk up the DOM tree to find an element with data-page
+        while (element && element !== document) {
+          if (element.hasAttribute && element.hasAttribute('data-page')) {
+            const pageId = element.getAttribute('data-page');
+            if (pageId) {
+              handlePageNavigation(pageId, e);
+              break; // Exit loop after handling
+            }
+          }
+          element = element.parentNode;
+        }
+      }, false);
+    }
+
+    // Attach navigation listeners when DOM is ready
+    attachNavigationListener();
+
+    // Add onclick handlers to ALL data-page elements as a fallback
+    // This ensures navigation works even if event delegation fails on mobile
+    function attachInlineHandlers() {
+      const elements = document.querySelectorAll('[data-page]');
+      elements.forEach(el => {
+        if (!el.hasAttribute('onclick')) {
+          el.onclick = function(e) {
+            const pageId = this.getAttribute('data-page');
+            if (pageId) {
+              handlePageNavigation(pageId, e);
+            }
+            return false;
+          };
+        }
+      });
+    }
+
+    // Attach inline handlers
+    attachInlineHandlers();
+
+    // Re-attach inline handlers after DOM mutations (for dynamically added content)
+    if (window.MutationObserver) {
+      const observer = new MutationObserver(function(mutations) {
+        attachInlineHandlers();
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
+    }
+
+    // Verification function to check navigation is working
+    function verifyNavigation() {
+      const allPages = document.querySelectorAll('.page');
+      const allNavButtons = document.querySelectorAll('[data-page]');
+      const results = {
+        pagesFound: allPages.length,
+        navButtonsFound: allNavButtons.length,
+        issues: []
+      };
+
+      // Check all pages have IDs
+      allPages.forEach((page, index) => {
+        if (!page.id) {
+          results.issues.push(`Page ${index} missing id attribute`);
+        }
+      });
+
+      // Check all nav buttons point to valid pages
+      allNavButtons.forEach((btn, index) => {
+        const pageId = btn.getAttribute('data-page');
+        if (!pageId) {
+          results.issues.push(`Button ${index} has empty data-page attribute`);
+          return;
+        }
+        const targetPage = document.getElementById(pageId);
+        if (!targetPage) {
+          results.issues.push(`Button points to non-existent page: ${pageId}`);
+        }
+      });
+
+      // Check pages are properly styled
+      allPages.forEach(page => {
+        const styles = window.getComputedStyle(page);
+        const isHidden = styles.display === 'none' || styles.visibility === 'hidden';
+        const shouldBeHidden = !page.classList.contains('active');
+        if (isHidden !== shouldBeHidden) {
+          results.issues.push(`Page ${page.id} visibility mismatch: display=${styles.display}, visibility=${styles.visibility}, active=${page.classList.contains('active')}`);
+        }
+      });
+
+      if (results.issues.length === 0) {
+        console.log('Navigation verification: All checks passed!', results);
+      } else {
+        console.warn('Navigation verification: Issues found', results);
       }
-    }, false); // Bubble phase for maximum compatibility
+
+      return results;
+    }
+
+    // Expose verification function globally
+    window.verifyNavigation = verifyNavigation;
+
+    // Run verification on page load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', verifyNavigation);
+    } else {
+      verifyNavigation();
+    }
 
     // Apply cursor styling immediately
     (function() {
@@ -2261,13 +2403,13 @@
       });
     }
 
-    // Close menu when clicking outside
+    // Close menu when clicking outside (but don't interfere with navigation)
     document.addEventListener('click', function(e) {
-      if (!e.target.closest('nav') && !e.target.closest('.hamburger-menu')) {
-        if (hamburgerMenu && navMenu) {
-          hamburgerMenu.classList.remove('active');
-          navMenu.classList.remove('active');
-        }
+      // Don't close menu if clicking on nav, hamburger, or data-page elements (which trigger navigation)
+      const isNavClick = e.target.closest('nav') || e.target.closest('.hamburger-menu') || e.target.closest('[data-page]');
+      if (!isNavClick && hamburgerMenu && navMenu && navMenu.classList.contains('active')) {
+        hamburgerMenu.classList.remove('active');
+        navMenu.classList.remove('active');
       }
     });
 
