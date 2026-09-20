@@ -2184,6 +2184,20 @@
   <button id="backToTop" title="Back to top" aria-label="Scroll back to top">↑</button>
 
   <script>
+    // Hamburger menu toggle - MUST run first and reliably
+    (function() {
+      const hamburgerMenu = document.getElementById('hamburgerMenu');
+      const navMenu = document.querySelector('.nav-menu');
+
+      if (hamburgerMenu && navMenu) {
+        hamburgerMenu.addEventListener('click', function(e) {
+          e.stopPropagation();
+          hamburgerMenu.classList.toggle('active');
+          navMenu.classList.toggle('active');
+        }, true); // Use capture phase for reliability
+      }
+    })();
+
     // Close mobile menu when navigation link is clicked
     // Navigation is handled by CSS :target selector with href="#pageId"
     document.addEventListener('click', function(e) {
@@ -2196,18 +2210,6 @@
         navMenu.classList.remove('active');
       }
     }, false);
-
-    // Hamburger menu toggle
-    const hamburgerMenu = document.getElementById('hamburgerMenu');
-    const navMenu = document.querySelector('.nav-menu');
-
-    if (hamburgerMenu && navMenu) {
-      hamburgerMenu.addEventListener('click', function(e) {
-        e.preventDefault();
-        hamburgerMenu.classList.toggle('active');
-        navMenu.classList.toggle('active');
-      });
-    }
 
     // Close menu when clicking outside (but don't interfere with navigation)
     document.addEventListener('click', function(e) {
