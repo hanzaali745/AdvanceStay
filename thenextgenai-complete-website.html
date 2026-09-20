@@ -2204,18 +2204,28 @@
     // Menu state management
     function closeMenu() {
       const menuToggle = document.getElementById('menuToggle');
+      const navMenu = document.querySelector('.nav-menu');
+
       if (menuToggle && menuToggle.checked) {
         menuToggle.checked = false;
       }
+
+      // Clear any inline styles that might interfere with CSS
+      if (navMenu) {
+        navMenu.removeAttribute('style');
+      }
     }
 
-    // Close menu when clicking on any navigation link
+    // Close menu when clicking on any navigation link (except dropdown toggle)
     const navMenu = document.querySelector('.nav-menu');
     const navLinks = navMenu ? navMenu.querySelectorAll('a') : [];
 
     navLinks.forEach(link => {
       link.addEventListener('click', function() {
-        closeMenu();
+        // Don't close menu for dropdown-toggle (it just opens the dropdown)
+        if (!link.classList.contains('dropdown-toggle')) {
+          closeMenu();
+        }
       });
     });
 
@@ -2302,6 +2312,7 @@
       link.addEventListener('click', () => {
         dropdownContent.classList.remove('active');
         dropdownToggle.setAttribute('aria-expanded', 'false');
+        closeMenu();
       });
     });
 
