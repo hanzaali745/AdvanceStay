@@ -2221,18 +2221,23 @@
       }
     }
 
-    // Close menu when clicking on any navigation link (except dropdown toggle)
-    // Use event delegation with capture phase for reliability
-    const navMenu = document.querySelector('.nav-menu');
+    // Close menu when page hash changes (when clicking navigation links)
+    // This is more reliable than click event listeners in artifact viewers
+    window.addEventListener('hashchange', function() {
+      closeMenu();
+    });
 
+    // Also close menu on direct link clicks as fallback
+    const navMenu = document.querySelector('.nav-menu');
     if (navMenu) {
       navMenu.addEventListener('click', function(e) {
-        const link = e.target.closest('a');
-        // Only close menu for real navigation links (not dropdown-toggle)
-        if (link && !link.classList.contains('dropdown-toggle') && link.href) {
-          setTimeout(() => closeMenu(), 50);
+        const link = e.target.closest('a[href]');
+        if (link && !link.classList.contains('dropdown-toggle')) {
+          // Force close immediately
+          closeMenu();
+          setTimeout(() => closeMenu(), 10);
         }
-      }, true); // capture phase to fire before any other handlers
+      }, true);
     }
 
     // Close menu when clicking outside nav-menu and hamburger
