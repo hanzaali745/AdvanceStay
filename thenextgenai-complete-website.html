@@ -262,6 +262,11 @@
       transform: translateY(0);
     }
 
+    /* Hidden checkbox for menu toggle */
+    .menu-toggle-checkbox {
+      display: none !important;
+    }
+
     .hamburger-menu {
       display: none;
       flex-direction: column;
@@ -275,6 +280,7 @@
       align-items: center;
       justify-content: center;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 101;
     }
 
     .hamburger-menu:focus-visible {
@@ -290,15 +296,16 @@
       display: block;
     }
 
-    .hamburger-menu.active span:nth-child(1) {
+    /* Menu open state - controlled by checkbox :checked */
+    #menuToggle:checked ~ .hamburger-menu span:nth-child(1) {
       transform: rotate(45deg) translate(8px, 8px);
     }
 
-    .hamburger-menu.active span:nth-child(2) {
+    #menuToggle:checked ~ .hamburger-menu span:nth-child(2) {
       opacity: 0;
     }
 
-    .hamburger-menu.active span:nth-child(3) {
+    #menuToggle:checked ~ .hamburger-menu span:nth-child(3) {
       transform: rotate(-45deg) translate(8px, -8px);
     }
 
@@ -837,7 +844,7 @@
       .hamburger-menu {
         display: flex;
         pointer-events: auto;
-        z-index: 100;
+        z-index: 101;
         position: relative;
       }
       .nav-menu {
@@ -853,14 +860,15 @@
         backdrop-filter: blur(12px);
         border-bottom: 1px solid var(--color-border-accent);
         padding: var(--spacing-lg) 0;
-        z-index: 99;
+        z-index: 100;
         width: 100%;
         height: auto;
         visibility: hidden !important;
         opacity: 0 !important;
         transition: opacity 0.3s ease, visibility 0.3s ease;
       }
-      .nav-menu.active {
+      /* Show menu when checkbox is checked */
+      #menuToggle:checked ~ .nav-menu {
         display: flex !important;
         pointer-events: auto !important;
         visibility: visible !important;
@@ -1433,11 +1441,12 @@
         <span style="background: var(--color-accent-gold); color: var(--color-text-inverse); width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px;">◆</span>
         <span>thenextgenai</span>
       </a>
-      <button class="hamburger-menu" id="hamburgerMenu" aria-label="Toggle menu" aria-expanded="false">
+      <input type="checkbox" id="menuToggle" class="menu-toggle-checkbox" aria-label="Toggle menu">
+      <label for="menuToggle" class="hamburger-menu" aria-label="Toggle navigation menu">
         <span></span>
         <span></span>
         <span></span>
-      </button>
+      </label>
       <ul class="nav-menu">
         <li class="nav-item"><a href="#home">Home</a></li>
         <li class="nav-item"><a href="#tutorials">Tutorials</a></li>
@@ -2192,76 +2201,31 @@
   <button id="backToTop" title="Back to top" aria-label="Scroll back to top">↑</button>
 
   <script>
-    // Initialize after DOM is ready
-    function setupMenuHandlers() {
-      const hamburgerMenu = document.getElementById('hamburgerMenu');
+    // Close menu when navigation link is clicked (uncheck the checkbox)
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        if (menuToggle) {
+          menuToggle.checked = false;
+        }
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
       const navMenu = document.querySelector('.nav-menu');
+      const hamburgerMenu = document.querySelector('.hamburger-menu');
+      const menuToggle = document.getElementById('menuToggle');
 
-      if (!hamburgerMenu) {
-        console.error('ERROR: hamburgerMenu element not found');
-        return;
+      const isClickInsideNav = navMenu && navMenu.contains(e.target);
+      const isClickOnHamburger = hamburgerMenu && hamburgerMenu.contains(e.target);
+
+      if (!isClickInsideNav && !isClickOnHamburger && menuToggle && menuToggle.checked) {
+        menuToggle.checked = false;
       }
-      if (!navMenu) {
-        console.error('ERROR: navMenu element not found');
-        return;
-      }
-
-      console.log('SUCCESS: Menu elements found and initializing');
-
-      // Direct click handler on hamburger button
-      hamburgerMenu.onclick = function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log('Hamburger clicked!');
-
-        const isActive = navMenu.classList.contains('active');
-        console.log('Current state:', isActive ? 'open' : 'closed');
-
-        hamburgerMenu.classList.toggle('active');
-        navMenu.classList.toggle('active');
-
-        console.log('New state:', navMenu.classList.contains('active') ? 'open' : 'closed');
-      };
-
-      // Also add addEventListener as backup
-      hamburgerMenu.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log('addEventListener click fired');
-        hamburgerMenu.classList.toggle('active');
-        navMenu.classList.toggle('active');
-      });
-
-      // Close menu when clicking nav links
-      navMenu.addEventListener('click', function(e) {
-        if (e.target.tagName === 'A' && e.target.href.startsWith('#')) {
-          console.log('Nav link clicked, closing menu');
-          hamburgerMenu.classList.remove('active');
-          navMenu.classList.remove('active');
-        }
-      });
-
-      // Close menu when clicking outside
-      document.addEventListener('click', function(e) {
-        const isClickInsideNav = navMenu.contains(e.target);
-        const isClickOnHamburger = hamburgerMenu.contains(e.target);
-
-        if (!isClickInsideNav && !isClickOnHamburger && navMenu.classList.contains('active')) {
-          console.log('Click outside menu, closing');
-          hamburgerMenu.classList.remove('active');
-          navMenu.classList.remove('active');
-        }
-      });
-
-      console.log('Menu handlers initialized successfully');
-    }
-
-    // Run when DOM is ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', setupMenuHandlers);
-    } else {
-      setupMenuHandlers();
-    }
+    });
 
 
     // Dropdown menu handling - stays visible during scroll
