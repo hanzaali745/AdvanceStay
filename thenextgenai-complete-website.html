@@ -2201,36 +2201,53 @@
   <button id="backToTop" title="Back to top" aria-label="Scroll back to top">↑</button>
 
   <script>
-    // Close menu when ANY navigation link is clicked (uncheck the checkbox)
-    const menuToggle = document.getElementById('menuToggle');
+    // Close menu when ANY navigation link is clicked
+    function closeMenuOnNavigation() {
+      const menuToggle = document.getElementById('menuToggle');
+      const navLinks = document.querySelectorAll('.nav-menu a');
 
-    // Get ALL navigation links including dropdown items
-    const navLinks = document.querySelectorAll('.nav-menu a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          // Uncheck the menu toggle checkbox to close menu
+          if (menuToggle) {
+            menuToggle.checked = false;
+            // Force reflow to ensure CSS applies immediately
+            void menuToggle.offsetHeight;
+          }
+        });
+      });
+    }
 
-    navLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        // Close menu immediately when link is clicked
-        if (menuToggle) {
+    // Close menu when clicking outside
+    function setupClickOutsideHandler() {
+      document.addEventListener('click', function(e) {
+        const navMenu = document.querySelector('.nav-menu');
+        const labelElement = document.querySelector('label[for="menuToggle"]');
+        const menuToggle = document.getElementById('menuToggle');
+
+        // Check if click is outside the nav menu and hamburger button
+        const isClickInsideNav = navMenu && navMenu.contains(e.target);
+        const isClickOnLabel = labelElement && labelElement.contains(e.target);
+        const isClickOnCheckbox = menuToggle && menuToggle === e.target;
+
+        // Close menu if click is outside
+        if (!isClickInsideNav && !isClickOnLabel && !isClickOnCheckbox && menuToggle && menuToggle.checked) {
           menuToggle.checked = false;
+          void menuToggle.offsetHeight;
         }
       });
-    });
+    }
 
-    // Also close menu when clicking outside
-    document.addEventListener('click', function(e) {
-      const navMenu = document.querySelector('.nav-menu');
-      const hamburgerMenu = document.querySelector('.hamburger-menu');
-      const menuToggle = document.getElementById('menuToggle');
-
-      // Check if click is outside the nav menu and hamburger button
-      const isClickInsideNav = navMenu && navMenu.contains(e.target);
-      const isClickOnHamburger = hamburgerMenu && hamburgerMenu.contains(e.target);
-
-      // Close menu if click is outside and menu is open
-      if (!isClickInsideNav && !isClickOnHamburger && menuToggle && menuToggle.checked) {
-        menuToggle.checked = false;
-      }
-    });
+    // Initialize handlers when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() {
+        closeMenuOnNavigation();
+        setupClickOutsideHandler();
+      });
+    } else {
+      closeMenuOnNavigation();
+      setupClickOutsideHandler();
+    }
 
 
     // Dropdown menu handling - stays visible during scroll
