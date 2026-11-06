@@ -1472,7 +1472,7 @@
         <li class="nav-item"><a href="#home">Home</a></li>
         <li class="nav-item"><a href="#tutorials">Tutorials</a></li>
         <li class="nav-item"><a href="#tools">AI Tools</a></li>
-        <li class="nav-item"><a href="#tools">Find by task</a></li>
+        <li class="nav-item"><a href="#find-by-task">Find by task</a></li>
         <li class="nav-item"><a href="#how-test">How We Test</a></li>
         <li class="nav-item dropdown" id="aboutDropdown">
           <a class="dropdown-toggle">About</a>
@@ -1813,6 +1813,152 @@
                     <span>⭐ Verified tested</span>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- FIND BY TASK PAGE -->
+  <div id="find-by-task" class="page">
+    <main>
+      <section class="section">
+        <div class="section-inner">
+          <h1 class="page-title">Find by <span class="accent">Task</span></h1>
+
+          <div class="content-box">
+            <div class="content-section">
+              <h2>Search Tutorials & Tools by What You Want to Do</h2>
+              <p>Can't find what you're looking for? Use our search filters below to browse tutorials and tools by category, task type, and complexity level.</p>
+            </div>
+
+            <!-- Search Filters -->
+            <div style="margin-top: var(--spacing-2xl); padding: var(--spacing-lg); background: rgba(26, 42, 69, 0.3); border-radius: var(--radius-lg); border: 1px solid rgba(253, 176, 34, 0.1);">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-lg);">
+
+                <!-- Content Type Filter -->
+                <div>
+                  <label style="display: block; font-weight: 600; margin-bottom: var(--spacing-sm); color: var(--color-accent-gold);">Content Type</label>
+                  <select style="width: 100%; padding: var(--spacing-sm); border: 1px solid rgba(253, 176, 34, 0.3); border-radius: var(--radius-md); background: rgba(10, 14, 39, 0.5); color: var(--color-text-primary); font-size: 14px; cursor: pointer;">
+                    <option>All Content</option>
+                    <option>📚 Tutorials & Guides</option>
+                    <option>🛠️ Tools Reviews</option>
+                    <option>📊 Comparisons</option>
+                    <option>🎓 How-To Guides</option>
+                  </select>
+                </div>
+
+                <!-- Task Category Filter -->
+                <div>
+                  <label style="display: block; font-weight: 600; margin-bottom: var(--spacing-sm); color: var(--color-accent-gold);">Task Category</label>
+                  <select style="width: 100%; padding: var(--spacing-sm); border: 1px solid rgba(253, 176, 34, 0.3); border-radius: var(--radius-md); background: rgba(10, 14, 39, 0.5); color: var(--color-text-primary); font-size: 14px; cursor: pointer;">
+                    <option>All Categories</option>
+                    <option>✍️ Writing & Content</option>
+                    <option>💻 Coding & Development</option>
+                    <option>🎨 Design & Creative</option>
+                    <option>📊 Data & Analytics</option>
+                    <option>🎓 Learning & Research</option>
+                    <option>💼 Business & Marketing</option>
+                  </select>
+                </div>
+
+                <!-- Complexity Filter -->
+                <div>
+                  <label style="display: block; font-weight: 600; margin-bottom: var(--spacing-sm); color: var(--color-accent-gold);">Difficulty Level</label>
+                  <select style="width: 100%; padding: var(--spacing-sm); border: 1px solid rgba(253, 176, 34, 0.3); border-radius: var(--radius-md); background: rgba(10, 14, 39, 0.5); color: var(--color-text-primary); font-size: 14px; cursor: pointer;">
+                    <option>All Levels</option>
+                    <option>🟢 Beginner</option>
+                    <option>🟡 Intermediate</option>
+                    <option>🔴 Advanced</option>
+                  </select>
+                </div>
+
+                <!-- Tool Type Filter -->
+                <div>
+                  <label style="display: block; font-weight: 600; margin-bottom: var(--spacing-sm); color: var(--color-accent-gold);">AI Tool</label>
+                  <select style="width: 100%; padding: var(--spacing-sm); border: 1px solid rgba(253, 176, 34, 0.3); border-radius: var(--radius-md); background: rgba(10, 14, 39, 0.5); color: var(--color-text-primary); font-size: 14px; cursor: pointer;">
+                    <option>All Tools</option>
+                    <option>🤖 Claude (Anthropic)</option>
+                    <option>💬 ChatGPT (OpenAI)</option>
+                    <option>🔍 Gemini (Google)</option>
+                    <option>🎨 Midjourney</option>
+                    <option>🎬 Synthesia</option>
+                    <option>💻 GitHub Copilot</option>
+                  </select>
+                </div>
+
+                <!-- Pricing Filter -->
+                <div>
+                  <label style="display: block; font-weight: 600; margin-bottom: var(--spacing-sm); color: var(--color-accent-gold);">Pricing</label>
+                  <select style="width: 100%; padding: var(--spacing-sm); border: 1px solid rgba(253, 176, 34, 0.3); border-radius: var(--radius-md); background: rgba(10, 14, 39, 0.5); color: var(--color-text-primary); font-size: 14px; cursor: pointer;">
+                    <option>All Pricing</option>
+                    <option>💰 Free</option>
+                    <option>🆓 Free + Paid</option>
+                    <option>💳 Paid Plans</option>
+                    <option>🏢 Enterprise</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Popular Tasks -->
+            <div style="margin-top: var(--spacing-2xl);">
+              <h3 style="font-size: 18px; font-weight: 600; margin-bottom: var(--spacing-lg); color: var(--color-text-primary);">Popular Tasks</h3>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--spacing-lg);">
+
+                <div style="padding: var(--spacing-lg); background: rgba(75, 122, 255, 0.05); border: 1px solid rgba(75, 122, 255, 0.2); border-radius: var(--radius-lg); cursor: pointer; transition: all 0.3s ease;">
+                  <h4 style="font-weight: 600; margin-bottom: var(--spacing-sm); color: var(--color-accent-blue);">✍️ Write Blog Posts</h4>
+                  <p style="font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--spacing-md);">Learn how to use AI to draft, edit, and optimize blog content</p>
+                  <span style="font-size: 12px; color: var(--color-accent-gold);">→ 5 tutorials</span>
+                </div>
+
+                <div style="padding: var(--spacing-lg); background: rgba(253, 176, 34, 0.05); border: 1px solid rgba(253, 176, 34, 0.2); border-radius: var(--radius-lg); cursor: pointer; transition: all 0.3s ease;">
+                  <h4 style="font-weight: 600; margin-bottom: var(--spacing-sm); color: var(--color-accent-gold);">💻 Debug Code</h4>
+                  <p style="font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--spacing-md);">Use AI assistants to identify and fix coding errors</p>
+                  <span style="font-size: 12px; color: var(--color-accent-gold);">→ 3 tutorials</span>
+                </div>
+
+                <div style="padding: var(--spacing-lg); background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: var(--radius-lg); cursor: pointer; transition: all 0.3s ease;">
+                  <h4 style="font-weight: 600; margin-bottom: var(--spacing-sm); color: var(--color-accent-green);">🎨 Generate Images</h4>
+                  <p style="font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--spacing-md);">Create stunning visuals with AI image generation tools</p>
+                  <span style="font-size: 12px; color: var(--color-accent-gold);">→ 4 tutorials</span>
+                </div>
+
+                <div style="padding: var(--spacing-lg); background: rgba(139, 92, 246, 0.05); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: var(--radius-lg); cursor: pointer; transition: all 0.3s ease;">
+                  <h4 style="font-weight: 600; margin-bottom: var(--spacing-sm); color: var(--color-accent-purple);">📊 Analyze Data</h4>
+                  <p style="font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--spacing-md);">Use AI to process and understand data insights</p>
+                  <span style="font-size: 12px; color: var(--color-accent-gold);">→ 3 tutorials</span>
+                </div>
+
+                <div style="padding: var(--spacing-lg); background: rgba(245, 158, 11, 0.05); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: var(--radius-lg); cursor: pointer; transition: all 0.3s ease;">
+                  <h4 style="font-weight: 600; margin-bottom: var(--spacing-sm); color: var(--color-accent-gold);">🎓 Learn New Topics</h4>
+                  <p style="font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--spacing-md);">Get AI-powered explanations and learning guides</p>
+                  <span style="font-size: 12px; color: var(--color-accent-gold);">→ 6 tutorials</span>
+                </div>
+
+                <div style="padding: var(--spacing-lg); background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: var(--radius-lg); cursor: pointer; transition: all 0.3s ease;">
+                  <h4 style="font-weight: 600; margin-bottom: var(--spacing-sm); color: var(--color-accent-blue);">💼 Create Marketing Copy</h4>
+                  <p style="font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--spacing-md);">Write compelling ad copy and marketing materials with AI</p>
+                  <span style="font-size: 12px; color: var(--color-accent-gold);">→ 4 tutorials</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div style="margin-top: var(--spacing-2xl); padding: var(--spacing-lg); background: rgba(26, 42, 69, 0.2); border-radius: var(--radius-lg);">
+              <h3 style="font-size: 18px; font-weight: 600; margin-bottom: var(--spacing-lg); color: var(--color-text-primary);">Or Browse by Section</h3>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-md);">
+                <a href="#tutorials" style="padding: var(--spacing-md); text-align: center; background: rgba(75, 122, 255, 0.1); border: 1px solid rgba(75, 122, 255, 0.3); border-radius: var(--radius-md); color: var(--color-accent-blue); text-decoration: none; font-weight: 500; transition: all 0.3s ease;">
+                  📚 All Tutorials
+                </a>
+                <a href="#tools" style="padding: var(--spacing-md); text-align: center; background: rgba(253, 176, 34, 0.1); border: 1px solid rgba(253, 176, 34, 0.3); border-radius: var(--radius-md); color: var(--color-accent-gold); text-decoration: none; font-weight: 500; transition: all 0.3s ease;">
+                  🛠️ AI Tools Directory
+                </a>
+                <a href="#how-test" style="padding: var(--spacing-md); text-align: center; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: var(--radius-md); color: var(--color-accent-green); text-decoration: none; font-weight: 500; transition: all 0.3s ease;">
+                  ✅ Our Testing Methodology
+                </a>
               </div>
             </div>
           </div>
