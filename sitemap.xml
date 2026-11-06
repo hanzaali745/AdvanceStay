@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+
+  <!-- Home Page -->
+  <url>
+    <loc>https://thenextgenai.com/</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Main Pages -->
+  <url>
+    <loc>https://thenextgenai.com#tutorials</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://thenextgenai.com#ai-tools</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://thenextgenai.com#how-we-test</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thenextgenai.com#about</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://thenextgenai.com#contact</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Policy Pages -->
+  <url>
+    <loc>https://thenextgenai.com#privacy</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://thenextgenai.com#faq</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Posts (Update these as you publish articles) -->
+  <url>
+    <loc>https://thenextgenai.com/blog/how-to-use-claude-ai</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://thenextgenai.com/images/blog/how-to-use-claude-ai.jpg</image:loc>
+      <image:title>How to Use Claude AI — Hands-on Tutorial</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://thenextgenai.com/blog/best-ai-tools-for-developers</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://thenextgenai.com/images/blog/best-ai-tools-for-developers.jpg</image:loc>
+      <image:title>Best AI Tools for Developers — Verified Review</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://thenextgenai.com/blog/ai-productivity-guide</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://thenextgenai.com/images/blog/ai-productivity-guide.jpg</image:loc>
+      <image:title>AI Productivity Guide — Verified Against Current Tools</image:title>
+    </image:image>
+  </url>
+
+</urlset>
