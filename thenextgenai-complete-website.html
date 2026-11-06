@@ -407,10 +407,13 @@
     }
 
     .hero {
-      padding: var(--spacing-4xl) var(--spacing-lg);
+      padding: var(--spacing-4xl) var(--spacing-lg) var(--spacing-4xl);
       position: relative;
       overflow: hidden;
       background: linear-gradient(135deg, rgba(75, 122, 255, 0.03), rgba(253, 176, 34, 0.02));
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
     }
 
     .hero::before {
@@ -552,7 +555,7 @@
     }
 
     .section {
-      padding: var(--spacing-3xl) var(--spacing-lg);
+      padding: var(--spacing-4xl) var(--spacing-lg);
       border-bottom: 1px solid var(--color-border-dark);
     }
 
@@ -575,7 +578,7 @@
     .articles-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: var(--spacing-lg);
+      gap: var(--spacing-2xl);
     }
 
     .article-card {
@@ -584,7 +587,7 @@
       background: linear-gradient(135deg, rgba(26, 42, 69, 0.5), rgba(18, 25, 47, 0.3));
       border: 1px solid var(--color-border-light);
       border-radius: var(--radius-lg);
-      padding: var(--spacing-lg);
+      padding: var(--spacing-2xl);
       overflow: hidden;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
@@ -1472,18 +1475,8 @@
         <li class="nav-item"><a href="#home">Home</a></li>
         <li class="nav-item"><a href="#tutorials">Tutorials</a></li>
         <li class="nav-item"><a href="#tools">AI Tools</a></li>
-        <li class="nav-item"><a href="#find-by-task">Find by task</a></li>
-        <li class="nav-item"><a href="#how-test">How We Test</a></li>
-        <li class="nav-item dropdown" id="aboutDropdown">
-          <a class="dropdown-toggle">About</a>
-          <div class="dropdown-content">
-            <a href="#about">About</a>
-            <a href="#contact">Contact Us</a>
-            <a href="#how-test">How we test</a>
-            <a href="#faq">FAQ</a>
-            <a href="#privacy">Privacy</a>
-          </div>
-        </li>
+        <li class="nav-item"><a href="#about">About</a></li>
+        <li class="nav-item"><a href="#contact">Contact</a></li>
       </ul>
     </nav>
   </header>
@@ -1501,50 +1494,16 @@
               Expert tutorials, research, and honest reviews from verified AI researchers and developers.
             </p>
             <div class="hero-ctas">
-              <a href="#tutorials" class="cta-primary">Read Tutorials →</a>
-              <a href="#about" class="cta-secondary">How We Work</a>
+              <a href="#tutorials" class="cta-primary">Start Reading →</a>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="section" id="featured">
-        <div class="section-inner">
-          <h2 class="section-title">Explore Our Content</h2>
-          <div class="articles-grid">
-            <div class="article-card" href="#tutorials" style="border-left: 4px solid var(--color-accent-gold);">
-              <div class="article-icon">📚</div>
-              <h3 class="article-title">Tutorials & Guides</h3>
-              <p class="article-excerpt">9 in-depth tutorials covering model comparisons, frameworks, and practical how-tos for AI tools and workflows.</p>
-              <div class="article-meta">
-                <span>Updated regularly</span>
-              </div>
-            </div>
-
-            <div class="article-card" href="#tools" style="border-left: 4px solid var(--color-accent-blue);">
-              <div class="article-icon">🛠️</div>
-              <h3 class="article-title">AI Tools Directory</h3>
-              <p class="article-excerpt">7 AI tools reviewed and tested. Specs, ratings, and our transparent methodology for every recommendation.</p>
-              <div class="article-meta">
-                <span>Verified tested</span>
-              </div>
-            </div>
-
-            <div class="article-card" href="#about" style="border-left: 4px solid var(--color-accent-green);">
-              <div class="article-icon">ℹ️</div>
-              <h3 class="article-title">About Us & Methodology</h3>
-              <p class="article-excerpt">Our mission, values, testing framework, editorial standards, and FAQ about what makes us different.</p>
-              <div class="article-meta">
-                <span>Our story</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <section class="section" style="background: linear-gradient(135deg, rgba(75, 122, 255, 0.03), rgba(253, 176, 34, 0.02));">
         <div class="section-inner">
-          <h2 class="section-title">Featured Tutorials</h2>
+          <h2 class="section-title">Latest Tutorials</h2>
           <div class="articles-grid">
             <div class="article-card" href="#tutorials">
               <div class="article-icon">⚖️</div>
@@ -1572,52 +1531,23 @@
                 <span>Practical guide</span>
               </div>
             </div>
+
+            <div class="article-card" href="#tutorials">
+              <div class="article-icon">🎨</div>
+              <h3 class="article-title">Midjourney Image Generation</h3>
+              <p class="article-excerpt">Step-by-step guide to creating stunning images with prompts, settings, and best practices.</p>
+              <div class="article-meta">
+                <span>Creative guide</span>
+              </div>
+            </div>
           </div>
 
           <div style="text-align: center; margin-top: var(--spacing-3xl);">
-            <a href="#tutorials" class="cta-primary">View All 9 Tutorials →</a>
+            <a href="#tutorials" class="cta-primary">View All Tutorials →</a>
           </div>
         </div>
       </section>
 
-      <!-- Testimonials Section -->
-      <section class="section">
-        <div class="section-inner">
-          <h2 class="section-title">Trusted by Thousands</h2>
-          <div class="articles-grid">
-            <div style="background: rgba(26, 42, 69, 0.3); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); padding: var(--spacing-lg);">
-              <p style="font-style: italic; margin-bottom: var(--spacing-lg); color: var(--color-text-secondary);">"TheNextGenAI's reviews are refreshingly honest. They actually test the tools and admit limitations. Game changer."</p>
-              <div style="display: flex; gap: var(--spacing-md); align-items: center;">
-                <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--color-accent-gold), var(--color-accent-blue)); display: flex; align-items: center; justify-content: center; font-size: 18px;">👨</div>
-                <div>
-                  <div style="font-weight: 600; color: var(--color-text-primary);">Sarah Chen</div>
-                  <div style="font-size: 13px; color: var(--color-text-muted);">Product Manager, Tech Startup</div>
-                </div>
-              </div>
-            </div>
-            <div style="background: rgba(26, 42, 69, 0.3); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); padding: var(--spacing-lg);">
-              <p style="font-style: italic; margin-bottom: var(--spacing-lg); color: var(--color-text-secondary);">"I've recommended these tutorials to my entire team. They're practical, current, and actually solve real problems."</p>
-              <div style="display: flex; gap: var(--spacing-md); align-items: center;">
-                <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--color-accent-gold), var(--color-accent-blue)); display: flex; align-items: center; justify-content: center; font-size: 18px;">👩</div>
-                <div>
-                  <div style="font-weight: 600; color: var(--color-text-primary);">Maya Patel</div>
-                  <div style="font-size: 13px; color: var(--color-text-muted);">Data Scientist, Fortune 500</div>
-                </div>
-              </div>
-            </div>
-            <div style="background: rgba(26, 42, 69, 0.3); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); padding: var(--spacing-lg);">
-              <p style="font-style: italic; margin-bottom: var(--spacing-lg); color: var(--color-text-secondary);">"Finally, AI reviews without the hype. These guys are real, transparent, and deeply knowledgeable."</p>
-              <div style="display: flex; gap: var(--spacing-md); align-items: center;">
-                <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--color-accent-gold), var(--color-accent-blue)); display: flex; align-items: center; justify-content: center; font-size: 18px;">👨</div>
-                <div>
-                  <div style="font-weight: 600; color: var(--color-text-primary);">James Wilson</div>
-                  <div style="font-size: 13px; color: var(--color-text-muted);">AI Developer, Indie Founder</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <!-- Newsletter Section -->
       <section class="section">
@@ -1633,33 +1563,6 @@
         </div>
       </section>
 
-      <section class="section">
-        <div class="section-inner">
-          <div style="text-align: center; max-width: 700px; margin: 0 auto;">
-            <h2 class="section-title">How We Test & Recommend</h2>
-            <p style="font-size: 16px; color: var(--color-text-secondary); margin-bottom: var(--spacing-2xl); line-height: 1.8;">
-              Every tool, tutorial, and recommendation is backed by real testing and verification—never speculation or assumptions.
-            </p>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--spacing-lg); margin-top: var(--spacing-2xl);">
-              <div style="padding: var(--spacing-lg); background: rgba(75, 122, 255, 0.1); border-radius: var(--radius-lg);">
-                <div style="font-size: 28px; margin-bottom: var(--spacing-md);">📚</div>
-                <div style="font-weight: 600; font-size: 14px; color: var(--color-text-primary);">Learn</div>
-                <div style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">Research & understand</div>
-              </div>
-              <div style="padding: var(--spacing-lg); background: rgba(16, 185, 129, 0.1); border-radius: var(--radius-lg);">
-                <div style="font-size: 28px; margin-bottom: var(--spacing-md);">✓</div>
-                <div style="font-weight: 600; font-size: 14px; color: var(--color-text-primary);">Verify</div>
-                <div style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">Test with real data</div>
-              </div>
-              <div style="padding: var(--spacing-lg); background: rgba(167, 139, 250, 0.1); border-radius: var(--radius-lg);">
-                <div style="font-size: 28px; margin-bottom: var(--spacing-md);">💡</div>
-                <div style="font-weight: 600; font-size: 14px; color: var(--color-text-primary);">Recommend</div>
-                <div style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">Share honest insights</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
     </main>
   </div>
 
