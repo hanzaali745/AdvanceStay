@@ -414,6 +414,19 @@
       min-height: 60vh;
       display: flex;
       align-items: center;
+      border-bottom: 3px solid var(--color-accent-gold);
+    }
+
+    /* Signature: Gold accent stripe */
+    .hero::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--color-accent-gold);
+      z-index: 0;
     }
 
     .hero::before {
@@ -569,10 +582,23 @@
       font-size: 36px;
       font-weight: 700;
       margin-bottom: var(--spacing-2xl);
+      padding-bottom: var(--spacing-lg);
+      position: relative;
       background: linear-gradient(135deg, var(--color-text-primary), var(--color-accent-blue));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+    }
+
+    /* Signature: Gold line under section title */
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--color-accent-gold), transparent);
     }
 
     .articles-grid {
@@ -607,6 +633,19 @@
       border-color: var(--color-accent-blue);
       box-shadow: 0 16px 40px rgba(75, 122, 255, 0.15);
       transform: translateY(-8px);
+    }
+
+    /* Signature: Gold left accent on hover */
+    .article-card:hover::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--color-accent-gold);
+      border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+      transition: all 0.3s ease;
     }
 
     .article-icon {
@@ -646,7 +685,21 @@
       font-weight: 700;
       line-height: 1.2;
       margin-bottom: var(--spacing-2xl);
+      padding-bottom: var(--spacing-xl);
+      position: relative;
       color: var(--color-text-primary);
+    }
+
+    /* Signature: Gold accent line under page title */
+    .page-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 120px;
+      height: 4px;
+      background: var(--color-accent-gold);
+      border-radius: 2px;
     }
 
     .page-title .accent {
@@ -1359,6 +1412,68 @@
       to { transform: rotate(360deg); }
     }
 
+    /* ===== SIGNATURE ELEMENT: VERIFIED BADGE ===== */
+    .verified-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: linear-gradient(135deg, rgba(253, 176, 34, 0.15), rgba(253, 176, 34, 0.05));
+      border: 1.5px solid var(--color-accent-gold);
+      border-radius: 24px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--color-accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      position: relative;
+    }
+
+    .verified-badge::before {
+      content: '✓';
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      background: var(--color-accent-gold);
+      color: var(--color-text-inverse);
+      border-radius: 50%;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+
+    /* Content type badge - distinct from verified */
+    .content-type-badge {
+      display: inline-block;
+      padding: 6px 12px;
+      background: rgba(75, 122, 255, 0.15);
+      border-left: 3px solid var(--color-accent-blue);
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-accent-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin-bottom: var(--spacing-md);
+    }
+
+    /* Article card enhancement with type indicator */
+    .article-card::before {
+      content: attr(data-type);
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--color-accent-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: var(--spacing-md);
+      padding-bottom: var(--spacing-sm);
+      border-bottom: 2px solid rgba(75, 122, 255, 0.3);
+      text-align: left;
+    }
+
     /* FAQ Styles */
     .faq-item {
       margin-bottom: var(--spacing-xl);
@@ -1505,39 +1620,43 @@
         <div class="section-inner">
           <h2 class="section-title">Latest Tutorials</h2>
           <div class="articles-grid">
-            <div class="article-card" href="#tutorials">
+            <div class="article-card" href="#tutorials" data-type="Tutorial">
+              <div class="verified-badge">Verified tested</div>
               <div class="article-icon">⚖️</div>
               <h3 class="article-title">Claude vs ChatGPT vs Gemini</h3>
               <p class="article-excerpt">Head-to-head comparison for long-document analysis. Context windows, pricing, and best use cases.</p>
               <div class="article-meta">
-                <span>Comparison guide</span>
+                <span>8 min read</span>
               </div>
             </div>
 
-            <div class="article-card" href="#tutorials">
+            <div class="article-card" href="#tutorials" data-type="How-To">
+              <div class="verified-badge">Verified tested</div>
               <div class="article-icon">📖</div>
               <h3 class="article-title">Gemini Notebook Workflow</h3>
               <p class="article-excerpt">Step-by-step guide to using Gemini Notebook for source-grounded research and document analysis.</p>
               <div class="article-meta">
-                <span>How-to guide</span>
+                <span>6 min read</span>
               </div>
             </div>
 
-            <div class="article-card" href="#tutorials">
+            <div class="article-card" href="#tutorials" data-type="Guide">
+              <div class="verified-badge">Verified tested</div>
               <div class="article-icon">📧</div>
               <h3 class="article-title">ChatGPT for Professional Emails</h3>
               <p class="article-excerpt">Templates, prompts, and best practices for writing business emails with AI assistance.</p>
               <div class="article-meta">
-                <span>Practical guide</span>
+                <span>5 min read</span>
               </div>
             </div>
 
-            <div class="article-card" href="#tutorials">
+            <div class="article-card" href="#tutorials" data-type="Tutorial">
+              <div class="verified-badge">Verified tested</div>
               <div class="article-icon">🎨</div>
               <h3 class="article-title">Midjourney Image Generation</h3>
               <p class="article-excerpt">Step-by-step guide to creating stunning images with prompts, settings, and best practices.</p>
               <div class="article-meta">
-                <span>Creative guide</span>
+                <span>7 min read</span>
               </div>
             </div>
           </div>
@@ -1668,52 +1787,58 @@
 
             <div style="margin-top: var(--spacing-2xl);">
               <div class="articles-grid">
-                <div class="article-card">
+                <div class="article-card" data-type="Tool Review">
+                  <div class="verified-badge">Verified tested</div>
                   <div class="article-icon">🤖</div>
                   <h3 class="article-title">Claude (Anthropic)</h3>
                   <p class="article-excerpt">Advanced language model with long context window. Best for analysis, coding, writing, and research.</p>
                   <div class="article-meta">
-                    <span>⭐ Verified tested</span>
+                    <span>Latest: January 2025</span>
                   </div>
                 </div>
-                <div class="article-card">
+                <div class="article-card" data-type="Tool Review">
+                  <div class="verified-badge">Verified tested</div>
                   <div class="article-icon">💬</div>
                   <h3 class="article-title">ChatGPT (OpenAI)</h3>
                   <p class="article-excerpt">Versatile AI assistant. GPT-4 for complex tasks, GPT-4 Turbo for cost-effective processing.</p>
                   <div class="article-meta">
-                    <span>⭐ Verified tested</span>
+                    <span>Latest: January 2025</span>
                   </div>
                 </div>
-                <div class="article-card">
+                <div class="article-card" data-type="Tool Review">
+                  <div class="verified-badge">Verified tested</div>
                   <div class="article-icon">🔍</div>
                   <h3 class="article-title">Gemini (Google)</h3>
                   <p class="article-excerpt">Google's AI with web search integration. Good for research and real-time information.</p>
                   <div class="article-meta">
-                    <span>⭐ Verified tested</span>
+                    <span>Latest: January 2025</span>
                   </div>
                 </div>
-                <div class="article-card">
+                <div class="article-card" data-type="Tool Review">
+                  <div class="verified-badge">Verified tested</div>
                   <div class="article-icon">🎨</div>
                   <h3 class="article-title">Midjourney</h3>
                   <p class="article-excerpt">Image generation with stunning quality. Best for creative professionals and detailed visuals.</p>
                   <div class="article-meta">
-                    <span>⭐ Verified tested</span>
+                    <span>Latest: January 2025</span>
                   </div>
                 </div>
-                <div class="article-card">
+                <div class="article-card" data-type="Tool Review">
+                  <div class="verified-badge">Verified tested</div>
                   <div class="article-icon">🎬</div>
                   <h3 class="article-title">Synthesia</h3>
                   <p class="article-excerpt">AI video generator with avatars. Perfect for marketing, training, and explainer videos.</p>
                   <div class="article-meta">
-                    <span>⭐ Verified tested</span>
+                    <span>Latest: January 2025</span>
                   </div>
                 </div>
-                <div class="article-card">
+                <div class="article-card" data-type="Tool Review">
+                  <div class="verified-badge">Verified tested</div>
                   <div class="article-icon">💻</div>
                   <h3 class="article-title">GitHub Copilot</h3>
                   <p class="article-excerpt">AI code assistant. Accelerates development and helps learn new programming languages.</p>
                   <div class="article-meta">
-                    <span>⭐ Verified tested</span>
+                    <span>Latest: January 2025</span>
                   </div>
                 </div>
               </div>
