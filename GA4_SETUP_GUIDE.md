@@ -28,19 +28,19 @@ Once you have your **Measurement ID**, provide it to me and I'll add this code t
 
 ```html
 <!-- Google Analytics 4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0GN01QZMS3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX', {
+  gtag('config', 'G-0GN01QZMS3', {
     'page_path': window.location.pathname,
     'page_title': document.title
   });
 </script>
 ```
 
-**Replace `G-XXXXXXXXXX` with your Measurement ID.**
+**Measurement ID:** `G-0GN01QZMS3` ✅
 
 ---
 
